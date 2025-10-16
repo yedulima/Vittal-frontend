@@ -1,6 +1,7 @@
-import ThemedText from '@/components/ThemedText';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { StyleSheet, Switch, TouchableOpacity, TouchableOpacityProps } from 'react-native';
+
+import ThemedText from '@/components/ThemedText';
 
 export type ButtonSwitchProps = TouchableOpacityProps & {
 	text: string;
