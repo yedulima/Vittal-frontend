@@ -1,13 +1,14 @@
-import ThemedText from '@/components/ThemedText';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import React from 'react';
 import { StyleSheet, TouchableOpacity, TouchableOpacityProps, View } from 'react-native';
 
+import ThemedText from '@/components/ThemedText';
+
 export type ThemedButtonProps = TouchableOpacityProps & {
 	text: string;
 	onPress: () => void;
-	secondaryText?: string;
+	subTitle?: string;
 	leftIconName?: React.ComponentProps<typeof Ionicons>['name'];
 	rightIconName?: React.ComponentProps<typeof Ionicons>['name'];
 	type?: 'default' | 'outlined';
@@ -16,7 +17,7 @@ export type ThemedButtonProps = TouchableOpacityProps & {
 
 export default function ThemedButton({
 	text,
-	secondaryText,
+	subTitle,
 	onPress,
 	leftIconName,
 	rightIconName,
@@ -25,10 +26,7 @@ export default function ThemedButton({
 	style,
 	...rest
 }: ThemedButtonProps) {
-	const button = useThemeColor('button');
-	const border = useThemeColor('border');
-    const textColor = useThemeColor('textColor');
-	const secondaryTextColor = useThemeColor('secondaryTextColor');
+	const { primaryText, secondaryText, button, border } = useThemeColor();
 
 	return (
 		<TouchableOpacity
@@ -42,14 +40,12 @@ export default function ThemedButton({
 			activeOpacity={0.9}
 			{...rest}
 		>
-			{leftIconName && <Ionicons name={leftIconName as any} size={19} color={textColor} />}
+			{leftIconName && <Ionicons name={leftIconName as any} size={19} color={primaryText} />}
 			<View style={styles.textContainer}>
 				<ThemedText text={text} type={textType} />
-				{secondaryText && (
-					<ThemedText text={secondaryText} style={[{ color: secondaryTextColor }, styles.secondaryText]} />
-				)}
+				{subTitle && <ThemedText text={subTitle} style={[{ color: secondaryText }, styles.secondaryText]} />}
 			</View>
-			{rightIconName && <Ionicons name={rightIconName as any} size={19} color={secondaryTextColor} />}
+			{rightIconName && <Ionicons name={rightIconName as any} size={19} color={secondaryText} />}
 		</TouchableOpacity>
 	);
 }

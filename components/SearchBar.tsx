@@ -1,6 +1,7 @@
-import ThemedView from '@/components/ThemedView';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { StyleSheet, TextInput, ViewProps } from 'react-native';
+
+import ThemedView from '@/components/ThemedView';
 
 export type SearchBarProps = ViewProps & {
 	placeholderText: string;
@@ -9,21 +10,19 @@ export type SearchBarProps = ViewProps & {
 };
 
 export default function SearchBar({ placeholderText, value, onChange, style, ...rest }: SearchBarProps) {
-	const textColor = useThemeColor('textColor');
-	const secondaryTextColor = useThemeColor('secondaryTextColor');
-	const border = useThemeColor('border');
+	const { primaryText, secondaryText, border } = useThemeColor();
 
 	return (
 		<ThemedView style={[{}, styles.container, style]} {...rest}>
 			<TextInput
 				placeholder={placeholderText}
 				clearButtonMode="always"
-				placeholderTextColor={secondaryTextColor}
+				placeholderTextColor={secondaryText}
 				autoCapitalize="none"
 				autoCorrect={false}
 				autoComplete="off"
 				onChangeText={onChange}
-				style={[{ color: textColor, borderColor: border }, styles.textInput]}
+				style={[{ color: primaryText, borderColor: border }, styles.textInput]}
 			/>
 		</ThemedView>
 	);

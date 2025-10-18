@@ -14,8 +14,7 @@ export type ContactProps = TouchableOpacityProps & {
 const PlaceholderImage = require('@/assets/images/placeholder-image.png');
 
 export default function Contact({ name, status, onPress, style, ...rest }: ContactProps) {
-	const button = useThemeColor('button');
-	const secondaryTextColor = useThemeColor('secondaryTextColor');
+	const { button, secondaryText } = useThemeColor();
 
 	return (
 		<TouchableOpacity
@@ -28,10 +27,10 @@ export default function Contact({ name, status, onPress, style, ...rest }: Conta
 				<ProfilePhoto imgSource={PlaceholderImage} style={styles.profilePhoto} />
 				<View style={styles.textContainer}>
 					<ThemedText text={name} style={styles.name} />
-					<ThemedText text={status} style={[{ color: secondaryTextColor }, styles.status]} />
+					<ThemedText text={status} style={[{ color: secondaryText }, styles.status]} />
 				</View>
 			</View>
-			<Ionicons name="arrow-forward" size={19} color={secondaryTextColor} />
+			<Ionicons name="arrow-forward" size={19} color={secondaryText} />
 		</TouchableOpacity>
 	);
 }

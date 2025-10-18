@@ -30,9 +30,7 @@ export default function Notification({
 	style,
 	...rest
 }: NotificationProps) {
-	const button = useThemeColor('button');
-	const secondaryTextColor = useThemeColor('secondaryTextColor');
-	const card = useThemeColor('card');
+	const { button, secondaryText, card } = useThemeColor();
 
 	return (
 		<TouchableOpacity
@@ -50,13 +48,10 @@ export default function Notification({
 				<View style={styles.textContainer}>
 					<View style={styles.titleContainer}>
 						<NotificationTitle title={title} type={type} />
-						<ThemedText text={date} style={[{ color: secondaryTextColor }, styles.dateText]} />
+						<ThemedText text={date} style={[{ color: secondaryText }, styles.dateText]} />
 					</View>
 					<View style={styles.descriptionContainer}>
-						<ThemedText
-							text={description}
-							style={[{ color: secondaryTextColor }, styles.descriptionText]}
-						/>
+						<ThemedText text={description} style={[{ color: secondaryText }, styles.descriptionText]} />
 					</View>
 				</View>
 			</View>
@@ -65,28 +60,26 @@ export default function Notification({
 }
 
 const NotificationTitle = ({ title, type }: NotificationTitleProps) => {
-	const textColor = useThemeColor('textColor');
-	const notificationColor = useThemeColor('notification');
+	const { primaryText, emergency, warning } = useThemeColor();
 
 	if (type === 'Alerta de SOS') {
-		return <ThemedText text={title ? title : type} style={[{ color: notificationColor }, styles.title]} />;
+		return <ThemedText text={title ? title : type} style={[{ color: emergency }, styles.title]} />;
 	} else if (type === 'Alerta de Medicamento') {
-		return <ThemedText text={title ? title : type} style={[{ color: '#dfa820' }, styles.title]} />;
+		return <ThemedText text={title ? title : type} style={[{ color: warning }, styles.title]} />;
 	} else {
-		return <ThemedText text={title ? title : type} style={[{ color: textColor }, styles.title]} />;
+		return <ThemedText text={title ? title : type} style={[{ color: primaryText }, styles.title]} />;
 	}
 };
 
 const NotificationIcon = ({ type }: { type: NotificationTypeName }) => {
-	const notificationColor = useThemeColor('notification');
-	const secondaryTextColor = useThemeColor('secondaryTextColor');
+	const { secondaryText, emergency, warning } = useThemeColor();
 
 	if (type === 'Alerta de SOS') {
-		return <Ionicons name="alert-circle-outline" size={42} color={notificationColor} />;
+		return <Ionicons name="alert-circle-outline" size={42} color={emergency} />;
 	} else if (type === 'Alerta de Medicamento') {
-		return <Ionicons name="medical" size={41} color={'#dfa820'} />;
+		return <Ionicons name="medical" size={41} color={warning} />;
 	} else {
-		return <Ionicons name="notifications-circle-outline" size={43} color={secondaryTextColor} />;
+		return <Ionicons name="notifications-circle-outline" size={43} color={secondaryText} />;
 	}
 };
 

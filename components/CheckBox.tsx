@@ -1,7 +1,8 @@
-import ThemedText from '@/components/ThemedText';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { StyleSheet, TouchableHighlightProps, TouchableOpacity } from 'react-native';
+
+import ThemedText from '@/components/ThemedText';
 
 export type CheckBoxProps = TouchableHighlightProps & {
 	title: string;
@@ -10,12 +11,12 @@ export type CheckBoxProps = TouchableHighlightProps & {
 };
 
 export default function CheckBox({ title, onChange, value, style, ...rest }: CheckBoxProps) {
-	const textColor = useThemeColor('textColor');
+	const { primaryText } = useThemeColor();
 
 	return (
 		<TouchableOpacity style={[styles.container, style]} onPress={onChange} activeOpacity={0.9}>
 			<ThemedText text={title} style={styles.text} />
-			<Ionicons name={value ? 'checkbox' : 'checkbox-outline'} size={22} color={textColor} />
+			<Ionicons name={value ? 'checkbox' : 'checkbox-outline'} size={22} color={primaryText} />
 		</TouchableOpacity>
 	);
 }

@@ -1,7 +1,8 @@
-import ThemedText from '@/components/ThemedText';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Modal, ModalProps, Pressable, StyleSheet, View } from 'react-native';
+
+import ThemedText from '@/components/ThemedText';
 
 export type TextSizeModalProps = ModalProps & {
 	isVisible: boolean;
@@ -9,8 +10,7 @@ export type TextSizeModalProps = ModalProps & {
 };
 
 export default function TextSizeModal({ isVisible, onClose, children, ...rest }: TextSizeModalProps) {
-	const textColor = useThemeColor('secondaryTextColor');
-	const card = useThemeColor('card');
+	const { primaryText, card } = useThemeColor();
 
 	return (
 		<Modal animationType="slide" transparent={true} visible={isVisible} {...rest}>
@@ -18,7 +18,7 @@ export default function TextSizeModal({ isVisible, onClose, children, ...rest }:
 				<View style={[styles.titleContainer, { backgroundColor: card }]}>
 					<ThemedText text="Text size" type="subtitle" />
 					<Pressable onPress={onClose}>
-						<Ionicons name="close" size={22} color={textColor} />
+						<Ionicons name="close" size={22} color={primaryText} />
 					</Pressable>
 				</View>
 				<View style={styles.contentWrapper}>{children}</View>

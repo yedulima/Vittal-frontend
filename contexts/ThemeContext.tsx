@@ -3,7 +3,7 @@ import { ReactNode, createContext, useEffect, useState } from 'react';
 import { useColorScheme } from 'react-native';
 
 export type ThemeContextType = {
-	currentTheme: string;
+	currentTheme: 'light' | 'dark';
 	toggleTheme: (newTheme: 'light' | 'dark') => void;
 	useSystemTheme: () => void;
 	isDark: boolean;
@@ -20,7 +20,7 @@ export const ThemeContext = createContext<ThemeContextType>({
 
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
 	const colorScheme = useColorScheme();
-	const [theme, setTheme] = useState<string>('light');
+	const [theme, setTheme] = useState<'light' | 'dark'>('light');
 	const [isDark, setIsDark] = useState<boolean>(false);
 	const [isSystemTheme, setIsSystemTheme] = useState<boolean>(true);
 

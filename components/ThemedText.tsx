@@ -7,12 +7,12 @@ export type ThemedTextProps = TextProps & {
 };
 
 export default function ThemedText({ text, type, style, ...rest }: ThemedTextProps) {
-	const textColor = useThemeColor('textColor');
+	const { primaryText } = useThemeColor();
 
 	return (
 		<Text
 			style={[
-				{ color: textColor },
+				{ color: primaryText },
 				type === 'default' ? styles.default : undefined,
 				type === 'light' ? styles.light : undefined,
 				type === 'title' ? styles.title : undefined,

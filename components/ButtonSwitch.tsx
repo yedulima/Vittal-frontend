@@ -10,7 +10,7 @@ export type ButtonSwitchProps = TouchableOpacityProps & {
 };
 
 export default function ButtonSwitch({ text, onPress, value, style }: ButtonSwitchProps) {
-	const button = useThemeColor('button');
+	const { button } = useThemeColor();
 
 	return (
 		<TouchableOpacity

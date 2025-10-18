@@ -18,7 +18,7 @@ export default function ConfigurationsScreen() {
 	const { isDark, toggleTheme } = useContext(ThemeContext);
 	const [isTextSizeModalVisible, setTextSizeModalVisible] = useState<boolean>(false);
 	const [textSize, setTextSize] = useState<string>('Small');
-	const border = useThemeColor('border');
+	const { border } = useThemeColor();
 
 	return (
 		<ThemedView style={styles.container}>
@@ -35,7 +35,7 @@ export default function ConfigurationsScreen() {
 			<OptionsSection title="Accessibility">
 				<ThemedButton
 					text="Text size"
-					secondaryText={textSize}
+					subTitle={textSize}
 					onPress={() => setTextSizeModalVisible(true)}
 					rightIconName="arrow-forward"
 				/>

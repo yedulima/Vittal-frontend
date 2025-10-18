@@ -3,17 +3,19 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { Tabs } from 'expo-router';
 
 export default function TabLayout() {
+	const { primary, primaryText, header } = useThemeColor();
+
 	return (
 		<Tabs
 			screenOptions={{
-				tabBarActiveTintColor: useThemeColor('primary'),
+				tabBarActiveTintColor: primary,
 				headerStyle: {
-					backgroundColor: useThemeColor('header'),
+					backgroundColor: header,
 				},
 				headerShadowVisible: false,
-				headerTintColor: useThemeColor('textColor'),
+				headerTintColor: primaryText,
 				tabBarStyle: {
-					backgroundColor: useThemeColor('header'),
+					backgroundColor: header,
 				},
 				headerTitleAlign: 'center',
 			}}

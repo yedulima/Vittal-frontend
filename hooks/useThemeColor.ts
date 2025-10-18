@@ -1,13 +1,12 @@
-import { Colors } from '@/constants/Colors';
+import { DarkTheme, DefaultTheme } from '@/constants/Colors';
 import { ThemeContext } from '@/contexts/ThemeContext';
 import { useContext } from 'react';
 
-type ColorKey = keyof (typeof Colors)['dark'] & keyof (typeof Colors)['light'];
-
-export const useThemeColor = (key: ColorKey) => {
+export const useThemeColor = () => {
 	const { currentTheme } = useContext(ThemeContext);
 
-	const theme = currentTheme === 'dark' ? 'dark' : 'light';
-
-	return Colors[theme][key];
+	if (currentTheme === 'dark') {
+		return DarkTheme;
+	}
+	return DefaultTheme;
 };

@@ -22,23 +22,21 @@ export default function ThemedDropDown({
 	style,
 	...rest
 }: ThemedDropDownProps) {
-	const border = useThemeColor('border');
-	const textColor = useThemeColor('textColor');
-	const card = useThemeColor('card');
+	const { primaryText, border, card } = useThemeColor();
 
 	return (
 		<Dropdown
 			style={[{ borderColor: border }, styles.dropdown, style]}
 			data={data}
 			containerStyle={[styles.containerStyle, { backgroundColor: card }]}
-			itemTextStyle={{ color: textColor }}
-			selectedTextStyle={{ color: textColor }}
+			itemTextStyle={{ color: primaryText }}
+			selectedTextStyle={{ color: primaryText }}
 			activeColor={card}
 			labelField={labelField}
 			valueField={valueField}
 			onChange={onChange}
 			value={value}
-			placeholderStyle={{ color: textColor, fontSize: 15 }}
+			placeholderStyle={{ color: primaryText, fontSize: 15 }}
 			placeholder={placeholderText}
 			{...rest}
 		/>
