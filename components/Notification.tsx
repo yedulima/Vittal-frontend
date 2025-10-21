@@ -30,13 +30,13 @@ export default function Notification({
 	style,
 	...rest
 }: NotificationProps) {
-	const { button, secondaryText, card } = useThemeColor();
+	const { button, secondaryText, card, border } = useThemeColor();
 
 	return (
 		<TouchableOpacity
 			onPress={onPress}
 			style={[
-				{ borderBottomColor: button, backgroundColor: isView ? 'transparent' : card },
+				{ backgroundColor: isView ? 'transparent' : card, borderColor: border },
 				styles.container,
 				style,
 			]}
@@ -92,9 +92,10 @@ const styles = StyleSheet.create({
 		height: 80,
 		paddingHorizontal: 7,
 		paddingBottom: 10,
-		borderBottomWidth: 2,
+		// borderBottomWidth: 2,
 		marginBottom: 10,
 		borderRadius: 5,
+		borderWidth: 1,
 	},
 	notificationInfoContainer: {
 		flex: 1,

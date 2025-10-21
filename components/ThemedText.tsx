@@ -4,15 +4,16 @@ import { StyleSheet, Text, TextProps } from 'react-native';
 export type ThemedTextProps = TextProps & {
 	text: string;
 	type?: 'default' | 'light' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
+	color?: string;
 };
 
-export default function ThemedText({ text, type, style, ...rest }: ThemedTextProps) {
+export default function ThemedText({ text, type, color, style, ...rest }: ThemedTextProps) {
 	const { primaryText } = useThemeColor();
 
 	return (
 		<Text
 			style={[
-				{ color: primaryText },
+				{ color: color ? color : primaryText },
 				type === 'default' ? styles.default : undefined,
 				type === 'light' ? styles.light : undefined,
 				type === 'title' ? styles.title : undefined,

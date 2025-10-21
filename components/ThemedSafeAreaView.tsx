@@ -14,7 +14,7 @@ export default function ThemedSafeAreaView({ children, style, ...rest }: ThemedV
 	return (
 		<View
 			style={[
-				{ backgroundColor: background, paddingTop: insets.top + 25, paddingBottom: insets.bottom + 25 },
+				{ backgroundColor: background, paddingTop: insets.top + 25, paddingBottom: insets.bottom + 10 },
 				styles.container,
 				style,
 			]}

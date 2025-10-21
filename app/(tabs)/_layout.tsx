@@ -33,7 +33,7 @@ export default function TabLayout() {
 			<Tabs.Screen
 				name="contacts"
 				options={{
-					title: 'Contacts',
+					title: 'Contatos',
 					headerShown: false,
 					tabBarIcon: ({ color, focused }) => (
 						<Ionicons name={focused ? 'people' : 'people-outline'} color={color} size={24} />
@@ -43,7 +43,7 @@ export default function TabLayout() {
 			<Tabs.Screen
 				name="notifications"
 				options={{
-					title: 'Notifications',
+					title: 'Notificações',
 					headerShown: false,
 					tabBarIcon: ({ color, focused }) => (
 						<Ionicons name={focused ? 'notifications' : 'notifications-outline'} color={color} size={24} />
@@ -53,7 +53,7 @@ export default function TabLayout() {
 			<Tabs.Screen
 				name="configurations"
 				options={{
-					title: 'Configurations',
+					title: 'Configurações',
 					headerShown: false,
 					tabBarIcon: ({ color, focused }) => (
 						<Ionicons name={focused ? 'cog' : 'cog-outline'} color={color} size={24} />

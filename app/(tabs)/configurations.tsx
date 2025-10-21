@@ -17,7 +17,7 @@ const PlaceholderImage = require('@/assets/images/placeholder-image.png');
 export default function ConfigurationsScreen() {
 	const { isDark, toggleTheme } = useContext(ThemeContext);
 	const [isTextSizeModalVisible, setTextSizeModalVisible] = useState<boolean>(false);
-	const [textSize, setTextSize] = useState<string>('Small');
+	const [textSize, setTextSize] = useState<string>('Pequena');
 	const { border } = useThemeColor();
 
 	return (
@@ -30,12 +30,12 @@ export default function ConfigurationsScreen() {
 					<ThemedText text="user@example.com" type="light" />
 				</View>
 			</View>
-			<OptionsSection title="Apparence">
-				<ButtonSwitch text="Dark theme" value={isDark} onPress={() => toggleTheme(isDark ? 'light' : 'dark')} />
+			<OptionsSection title="Aparência">
+				<ButtonSwitch text="Tema escuro" value={isDark} onPress={() => toggleTheme(isDark ? 'light' : 'dark')} />
 			</OptionsSection>
-			<OptionsSection title="Accessibility">
+			<OptionsSection title="Acessibilidade">
 				<ThemedButton
-					text="Text size"
+					text="Text"
 					subTitle={textSize}
 					onPress={() => setTextSizeModalVisible(true)}
 					rightIconName="arrow-forward"
@@ -49,9 +49,9 @@ export default function ConfigurationsScreen() {
 				textType="defaultSemiBold"
 			/>
 			<TextSizeModal isVisible={isTextSizeModalVisible} onClose={() => setTextSizeModalVisible(false)}>
-				<CheckBox title="Small" onChange={() => setTextSize('Small')} value={textSize === 'Small'} />
-				<CheckBox title="Medium" onChange={() => setTextSize('Medium')} value={textSize === 'Medium'} />
-				<CheckBox title="Large" onChange={() => setTextSize('Large')} value={textSize === 'Large'} />
+				<CheckBox title="Pequena" onChange={() => setTextSize('Pequena')} value={textSize === 'Pequena'} />
+				<CheckBox title="Mediana" onChange={() => setTextSize('Mediana')} value={textSize === 'Mediana'} />
+				<CheckBox title="Grande" onChange={() => setTextSize('Grande')} value={textSize === 'Grande'} />
 			</TextSizeModal>
 		</ThemedSafeAreaView>
 	);
