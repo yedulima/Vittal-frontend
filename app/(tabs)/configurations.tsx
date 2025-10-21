@@ -9,8 +9,8 @@ import OptionsSection from '@/components/OptionsSection';
 import ProfilePhoto from '@/components/ProfilePhoto';
 import TextSizeModal from '@/components/TextSizeModal';
 import ThemedButton from '@/components/ThemedButton';
+import ThemedSafeAreaView from '@/components/ThemedSafeAreaView';
 import ThemedText from '@/components/ThemedText';
-import ThemedView from '@/components/ThemedView';
 
 const PlaceholderImage = require('@/assets/images/placeholder-image.png');
 
@@ -21,7 +21,8 @@ export default function ConfigurationsScreen() {
 	const { border } = useThemeColor();
 
 	return (
-		<ThemedView style={styles.container}>
+		<ThemedSafeAreaView>
+			<ThemedText text="Configurações" type="title" style={styles.title} />
 			<View style={styles.profileContainer}>
 				<ProfilePhoto imgSource={PlaceholderImage} style={[{ borderColor: border }, styles.profilePhoto]} />
 				<View style={styles.profileTextContainer}>
@@ -52,15 +53,15 @@ export default function ConfigurationsScreen() {
 				<CheckBox title="Medium" onChange={() => setTextSize('Medium')} value={textSize === 'Medium'} />
 				<CheckBox title="Large" onChange={() => setTextSize('Large')} value={textSize === 'Large'} />
 			</TextSizeModal>
-		</ThemedView>
+		</ThemedSafeAreaView>
 	);
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		alignItems: 'center',
-		padding: 28,
+	title: {
+		fontSize: 25,
+		alignSelf: 'flex-start',
+		paddingBottom: 30,
 	},
 	profileContainer: {
 		alignItems: 'center',

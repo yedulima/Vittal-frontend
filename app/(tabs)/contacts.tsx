@@ -6,7 +6,7 @@ import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
 import Contact from '@/components/Contact';
 import SearchBar from '@/components/SearchBar';
 import ThemedText from '@/components/ThemedText';
-import ThemedView from '@/components/ThemedView';
+import ThemedSafeAreaView from '@/components/ThemedSafeAreaView';
 
 export default function ContactsScreen() {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -42,10 +42,11 @@ export default function ContactsScreen() {
 	}, []);
 
 	return (
-		<ThemedView style={styles.container}>
+		<ThemedSafeAreaView>
+			<ThemedText text="Contatos" type="title" style={styles.title} />
 			<View style={styles.searchBarContainer}>
 				<SearchBar
-					placeholderText="Search contact"
+					placeholderText="Procurar contato"
 					value={searchQuery}
 					onChange={(query) => handleSearch(query)}
 				/>
@@ -75,14 +76,15 @@ export default function ContactsScreen() {
 					)}
 				</View>
 			)}
-		</ThemedView>
+		</ThemedSafeAreaView>
 	);
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		padding: 28,
+	title: {
+		fontSize: 25,
+		alignSelf: 'flex-start',
+		paddingBottom: 30,
 	},
 	searchBarContainer: {
 		width: '100%',

@@ -1,20 +1,21 @@
 import { StyleSheet } from 'react-native';
 
 import ThemedText from '@/components/ThemedText';
-import ThemedView from '@/components/ThemedView';
+import ThemedSafeAreaView from '@/components/ThemedSafeAreaView';
 
 export default function HomeScreen() {
 	return (
-		<ThemedView style={styles.container}>
+		<ThemedSafeAreaView>
+			<ThemedText text="Home" type="title" style={styles.title} />
 			<ThemedText text="Home screen" type='subtitle' />
-		</ThemedView>
+		</ThemedSafeAreaView>
 	);
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'center',
+	title: {
+		fontSize: 25,
+		alignSelf: 'flex-start',
+		paddingBottom: 30,
 	},
 });

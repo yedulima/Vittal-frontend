@@ -24,6 +24,7 @@ export default function TabLayout() {
 				name="index"
 				options={{
 					title: 'Home',
+					headerShown: false,
 					tabBarIcon: ({ color, focused }) => (
 						<Ionicons name={focused ? 'home-sharp' : 'home-outline'} color={color} size={24} />
 					),
@@ -33,6 +34,7 @@ export default function TabLayout() {
 				name="contacts"
 				options={{
 					title: 'Contacts',
+					headerShown: false,
 					tabBarIcon: ({ color, focused }) => (
 						<Ionicons name={focused ? 'people' : 'people-outline'} color={color} size={24} />
 					),
@@ -42,6 +44,7 @@ export default function TabLayout() {
 				name="notifications"
 				options={{
 					title: 'Notifications',
+					headerShown: false,
 					tabBarIcon: ({ color, focused }) => (
 						<Ionicons name={focused ? 'notifications' : 'notifications-outline'} color={color} size={24} />
 					),
@@ -51,6 +54,7 @@ export default function TabLayout() {
 				name="configurations"
 				options={{
 					title: 'Configurations',
+					headerShown: false,
 					tabBarIcon: ({ color, focused }) => (
 						<Ionicons name={focused ? 'cog' : 'cog-outline'} color={color} size={24} />
 					),
