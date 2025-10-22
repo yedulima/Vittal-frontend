@@ -34,8 +34,7 @@ export default function NotificationsScreen() {
 
 const styles = StyleSheet.create({
 	title: {
-		fontSize: 25,
 		alignSelf: 'flex-start',
-		paddingBottom: 30,
+		marginBottom: 30,
 	},
 });

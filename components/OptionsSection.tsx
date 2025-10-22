@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { StyleProp, StyleSheet, View, ViewProps } from 'react-native';
 
-import ThemedText from './ThemedText';
+import ThemedText from '@/components/ThemedText';
 
 export type OptionsSectionProps = ViewProps & {
 	title: string;
@@ -12,7 +12,7 @@ export type OptionsSectionProps = ViewProps & {
 export default function OptionsSection({ title, style, children }: OptionsSectionProps) {
 	return (
 		<View style={[styles.optionsContainer, style]}>
-			<ThemedText text={title} type="subtitle" style={styles.title} />
+			<ThemedText text={title} type="subtitle" />
 			{children}
 		</View>
 	);
@@ -24,7 +24,4 @@ const styles = StyleSheet.create({
 		gap: 12,
 		marginBottom: 20,
 	},
-	title: {
-		fontSize: 18,
-	}
 });

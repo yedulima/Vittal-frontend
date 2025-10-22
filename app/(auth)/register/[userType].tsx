@@ -94,7 +94,7 @@ export default function RegisterScreen() {
 	if (!config) {
 		return (
 			<ThemedView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-				<ThemedText text="Tipo de usuário inválido!" />
+				<ThemedText text="Tipo de usuário inválido!" type="default" />
 			</ThemedView>
 		);
 	}
@@ -108,35 +108,27 @@ export default function RegisterScreen() {
 			</View>
 			<View style={styles.credentials}>
 				<View>
-					<ThemedText text="Nome completo" style={styles.inputLabel} />
-					<ThemedInput value={name}  onChange={(e: any) => setName(e)} />
+					<ThemedText text="Nome completo" type="default" style={styles.inputLabel} />
+					<ThemedInput value={name} onChange={(e: any) => setName(e)} />
 				</View>
 				<View>
-					<ThemedText text="E-mail" style={styles.inputLabel} />
+					<ThemedText text="E-mail" type="default" style={styles.inputLabel} />
 					<ThemedInput value={email} inputType="email-address" onChange={(e: any) => setEmail(e)} />
 				</View>
 				<View>
-					<ThemedText text="Senha" style={styles.inputLabel} />
-					<ThemedInput
-						value={password}
-						onChange={(e: any) => setPassword(e)}
-						type='password'
-					/>
+					<ThemedText text="Senha" type="default" style={styles.inputLabel} />
+					<ThemedInput value={password} onChange={(e: any) => setPassword(e)} type="password" />
 				</View>
 				<View>
-					<ThemedText text="Confirme sua Senha" style={styles.inputLabel} />
-					<ThemedInput
-						value={confirmPassword}
-						onChange={(e: any) => setConfirmPassword(e)}
-						type='password'
-					/>
+					<ThemedText text="Confirme sua Senha" type="default" style={styles.inputLabel} />
+					<ThemedInput value={confirmPassword} onChange={(e: any) => setConfirmPassword(e)} type="password" />
 				</View>
 				<View>
-					<ThemedText text="Data de nascimento" style={styles.inputLabel} />
+					<ThemedText text="Data de nascimento" type="default" style={styles.inputLabel} />
 					<ThemedInput value={birthDay} onChange={(e: any) => setBirthDay(e)} />
 				</View>
 				<View>
-					<ThemedText text="Telefone" style={styles.inputLabel} />
+					<ThemedText text="Telefone" type="default" style={styles.inputLabel} />
 					<ThemedInput value={phoneNumber} inputType="phone-pad" onChange={(e: any) => setPhoneNumber(e)} />
 				</View>
 			</View>
@@ -171,7 +163,6 @@ const styles = StyleSheet.create({
 		marginBottom: 20,
 	},
 	inputLabel: {
-		fontSize: 16,
 		fontWeight: 500,
 		marginBottom: 8,
 	},

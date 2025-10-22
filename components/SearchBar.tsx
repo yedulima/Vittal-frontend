@@ -21,6 +21,7 @@ export default function SearchBar({ placeholderText, value, onChange, style, ...
 				autoCapitalize="none"
 				autoCorrect={false}
 				autoComplete="off"
+				autoFocus={false}
 				onChangeText={onChange}
 				style={[{ color: primaryText, borderColor: border }, styles.textInput]}
 			/>

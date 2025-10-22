@@ -3,7 +3,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import React from 'react';
 import { ActivityIndicator, StyleSheet, TouchableOpacity, TouchableOpacityProps, View } from 'react-native';
 
-import ThemedText from '@/components/ThemedText';
+import ThemedText, { TextType } from '@/components/ThemedText';
 
 export type ThemedButtonProps = TouchableOpacityProps & {
 	text: string;
@@ -11,8 +11,8 @@ export type ThemedButtonProps = TouchableOpacityProps & {
 	subTitle?: string;
 	leftIconName?: React.ComponentProps<typeof Ionicons>['name'];
 	rightIconName?: React.ComponentProps<typeof Ionicons>['name'];
-	type?: 'default' | 'outlined';
-	textType?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
+	buttonType?: 'default' | 'outlined';
+	textType?: TextType;
 	loading?: boolean;
 };
 
@@ -22,7 +22,7 @@ export default function ThemedButton({
 	onPress,
 	leftIconName,
 	rightIconName,
-	type = 'default',
+	buttonType = 'default',
 	textType,
 	loading,
 	style,
@@ -35,8 +35,8 @@ export default function ThemedButton({
 			onPress={onPress}
 			style={[
 				(rightIconName || leftIconName) && styles.iconButton,
-				type === 'default' ? { backgroundColor: button } : { borderColor: border },
-				type === 'default' ? styles.default : styles.outlined,
+				buttonType === 'default' ? { backgroundColor: button } : { borderColor: border },
+				buttonType === 'default' ? styles.default : styles.outlined,
 				styles.button,
 				style,
 			]}
@@ -49,10 +49,8 @@ export default function ThemedButton({
 				<>
 					{leftIconName && <Ionicons name={leftIconName as any} size={19} color={primaryText} />}
 					<View style={styles.textContainer}>
-						<ThemedText text={text} type={textType} />
-						{subTitle && (
-							<ThemedText text={subTitle} style={[{ color: secondaryText }, styles.secondaryText]} />
-						)}
+						<ThemedText text={text} type={textType ? textType : 'default'} />
+						{subTitle && <ThemedText text={subTitle} type="small" style={{ color: secondaryText }} />}
 					</View>
 					{rightIconName && <Ionicons name={rightIconName as any} size={19} color={secondaryText} />}
 				</>
@@ -91,8 +89,5 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		gap: 8,
-	},
-	secondaryText: {
-		fontSize: 12,
 	},
 });

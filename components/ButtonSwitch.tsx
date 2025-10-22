@@ -18,7 +18,7 @@ export default function ButtonSwitch({ text, onPress, value, style }: ButtonSwit
 			style={[{ backgroundColor: button }, styles.button, style]}
 			activeOpacity={0.9}
 		>
-			<ThemedText text={text} />
+			<ThemedText text={text} type='default' />
 			<Switch value={value} trackColor={{ false: '#d1d1d1ff', true: '#494949ff' }} activeThumbColor="#fff" />
 		</TouchableOpacity>
 	);

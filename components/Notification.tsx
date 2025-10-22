@@ -30,16 +30,12 @@ export default function Notification({
 	style,
 	...rest
 }: NotificationProps) {
-	const { button, secondaryText, card, border } = useThemeColor();
+	const { secondaryText, card, border } = useThemeColor();
 
 	return (
 		<TouchableOpacity
 			onPress={onPress}
-			style={[
-				{ backgroundColor: isView ? 'transparent' : card, borderColor: border },
-				styles.container,
-				style,
-			]}
+			style={[{ backgroundColor: isView ? 'transparent' : card, borderColor: border }, styles.container, style]}
 			activeOpacity={0.7}
 			{...rest}
 		>
@@ -48,10 +44,10 @@ export default function Notification({
 				<View style={styles.textContainer}>
 					<View style={styles.titleContainer}>
 						<NotificationTitle title={title} type={type} />
-						<ThemedText text={date} style={[{ color: secondaryText }, styles.dateText]} />
+						<ThemedText text={date} type="small" style={{ color: secondaryText }} />
 					</View>
 					<View style={styles.descriptionContainer}>
-						<ThemedText text={description} style={[{ color: secondaryText }, styles.descriptionText]} />
+						<ThemedText text={description} type="default" style={{ color: secondaryText }} />
 					</View>
 				</View>
 			</View>
@@ -63,11 +59,11 @@ const NotificationTitle = ({ title, type }: NotificationTitleProps) => {
 	const { primaryText, emergency, warning } = useThemeColor();
 
 	if (type === 'Alerta de SOS') {
-		return <ThemedText text={title ? title : type} style={[{ color: emergency }, styles.title]} />;
+		return <ThemedText text={title ? title : type} type="defaultSemiBold" style={{ color: emergency }} />;
 	} else if (type === 'Alerta de Medicamento') {
-		return <ThemedText text={title ? title : type} style={[{ color: warning }, styles.title]} />;
+		return <ThemedText text={title ? title : type} type="defaultSemiBold" style={{ color: warning }} />;
 	} else {
-		return <ThemedText text={title ? title : type} style={[{ color: primaryText }, styles.title]} />;
+		return <ThemedText text={title ? title : type} type="defaultSemiBold" style={{ color: primaryText }} />;
 	}
 };
 
@@ -92,7 +88,6 @@ const styles = StyleSheet.create({
 		height: 80,
 		paddingHorizontal: 7,
 		paddingBottom: 10,
-		// borderBottomWidth: 2,
 		marginBottom: 10,
 		borderRadius: 5,
 		borderWidth: 1,
@@ -118,19 +113,5 @@ const styles = StyleSheet.create({
 	descriptionContainer: {
 		width: '97%',
 		maxHeight: 40,
-	},
-	title: {
-		fontSize: 16,
-		fontWeight: '500',
-	},
-	dateText: {
-		fontSize: 11.5,
-	},
-	descriptionText: {
-		fontSize: 13,
-	},
-	status: {
-		fontSize: 12,
-		fontWeight: 'light',
 	},
 });

@@ -15,36 +15,36 @@ export default function HomeScreen() {
 				<View style={styles.welcomeBackContainer}>
 					<ThemedText text="Boa noite," type="defaultSemiBold" />
 					<ThemedText text="Eduardo" type="title" style={styles.name} />
-					<ThemedText text="Hoje você tem 2 emergências e 1 alerta ativo" style={{ color: secondaryText }} />
+					<ThemedText text="Hoje você tem 2 emergências e 1 alerta ativo" type='default' style={{ color: secondaryText }} />
 				</View>
 				<View>
 					<View style={styles.cardsContainer}>
 						<View style={[{ borderColor: border, backgroundColor: card }, styles.card]}>
 							<MaterialIcons name="error" size={35} color="#ff4d4d" />
 							<View>
-								<ThemedText text="Emergências" style={styles.cardLabel} />
-								<ThemedText text="1" style={styles.cardNumber} />
+								<ThemedText text="Emergências" type='defaultSemiBold' />
+								<ThemedText text="1" type='subtitle'  />
 							</View>
 						</View>
 						<View style={[{ borderColor: border, backgroundColor: card }, styles.card]}>
 							<MaterialIcons name="warning" size={35} color="#ffcc00" />
 							<View>
-								<ThemedText text="Alertas" style={styles.cardLabel} />
-								<ThemedText text="1" style={styles.cardNumber} />
+								<ThemedText text="Alertas" type='defaultSemiBold' />
+								<ThemedText text="1" type='subtitle' />
 							</View>
 						</View>
 						<View style={[{ borderColor: border, backgroundColor: card }, styles.card]}>
 							<MaterialIcons name="schedule" size={35} color="#999" />
 							<View>
-								<ThemedText text="Pendentes" style={styles.cardLabel} />
-								<ThemedText text="2" style={styles.cardNumber} />
+								<ThemedText text="Pendentes" type='defaultSemiBold' />
+								<ThemedText text="2" type='subtitle' />
 							</View>
 						</View>
 						<View style={[{ borderColor: border, backgroundColor: card }, styles.card]}>
 							<MaterialIcons name="person" size={35} color="#ccc" />
 							<View>
-								<ThemedText text="Idosos" style={styles.cardLabel} />
-								<ThemedText text="5" style={styles.cardNumber} />
+								<ThemedText text="Idosos" type='defaultSemiBold' />
+								<ThemedText text="5" type='subtitle' />
 							</View>
 						</View>
 					</View>
@@ -106,13 +106,6 @@ const styles = StyleSheet.create({
 		borderWidth: 1.5,
 		marginBottom: 15,
 		gap: 2,
-	},
-	cardLabel: {
-		fontSize: 16,
-	},
-	cardNumber: {
-		fontSize: 20,
-		fontWeight: '700',
 	},
 	notificationsContainer: {
 		gap: 15,

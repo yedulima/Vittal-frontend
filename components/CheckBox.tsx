@@ -14,8 +14,8 @@ export default function CheckBox({ title, onChange, value, style, ...rest }: Che
 	const { primaryText } = useThemeColor();
 
 	return (
-		<TouchableOpacity style={[styles.container, style]} onPress={onChange} activeOpacity={0.9}>
-			<ThemedText text={title} style={styles.text} />
+		<TouchableOpacity style={[styles.container, style]} onPress={onChange} activeOpacity={0.9} {...rest}>
+			<ThemedText text={title} type="default" />
 			<Ionicons name={value ? 'checkbox' : 'checkbox-outline'} size={22} color={primaryText} />
 		</TouchableOpacity>
 	);
@@ -27,8 +27,5 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',
-	},
-	text: {
-		fontSize: 16,
 	},
 });

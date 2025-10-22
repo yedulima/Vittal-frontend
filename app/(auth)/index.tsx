@@ -35,7 +35,7 @@ export default function HomeScreen() {
 					text="Cadastrar-se"
 					onPress={() => router.navigate('/register')}
 					textType="defaultSemiBold"
-					type="outlined"
+					buttonType="outlined"
 					style={{ backgroundColor: 'transparent', borderWidth: 2 }}
 				/>
 			</View>

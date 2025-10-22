@@ -5,8 +5,8 @@ import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
 
 import Contact from '@/components/Contact';
 import SearchBar from '@/components/SearchBar';
-import ThemedText from '@/components/ThemedText';
 import ThemedSafeAreaView from '@/components/ThemedSafeAreaView';
+import ThemedText from '@/components/ThemedText';
 
 export default function ContactsScreen() {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -56,11 +56,15 @@ export default function ContactsScreen() {
 					<ActivityIndicator color={isDark ? '#fff' : '#0a84ff'} size={30} />
 				</View>
 			) : error ? (
-				<ThemedText text="Error fetching data." style={{ alignSelf: 'center' }} />
+				<ThemedText text="Error fetching data." type="default" style={{ alignSelf: 'center' }} />
 			) : (
 				<View style={styles.contactsContainer}>
 					{data && data.length === 0 && searchQuery ? (
-						<ThemedText text={`No matches for "${searchQuery}"`} style={{ alignSelf: 'center' }} />
+						<ThemedText
+							text={`No matches for "${searchQuery}"`}
+							type="default"
+							style={{ alignSelf: 'center' }}
+						/>
 					) : (
 						<FlatList
 							data={data}
@@ -68,7 +72,7 @@ export default function ContactsScreen() {
 							renderItem={({ item }: { item: any }) => (
 								<Contact
 									name={item.name}
-									status={item.status === 'Active' ? 'Active' : 'Inactive'}
+									status={item.status === 'Active' ? 'Ativo' : 'Inativo'}
 									onPress={() => {}}
 								/>
 							)}
@@ -82,9 +86,8 @@ export default function ContactsScreen() {
 
 const styles = StyleSheet.create({
 	title: {
-		fontSize: 25,
 		alignSelf: 'flex-start',
-		paddingBottom: 30,
+		marginBottom: 30,
 	},
 	searchBarContainer: {
 		width: '100%',

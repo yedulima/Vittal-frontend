@@ -7,7 +7,7 @@ import ThemedText from '@/components/ThemedText';
 
 export type ContactProps = TouchableOpacityProps & {
 	name: string;
-	status: 'Active' | 'Inactive';
+	status: 'Ativo' | 'Inativo';
 	onPress: () => void;
 };
 
@@ -26,8 +26,8 @@ export default function Contact({ name, status, onPress, style, ...rest }: Conta
 			<View style={styles.userInfoContainer}>
 				<ProfilePhoto imgSource={PlaceholderImage} style={styles.profilePhoto} />
 				<View style={styles.textContainer}>
-					<ThemedText text={name} style={styles.name} />
-					<ThemedText text={status} style={[{ color: secondaryText }, styles.status]} />
+					<ThemedText text={name} type="default" />
+					<ThemedText text={status} type="light" style={[{ color: secondaryText }]} />
 				</View>
 			</View>
 			<Ionicons name="arrow-forward" size={19} color={secondaryText} />
@@ -61,13 +61,5 @@ const styles = StyleSheet.create({
 	textContainer: {
 		alignItems: 'flex-start',
 		justifyContent: 'center',
-	},
-	name: {
-		fontSize: 16,
-		fontWeight: 'semibold',
-	},
-	status: {
-		fontSize: 12,
-		fontWeight: 'light',
 	},
 });

@@ -23,7 +23,7 @@ export default function ConfigurationsScreen() {
 	const [email, setEmail] = useState<string>('user@example.com');
 	const [loading, setLoading] = useState<boolean>(false);
 	const [isTextSizeModalVisible, setTextSizeModalVisible] = useState<boolean>(false);
-	const [textSize, setTextSize] = useState<string>('Pequena');
+	const [textSize, setTextSize] = useState<string>('Mediana');
 
 	const { border, primaryText } = useThemeColor();
 
@@ -82,7 +82,7 @@ export default function ConfigurationsScreen() {
 			</OptionsSection>
 			<OptionsSection title="Acessibilidade">
 				<ThemedButton
-					text="Text"
+					text="Fonte"
 					subTitle={textSize}
 					onPress={() => setTextSizeModalVisible(true)}
 					rightIconName="arrow-forward"
@@ -106,9 +106,8 @@ export default function ConfigurationsScreen() {
 
 const styles = StyleSheet.create({
 	title: {
-		fontSize: 25,
 		alignSelf: 'flex-start',
-		paddingBottom: 30,
+		marginBottom: 30,
 	},
 	profileContainer: {
 		alignItems: 'center',
