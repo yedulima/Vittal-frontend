@@ -1,3 +1,4 @@
+import { useAuthRedirect } from '@/hooks/useAuth';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { register } from '@/services/auth';
 import { useLocalSearchParams, useRouter } from 'expo-router';
@@ -60,7 +61,7 @@ export default function RegisterScreen() {
 			const formData = { name, email, password, birthDay, phoneNumber };
 
 			await config.registerHandler(formData);
-			router.replace('/(tabs)');
+			useAuthRedirect();
 		} catch (error: any) {
 			const errorCode = error.code;
 

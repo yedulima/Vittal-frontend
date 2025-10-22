@@ -4,7 +4,7 @@ import { Tabs } from 'expo-router';
 
 import ThemedView from '@/components/ThemedView';
 
-export default function TabLayout() {
+export default function IdosoLayout() {
 	const { primary, primaryText, header } = useThemeColor();
 
 	return (
@@ -31,16 +31,6 @@ export default function TabLayout() {
 						headerShown: false,
 						tabBarIcon: ({ color, focused }) => (
 							<Ionicons name={focused ? 'home-sharp' : 'home-outline'} color={color} size={24} />
-						),
-					}}
-				/>
-				<Tabs.Screen
-					name="contacts"
-					options={{
-						title: 'Contatos',
-						headerShown: false,
-						tabBarIcon: ({ color, focused }) => (
-							<Ionicons name={focused ? 'people' : 'people-outline'} color={color} size={24} />
 						),
 					}}
 				/>

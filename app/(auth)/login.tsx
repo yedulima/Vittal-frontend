@@ -3,6 +3,7 @@ import { loginWithEmailAndPassword } from '@/services/auth';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { Alert, StyleSheet, View } from 'react-native';
+import { useAuthRedirect } from '@/hooks/useAuth';
 
 import ReturnButton from '@/components/ReturnButton';
 import ThemedButton from '@/components/ThemedButton';
@@ -28,7 +29,7 @@ export default function LoginScreen() {
 			}
 
 			await loginWithEmailAndPassword(email, password);
-			router.replace('/(tabs)');
+			useAuthRedirect();
 		} catch (error: any) {
 			const errorCode = error.code;
 
