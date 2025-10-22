@@ -22,6 +22,7 @@ export default function ThemedText({ text, type, color, style, ...rest }: Themed
 				type === 'link' ? styles.link : undefined,
 				style,
 			]}
+			allowFontScaling={false}
 			{...rest}
 		>
 			{text}

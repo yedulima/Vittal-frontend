@@ -1,28 +1,38 @@
 import { useThemeColor } from '@/hooks/useThemeColor';
-import { StyleSheet, TextInput, ViewProps } from 'react-native';
+import { KeyboardType, StyleSheet, TextInput, TextInputProps, ViewProps } from 'react-native';
 
 import ThemedView from '@/components/ThemedView';
 
-export type SearchBarProps = ViewProps & {
-	placeholderText: string;
-	value: string;
-	onChange: (query: string) => void;
+export type SearchBarProps = TextInputProps & ViewProps & {
+    value: string;
+	onChange: (text: string) => void;
+	placeholderText?: string;
+	type?: KeyboardType;
 };
 
-export default function SearchBar({ placeholderText, value, onChange, style, ...rest }: SearchBarProps) {
+export default function ThemedInput({
+	placeholderText,
+	value,
+	onChange,
+	type = 'default',
+	style,
+	...rest
+}: SearchBarProps) {
 	const { primaryText, secondaryText, border } = useThemeColor();
 
 	return (
-		<ThemedView style={[styles.container, style]} {...rest}>
+		<ThemedView style={[styles.container, style]}>
 			<TextInput
 				placeholder={placeholderText}
-				clearButtonMode="always"
+				clearButtonMode="never"
 				placeholderTextColor={secondaryText}
 				autoCapitalize="none"
 				autoCorrect={false}
 				autoComplete="off"
+				keyboardType={type}
 				onChangeText={onChange}
 				style={[{ color: primaryText, borderColor: border }, styles.textInput]}
+				{...rest}
 			/>
 		</ThemedView>
 	);
