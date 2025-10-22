@@ -58,9 +58,9 @@ export default function RegisterScreen() {
 			}
 
 			const formData = { name, email, password, birthDay, phoneNumber };
-			await config.registerHandler(formData);
 
-			console.log('Cadastrado com sucesso!');
+			await config.registerHandler(formData);
+			router.replace('/(tabs)');
 		} catch (error: any) {
 			const errorCode = error.code;
 

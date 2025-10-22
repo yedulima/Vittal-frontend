@@ -28,8 +28,7 @@ export default function LoginScreen() {
 			}
 
 			await loginWithEmailAndPassword(email, password);
-
-			console.log('Usuário logado com sucesso!');
+			router.replace('/(tabs)');
 		} catch (error: any) {
 			const errorCode = error.code;
 

@@ -1,5 +1,7 @@
 import { ThemeContext } from '@/contexts/ThemeContext';
+import { FIREBASE_AUTH } from '@/FirebaseConfig';
 import { useThemeColor } from '@/hooks/useThemeColor';
+import { useRouter } from 'expo-router';
 import { useContext, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
@@ -18,7 +20,15 @@ export default function ConfigurationsScreen() {
 	const { isDark, toggleTheme } = useContext(ThemeContext);
 	const [isTextSizeModalVisible, setTextSizeModalVisible] = useState<boolean>(false);
 	const [textSize, setTextSize] = useState<string>('Pequena');
+
 	const { border } = useThemeColor();
+
+	const router = useRouter();
+
+	const handleLogout = () => {
+		FIREBASE_AUTH.signOut();
+		router.replace('/(auth)');
+	};
 
 	return (
 		<ThemedSafeAreaView>
@@ -31,7 +41,11 @@ export default function ConfigurationsScreen() {
 				</View>
 			</View>
 			<OptionsSection title="Aparência">
-				<ButtonSwitch text="Tema escuro" value={isDark} onPress={() => toggleTheme(isDark ? 'light' : 'dark')} />
+				<ButtonSwitch
+					text="Tema escuro"
+					value={isDark}
+					onPress={() => toggleTheme(isDark ? 'light' : 'dark')}
+				/>
 			</OptionsSection>
 			<OptionsSection title="Acessibilidade">
 				<ThemedButton
@@ -43,7 +57,7 @@ export default function ConfigurationsScreen() {
 			</OptionsSection>
 			<ThemedButton
 				text="Encerrar sessão"
-				onPress={() => {}}
+				onPress={handleLogout}
 				leftIconName="exit-outline"
 				style={styles.logoutButton}
 				textType="defaultSemiBold"

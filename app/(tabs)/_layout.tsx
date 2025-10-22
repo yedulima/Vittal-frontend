@@ -18,6 +18,7 @@ export default function TabLayout() {
 					backgroundColor: header,
 				},
 				headerTitleAlign: 'center',
+				animation: 'shift',
 			}}
 		>
 			<Tabs.Screen
