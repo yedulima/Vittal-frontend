@@ -74,15 +74,15 @@ export default function LoginScreen() {
 				<View style={styles.credentials}>
 					<View>
 						<ThemedText text="E-mail" style={styles.inputLabel} />
-						<ThemedInput value={email} type="email-address" onChange={(e: any) => setEmail(e)} />
+						<ThemedInput value={email} inputType="email-address" onChange={(e: any) => setEmail(e)} />
 					</View>
 					<View>
 						<ThemedText text="Senha" style={styles.inputLabel} />
 						<ThemedInput
 							value={password}
-							type="email-address"
+							inputType="email-address"
 							onChange={(e: any) => setPassword(e)}
-							secureTextEntry={true}
+							type='password'
 						/>
 					</View>
 					<ThemedText text="Esqueci minha senha" type="default" style={styles.forgotPassowrd} />

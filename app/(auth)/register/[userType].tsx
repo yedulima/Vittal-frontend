@@ -109,37 +109,35 @@ export default function RegisterScreen() {
 			<View style={styles.credentials}>
 				<View>
 					<ThemedText text="Nome completo" style={styles.inputLabel} />
-					<ThemedInput value={name} type="default" onChange={(e: any) => setName(e)} />
+					<ThemedInput value={name}  onChange={(e: any) => setName(e)} />
 				</View>
 				<View>
 					<ThemedText text="E-mail" style={styles.inputLabel} />
-					<ThemedInput value={email} type="email-address" onChange={(e: any) => setEmail(e)} />
+					<ThemedInput value={email} inputType="email-address" onChange={(e: any) => setEmail(e)} />
 				</View>
 				<View>
 					<ThemedText text="Senha" style={styles.inputLabel} />
 					<ThemedInput
 						value={password}
-						type="default"
 						onChange={(e: any) => setPassword(e)}
-						secureTextEntry={true}
+						type='password'
 					/>
 				</View>
 				<View>
 					<ThemedText text="Confirme sua Senha" style={styles.inputLabel} />
 					<ThemedInput
 						value={confirmPassword}
-						type="default"
 						onChange={(e: any) => setConfirmPassword(e)}
-						secureTextEntry={true}
+						type='password'
 					/>
 				</View>
 				<View>
 					<ThemedText text="Data de nascimento" style={styles.inputLabel} />
-					<ThemedInput value={birthDay} type="default" onChange={(e: any) => setBirthDay(e)} />
+					<ThemedInput value={birthDay} onChange={(e: any) => setBirthDay(e)} />
 				</View>
 				<View>
 					<ThemedText text="Telefone" style={styles.inputLabel} />
-					<ThemedInput value={phoneNumber} type="phone-pad" onChange={(e: any) => setPhoneNumber(e)} />
+					<ThemedInput value={phoneNumber} inputType="phone-pad" onChange={(e: any) => setPhoneNumber(e)} />
 				</View>
 			</View>
 			<ThemedButton
