@@ -1,7 +1,7 @@
 import { useThemeColor } from '@/hooks/useThemeColor';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import React from 'react';
-import { StyleSheet, TouchableOpacity, TouchableOpacityProps, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, TouchableOpacity, TouchableOpacityProps, View } from 'react-native';
 
 import ThemedText from '@/components/ThemedText';
 
@@ -13,6 +13,7 @@ export type ThemedButtonProps = TouchableOpacityProps & {
 	rightIconName?: React.ComponentProps<typeof Ionicons>['name'];
 	type?: 'default' | 'outlined';
 	textType?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
+	loading?: boolean;
 };
 
 export default function ThemedButton({
@@ -23,6 +24,7 @@ export default function ThemedButton({
 	rightIconName,
 	type = 'default',
 	textType,
+	loading,
 	style,
 	...rest
 }: ThemedButtonProps) {
@@ -35,17 +37,26 @@ export default function ThemedButton({
 				(rightIconName || leftIconName) && styles.iconButton,
 				type === 'default' ? { backgroundColor: button } : { borderColor: border },
 				type === 'default' ? styles.default : styles.outlined,
+				styles.button,
 				style,
 			]}
 			activeOpacity={0.9}
 			{...rest}
 		>
-			{leftIconName && <Ionicons name={leftIconName as any} size={19} color={primaryText} />}
-			<View style={styles.textContainer}>
-				<ThemedText text={text} type={textType} />
-				{subTitle && <ThemedText text={subTitle} style={[{ color: secondaryText }, styles.secondaryText]} />}
-			</View>
-			{rightIconName && <Ionicons name={rightIconName as any} size={19} color={secondaryText} />}
+			{loading ? (
+				<ActivityIndicator color={'#fff'} size={'small'} />
+			) : (
+				<>
+					{leftIconName && <Ionicons name={leftIconName as any} size={19} color={primaryText} />}
+					<View style={styles.textContainer}>
+						<ThemedText text={text} type={textType} />
+						{subTitle && (
+							<ThemedText text={subTitle} style={[{ color: secondaryText }, styles.secondaryText]} />
+						)}
+					</View>
+					{rightIconName && <Ionicons name={rightIconName as any} size={19} color={secondaryText} />}
+				</>
+			)}
 		</TouchableOpacity>
 	);
 }
@@ -65,6 +76,9 @@ const styles = StyleSheet.create({
 		padding: 16,
 		borderRadius: 6,
 		borderWidth: 4,
+	},
+	button: {
+		height: 60,
 	},
 	iconButton: {
 		flexDirection: 'row',

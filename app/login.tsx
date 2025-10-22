@@ -1,7 +1,8 @@
 import { useThemeColor } from '@/hooks/useThemeColor';
+import { loginWithEmailAndPassword } from '@/services/auth';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 
 import ReturnButton from '@/components/ReturnButton';
 import ThemedButton from '@/components/ThemedButton';
@@ -12,10 +13,56 @@ import ThemedText from '@/components/ThemedText';
 export default function LoginScreen() {
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
+	const [loading, setLoading] = useState<boolean>(false);
 
 	const { button2 } = useThemeColor();
 
 	const router = useRouter();
+
+	const handleLogin = async () => {
+		setLoading(true);
+
+		try {
+			if (!email || !password) {
+				return Alert.alert('Preencha todos os campos');
+			}
+
+			await loginWithEmailAndPassword(email, password);
+
+			console.log('Usuário logado com sucesso!');
+		} catch (error: any) {
+			const errorCode = error.code;
+
+			switch (errorCode) {
+				case 'auth/invalid-email':
+					console.error('E-mail inválido!');
+					Alert.alert('E-mail inválido!');
+					break;
+				case 'auth/invalid-credential':
+					console.error('Credênciais inválidas!');
+					Alert.alert('Credênciais inválidas!');
+					break;
+				case 'auth/wrong-password':
+					console.error('E-mail ou senha incorretos!');
+					Alert.alert('E-mail ou senha incorretos!');
+					break;
+				case 'auth/user-not-found':
+					console.error('Usuário não encontrado!');
+					Alert.alert('Usuário não encontrado!');
+					break;
+				case 'auth/too-many-requests':
+					console.warn('Muitas requisições feitas.');
+					Alert.alert('Muitas requisições feitas.', 'Tente novamente mais tarde.');
+					break;
+				case 'firestore/unavailable':
+					console.warn('Serviço indisponível.');
+					Alert.alert('Serviço indisponível.');
+					break;
+			}
+		} finally {
+			setLoading(false);
+		}
+	};
 
 	return (
 		<ThemedSafeAreaView style={styles.container}>
@@ -43,8 +90,9 @@ export default function LoginScreen() {
 				</View>
 				<ThemedButton
 					text="Entrar"
-					onPress={() => {}}
+					onPress={handleLogin}
 					textType="defaultSemiBold"
+					loading={loading}
 					style={{ backgroundColor: button2 }}
 				/>
 			</View>

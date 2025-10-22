@@ -1,4 +1,5 @@
 import { useThemeColor } from '@/hooks/useThemeColor';
+import { register } from '@/services/auth';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useState } from 'react';
 import { Alert, StyleSheet, View } from 'react-native';
@@ -13,16 +14,14 @@ import ThemedView from '@/components/ThemedView';
 const USER_CONFIG = {
 	idoso: {
 		title: 'Cadastro do Idoso',
-		registerHandler: (data: any) => {
-			console.log('Dados do IDOSO:', data);
-			Alert.alert('Cadastro de Idoso', 'Simulando envio de dados...');
+		registerHandler: async (data: any) => {
+			await register(data, 'idosos');
 		},
 	},
 	cuidador: {
 		title: 'Cadastro do Cuidador',
-		registerHandler: (data: any) => {
-			console.log('Dados do CUIDADOR:', data);
-			Alert.alert('Cadastro de Cuidador', 'Simulando envio de dados...');
+		registerHandler: async (data: any) => {
+			await register(data, 'cuidadores');
 		},
 	},
 };
@@ -34,6 +33,7 @@ export default function RegisterScreen() {
 	const [confirmPassword, setConfirmPassword] = useState<string>('');
 	const [birthDay, setBirthDay] = useState<string>('');
 	const [phoneNumber, setPhoneNumber] = useState<string>('');
+	const [loading, setLoading] = useState<boolean>(false);
 
 	const { button2 } = useThemeColor();
 
@@ -43,9 +43,52 @@ export default function RegisterScreen() {
 
 	const config = USER_CONFIG[userType];
 
-	const handleRegister = () => {
-		const formData = { name, email, password, confirmPassword, birthDay, phoneNumber };
-		config.registerHandler(formData);
+	const handleRegister = async () => {
+		setLoading(true);
+
+		try {
+			if (!name || !email || !password || !confirmPassword || !birthDay || !phoneNumber) {
+				console.warn('Preencha todos os campos.');
+				return Alert.alert('Preencha todos os campos.');
+			}
+
+			if (password !== confirmPassword) {
+				console.warn('Senhas não correspondem.');
+				return Alert.alert('Senhas não correspondem.');
+			}
+
+			const formData = { name, email, password, birthDay, phoneNumber };
+			await config.registerHandler(formData);
+
+			console.log('Cadastrado com sucesso!');
+		} catch (error: any) {
+			const errorCode = error.code;
+
+			switch (errorCode) {
+				case 'auth/email-already-in-use':
+					console.warn('E-mail já está sendo usado!');
+					Alert.alert('E-mail já está sendo usado!');
+					break;
+				case 'auth/invalid-email':
+					console.warn('E-mail inválido!');
+					Alert.alert('E-mail inválido!');
+					break;
+				case 'auth/weak-password':
+					console.warn('Senha fraca!');
+					Alert.alert('Senha fraca!');
+					break;
+				case 'auth/too-many-requests':
+					console.warn('Muitas requisições feitas.');
+					Alert.alert('Muitas requisições feitas.', 'Tente novamente mais tarde.');
+					break;
+				case 'firestore/unavailable':
+					console.warn('Serviço indisponível.');
+					Alert.alert('Serviço indisponível.');
+					break;
+			}
+		} finally {
+			setLoading(false);
+		}
 	};
 
 	if (!config) {
@@ -92,27 +135,18 @@ export default function RegisterScreen() {
 				</View>
 				<View>
 					<ThemedText text="Data de nascimento" style={styles.inputLabel} />
-					<ThemedInput
-						value={birthDay}
-						type="default"
-						onChange={(e: any) => setBirthDay(e)}
-						secureTextEntry={true}
-					/>
+					<ThemedInput value={birthDay} type="default" onChange={(e: any) => setBirthDay(e)} />
 				</View>
 				<View>
 					<ThemedText text="Telefone" style={styles.inputLabel} />
-					<ThemedInput
-						value={phoneNumber}
-						type="phone-pad"
-						onChange={(e: any) => setPhoneNumber(e)}
-						secureTextEntry={true}
-					/>
+					<ThemedInput value={phoneNumber} type="phone-pad" onChange={(e: any) => setPhoneNumber(e)} />
 				</View>
 			</View>
 			<ThemedButton
 				text="Cadastrar-se"
 				onPress={handleRegister}
 				textType="defaultSemiBold"
+				loading={loading}
 				style={{ backgroundColor: button2 }}
 			/>
 			<View style={styles.footer}>
