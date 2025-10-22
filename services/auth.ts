@@ -36,6 +36,8 @@ export async function register(data: any, collection: string) {
 				: { idosos: [] }),
 			userRef: `/users/${user.uid}`,
 		});
+
+		await loginWithEmailAndPassword(email, password);
 	} catch (error: any) {
 		console.error('Erro ao cadastrar!');
 		throw error;

@@ -1,9 +1,10 @@
 import { ThemeContext } from '@/contexts/ThemeContext';
 import { FIREBASE_AUTH } from '@/FirebaseConfig';
 import { useThemeColor } from '@/hooks/useThemeColor';
+import { getUserData } from '@/utils/getUserData';
 import { useRouter } from 'expo-router';
-import { useContext, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { useContext, useEffect, useState } from 'react';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
 
 import ButtonSwitch from '@/components/ButtonSwitch';
 import CheckBox from '@/components/CheckBox';
@@ -18,12 +19,38 @@ const PlaceholderImage = require('@/assets/images/placeholder-image.png');
 
 export default function ConfigurationsScreen() {
 	const { isDark, toggleTheme } = useContext(ThemeContext);
+	const [name, setName] = useState<string>('Username');
+	const [email, setEmail] = useState<string>('user@example.com');
+	const [loading, setLoading] = useState<boolean>(false);
 	const [isTextSizeModalVisible, setTextSizeModalVisible] = useState<boolean>(false);
 	const [textSize, setTextSize] = useState<string>('Pequena');
 
-	const { border } = useThemeColor();
+	const { border, primaryText } = useThemeColor();
 
 	const router = useRouter();
+
+	useEffect(() => {
+		const getNameAndEmail = async () => {
+			setLoading(true);
+			try {
+				const currentUser = FIREBASE_AUTH.currentUser;
+				const userId = currentUser?.uid;
+				const userData = await getUserData(userId);
+
+				if (!userData) {
+					return null;
+				}
+
+				setName(userData!.name);
+				setEmail(userData!.email);
+			} catch (error: any) {
+				console.error(error);
+			} finally {
+				setLoading(false);
+			}
+		};
+		getNameAndEmail();
+	}, []);
 
 	const handleLogout = () => {
 		FIREBASE_AUTH.signOut();
@@ -36,8 +63,14 @@ export default function ConfigurationsScreen() {
 			<View style={styles.profileContainer}>
 				<ProfilePhoto imgSource={PlaceholderImage} style={[{ borderColor: border }, styles.profilePhoto]} />
 				<View style={styles.profileTextContainer}>
-					<ThemedText text="Username" type="defaultSemiBold" style={styles.userName} />
-					<ThemedText text="user@example.com" type="light" />
+					{loading ? (
+						<ActivityIndicator color={primaryText} size={30} />
+					) : (
+						<>
+							<ThemedText text={name} type="defaultSemiBold" style={styles.userName} />
+							<ThemedText text={email} type="light" />
+						</>
+					)}
 				</View>
 			</View>
 			<OptionsSection title="Aparência">
