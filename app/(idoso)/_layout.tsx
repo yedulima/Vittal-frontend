@@ -1,4 +1,5 @@
 import { useThemeColor } from '@/hooks/useThemeColor';
+import { FontAwesome5 } from '@expo/vector-icons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Tabs } from 'expo-router';
 
@@ -31,6 +32,16 @@ export default function IdosoLayout() {
 						headerShown: false,
 						tabBarIcon: ({ color, focused }) => (
 							<Ionicons name={focused ? 'home-sharp' : 'home-outline'} color={color} size={24} />
+						),
+					}}
+				/>
+				<Tabs.Screen
+					name="medicines"
+					options={{
+						title: 'Medicações',
+						headerShown: false,
+						tabBarIcon: ({ color, focused }) => (
+							<Ionicons name={focused ? 'medkit' : 'medkit-outline'} color={color} size={24} />
 						),
 					}}
 				/>

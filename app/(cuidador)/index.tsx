@@ -2,8 +2,9 @@ import { FIREBASE_AUTH } from '@/FirebaseConfig';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { getUserData } from '@/utils/getUserData';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, ScrollView, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import Notification from '@/components/Notification';
 import ThemedSafeAreaView from '@/components/ThemedSafeAreaView';
@@ -14,6 +15,8 @@ export default function HomeScreen() {
 	const [loading, setLoading] = useState<boolean>(false);
 
 	const { primaryText, secondaryText, border, card } = useThemeColor();
+
+	const router = useRouter();
 
 	useEffect(() => {
 		const getNameAndEmail = async () => {
@@ -91,7 +94,9 @@ export default function HomeScreen() {
 				<View style={styles.notificationsContainer}>
 					<View style={styles.notificationsHeader}>
 						<ThemedText text="Últimos notificações" type="subtitle" />
-						<ThemedText text="Ver todas" type="light" color={secondaryText} />
+						<Pressable onPress={() => router.navigate('/notifications')}>
+							<ThemedText text="Ver todas" type="light" color={secondaryText} />
+						</Pressable>
 					</View>
 					<View>
 						<Notification

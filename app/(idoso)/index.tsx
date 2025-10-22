@@ -1,10 +1,12 @@
 import { FIREBASE_AUTH } from '@/FirebaseConfig';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { getUserData } from '@/utils/getUserData';
-import { MaterialIcons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, ScrollView, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Pressable, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 
+import Medicine from '@/components/Medicine';
 import Notification from '@/components/Notification';
 import ThemedSafeAreaView from '@/components/ThemedSafeAreaView';
 import ThemedText from '@/components/ThemedText';
@@ -13,7 +15,9 @@ export default function HomeScreen() {
 	const [name, setName] = useState<string>('Username');
 	const [loading, setLoading] = useState<boolean>(false);
 
-	const { primaryText, secondaryText, border, card } = useThemeColor();
+	const { primaryText, secondaryText, emergency } = useThemeColor();
+
+	const router = useRouter();
 
 	useEffect(() => {
 		const getNameAndEmail = async () => {
@@ -51,67 +55,69 @@ export default function HomeScreen() {
 						<ThemedText text={name} type="title" style={styles.name} />
 					)}
 					<ThemedText
-						text="Hoje você tem 2 emergências e 1 alerta ativo"
+						text="Hoje você tem 3 medicações a tomar"
 						type="default"
 						style={{ color: secondaryText }}
 					/>
 				</View>
-				<View>
-					<View style={styles.cardsContainer}>
-						<View style={[{ borderColor: border, backgroundColor: card }, styles.card]}>
-							<MaterialIcons name="error" size={35} color="#ff4d4d" />
-							<View>
-								<ThemedText text="Emergências" type="defaultSemiBold" />
-								<ThemedText text="1" type="subtitle" />
-							</View>
-						</View>
-						<View style={[{ borderColor: border, backgroundColor: card }, styles.card]}>
-							<MaterialIcons name="warning" size={35} color="#ffcc00" />
-							<View>
-								<ThemedText text="Alertas" type="defaultSemiBold" />
-								<ThemedText text="1" type="subtitle" />
-							</View>
-						</View>
-						<View style={[{ borderColor: border, backgroundColor: card }, styles.card]}>
-							<MaterialIcons name="schedule" size={35} color="#999" />
-							<View>
-								<ThemedText text="Pendentes" type="defaultSemiBold" />
-								<ThemedText text="2" type="subtitle" />
-							</View>
-						</View>
-						<View style={[{ borderColor: border, backgroundColor: card }, styles.card]}>
-							<MaterialIcons name="person" size={35} color="#ccc" />
-							<View>
-								<ThemedText text="Idosos" type="defaultSemiBold" />
-								<ThemedText text="5" type="subtitle" />
-							</View>
-						</View>
+				<View style={styles.emergencyButtonContainer}>
+					<TouchableOpacity
+						style={[{ backgroundColor: emergency }, styles.emergencyButton]}
+						activeOpacity={0.9}
+					>
+						<FontAwesome name="warning" color="#fff" size={30} />
+						<ThemedText text="SOS" type="title" color="#fff" />
+						<ThemedText text="Emergência imediata" type="default" color="#fff" />
+					</TouchableOpacity>
+				</View>
+				<View style={styles.sectionContainer}>
+					<View style={styles.sectionHeader}>
+						<ThemedText text="Medicamentos" type="subtitle" />
+						<Pressable onPress={() => router.navigate('/medicines')}>
+							<ThemedText text="Ver todos" type="light" color={secondaryText} />
+						</Pressable>
+					</View>
+					<View>
+						<Medicine
+							title="Dipirona"
+							description="50mg"
+							hour="14:30"
+							date="14/02/2007"
+							isView={false}
+							onPress={() => {}}
+						/>
+						<Medicine
+							title="Nimesulida"
+							description="80mg"
+							hour="14:30"
+							date="14/02/2007"
+							isView={false}
+							onPress={() => {}}
+						/>
+						<Medicine
+							title="Paracetamol"
+							description="30mg"
+							hour="16:00"
+							date="14/02/2007"
+							isView={false}
+							onPress={() => {}}
+						/>
 					</View>
 				</View>
-				<View style={styles.notificationsContainer}>
-					<View style={styles.notificationsHeader}>
+				<View style={styles.sectionContainer}>
+					<View style={styles.sectionHeader}>
 						<ThemedText text="Últimos notificações" type="subtitle" />
-						<ThemedText text="Ver todas" type="light" color={secondaryText} />
+						<Pressable onPress={() => router.navigate('/notifications')}>
+							<ThemedText text="Ver todas" type="light" color={secondaryText} />
+						</Pressable>
 					</View>
 					<View>
 						<Notification
-							description="Ana não tomou o remédio da noite."
-							type="Alerta de Medicamento"
-							isView={true}
-							date="15/07/2024 - 10:30"
-							onPress={() => {}}
-						/>
-						<Notification
-							description="Acionado por Gabriela Freitas."
+							title="Alerta do cuidador"
+							description="Cuidador enviou alerta."
 							type="Alerta de SOS"
 							isView={false}
-							date="15/07/2024 - 10:30"
-							onPress={() => {}}
-						/>
-						<Notification
-							description="Já baixou os novos updates?"
-							isView={false}
-							date="15/07/2024 - 10:30"
+							date="15/05/2024 - 11:00"
 							onPress={() => {}}
 						/>
 					</View>
@@ -129,28 +135,24 @@ const styles = StyleSheet.create({
 		alignSelf: 'flex-start',
 		marginBottom: 8,
 	},
-	cardsContainer: {
-		flexDirection: 'row',
-		flexWrap: 'wrap',
-		justifyContent: 'space-between',
-		marginBottom: 30,
-	},
-	card: {
-		flexDirection: 'row',
+	emergencyButtonContainer: {
 		alignItems: 'center',
-		justifyContent: 'space-evenly',
-		width: '48%',
-		paddingVertical: 13,
+		justifyContent: 'center',
+		marginTop: 10,
+		marginBottom: 20,
+	},
+	emergencyButton: {
+		alignItems: 'center',
+		justifyContent: 'center',
+		width: '100%',
+		paddingVertical: 15,
 		borderRadius: 15,
-		borderWidth: 1.5,
-		marginBottom: 15,
-		gap: 2,
 	},
-	notificationsContainer: {
+	sectionContainer: {
 		gap: 15,
-		marginBottom: 30,
+		marginBottom: 15,
 	},
-	notificationsHeader: {
+	sectionHeader: {
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',

@@ -2,7 +2,7 @@ import { useThemeColor } from '@/hooks/useThemeColor';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { StyleSheet, TouchableOpacity, TouchableOpacityProps, View } from 'react-native';
 
-import ThemedText from './ThemedText';
+import ThemedText from '@/components/ThemedText';
 
 type NotificationTypeName = 'Alerta de SOS' | 'Nova notificação' | 'Alerta de Medicamento';
 
@@ -39,7 +39,7 @@ export default function Notification({
 			activeOpacity={0.7}
 			{...rest}
 		>
-			<View style={styles.notificationInfoContainer}>
+			<View style={styles.infoContainer}>
 				<NotificationIcon type={type} />
 				<View style={styles.textContainer}>
 					<View style={styles.titleContainer}>
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
 		borderRadius: 5,
 		borderWidth: 1,
 	},
-	notificationInfoContainer: {
+	infoContainer: {
 		flex: 1,
 		flexDirection: 'row',
 		alignItems: 'center',
