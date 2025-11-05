@@ -1,42 +1,52 @@
-import { useThemeColor } from '@/hooks/useThemeColor';
-import { StyleSheet, TextInput, ViewProps } from 'react-native';
+import { useThemeContext } from '@/contexts/ThemeContext';
+import { searchBarStyles } from '@/styles/components/SearchBarStyles';
+import { USERS, UserInterface } from '@/utils/data';
+import { useMemo, useState } from 'react';
+import { TextInput, View } from 'react-native';
 
-import ThemedView from '@/components/ThemedView';
+import filter from 'lodash.filter';
 
-export type SearchBarProps = ViewProps & {
-	placeholderText: string;
-	value: string;
-	onChange: (query: string) => void;
-};
-
-export default function SearchBar({ placeholderText, value, onChange, style, ...rest }: SearchBarProps) {
-	const { primaryText, secondaryText, border } = useThemeColor();
-
-	return (
-		<ThemedView style={[styles.container, style]} {...rest}>
-			<TextInput
-				placeholder={placeholderText}
-				clearButtonMode="always"
-				placeholderTextColor={secondaryText}
-				autoCapitalize="none"
-				autoCorrect={false}
-				autoComplete="off"
-				autoFocus={false}
-				onChangeText={onChange}
-				style={[{ color: primaryText, borderColor: border }, styles.textInput]}
-			/>
-		</ThemedView>
-	);
+interface SearchBarProps {
+	placeholder: string;
+	onChange: (filteredData: UserInterface[]) => void;
 }
 
-const styles = StyleSheet.create({
-	container: {
-		width: '100%',
-	},
-	textInput: {
-		paddingHorizontal: 20,
-		paddingVertical: 10,
-		borderWidth: 1,
-		borderRadius: 8,
-	},
-});
+export default function SearchBar({ placeholder, onChange }: SearchBarProps) {
+	const { colors } = useThemeContext();
+	const styles = searchBarStyles(colors!);
+
+	const [query, setQuery] = useState<string>('');
+
+	const handleSearch = (query: string) => {
+		setQuery(query);
+	};
+
+	const filteredData = useMemo(() => {
+		let result: UserInterface[];
+
+		if (!query) {
+			result = USERS as UserInterface[];
+		}
+		const formattedQuery = query.toLowerCase();
+		result = filter(USERS, (user: UserInterface) => {
+			const name = user.name.toLowerCase();
+			return name.includes(formattedQuery);
+		}) as UserInterface[];
+
+		onChange(result);
+		return result;
+	}, [query]);
+
+	return (
+		<View style={styles.container}>
+			<TextInput
+				value={query}
+				placeholder={placeholder}
+				placeholderTextColor={colors?.accentColor}
+				clearButtonMode="while-editing"
+				onChangeText={handleSearch}
+				style={styles.textInput}
+			/>
+		</View>
+	);
+}

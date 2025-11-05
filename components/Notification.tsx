@@ -1,117 +1,38 @@
-import { useThemeColor } from '@/hooks/useThemeColor';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleSheet, TouchableOpacity, TouchableOpacityProps, View } from 'react-native';
+import { useThemeContext } from '@/contexts/ThemeContext';
+import { notificationStyles } from '@/styles/components/NotificationStyles';
+import { Feather } from '@expo/vector-icons';
+import React from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 
-import ThemedText from '@/components/ThemedText';
-
-type NotificationTypeName = 'Alerta de SOS' | 'Nova notificação' | 'Alerta de Medicamento';
-
-interface NotificationTitleProps {
-	title?: string;
-	type: NotificationTypeName;
+interface NotificationProp {
+	data: {
+		title: string;
+		description: string;
+		date: string;
+		iconName: React.ComponentProps<typeof Feather>['name'];
+	};
 }
 
-export type NotificationProps = TouchableOpacityProps & {
-	title?: string;
-	type?: NotificationTypeName;
-	description: string;
-	isView: boolean;
-	date: string;
-	onPress: () => void;
-};
-
-export default function Notification({
-	title,
-	type = 'Nova notificação',
-	description,
-	isView,
-	date,
-	onPress,
-	style,
-	...rest
-}: NotificationProps) {
-	const { secondaryText, card, border } = useThemeColor();
+export default function Notification({ data }: NotificationProp) {
+	const { colors } = useThemeContext();
+	const styles = notificationStyles(colors!);
 
 	return (
-		<TouchableOpacity
-			onPress={onPress}
-			style={[{ backgroundColor: isView ? 'transparent' : card, borderColor: border }, styles.container, style]}
-			activeOpacity={0.7}
-			{...rest}
-		>
-			<View style={styles.infoContainer}>
-				<NotificationIcon type={type} />
-				<View style={styles.textContainer}>
-					<View style={styles.titleContainer}>
-						<NotificationTitle title={title} type={type} />
-						<ThemedText text={date} type="small" style={{ color: secondaryText }} />
-					</View>
-					<View style={styles.descriptionContainer}>
-						<ThemedText text={description} type="default" style={{ color: secondaryText }} />
-					</View>
+		<TouchableOpacity style={styles.container} activeOpacity={0.8}>
+			<View style={styles.info}>
+				<View style={styles.figureContainer}>
+					<Feather name={data.iconName} style={styles.figure} size={30} />
+				</View>
+				<View style={styles.notificationInfos}>
+					<Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
+						{data.title}
+					</Text>
+					<Text style={styles.description} numberOfLines={1} ellipsizeMode="tail">
+						{data.description}
+					</Text>
 				</View>
 			</View>
+			<Feather name="arrow-right" size={17} style={styles.icon} />
 		</TouchableOpacity>
 	);
 }
-
-const NotificationTitle = ({ title, type }: NotificationTitleProps) => {
-	const { primaryText, emergency, warning } = useThemeColor();
-
-	if (type === 'Alerta de SOS') {
-		return <ThemedText text={title ? title : type} type="defaultSemiBold" style={{ color: emergency }} />;
-	} else if (type === 'Alerta de Medicamento') {
-		return <ThemedText text={title ? title : type} type="defaultSemiBold" style={{ color: warning }} />;
-	} else {
-		return <ThemedText text={title ? title : type} type="defaultSemiBold" style={{ color: primaryText }} />;
-	}
-};
-
-const NotificationIcon = ({ type }: { type: NotificationTypeName }) => {
-	const { secondaryText, emergency, warning } = useThemeColor();
-
-	if (type === 'Alerta de SOS') {
-		return <Ionicons name="alert-circle-outline" size={42} color={emergency} />;
-	} else if (type === 'Alerta de Medicamento') {
-		return <Ionicons name="medical" size={41} color={warning} />;
-	} else {
-		return <Ionicons name="notifications-circle-outline" size={43} color={secondaryText} />;
-	}
-};
-
-const styles = StyleSheet.create({
-	container: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'space-between',
-		width: '100%',
-		height: 80,
-		paddingHorizontal: 7,
-		paddingBottom: 10,
-		marginBottom: 10,
-		borderRadius: 5,
-		borderWidth: 1,
-	},
-	infoContainer: {
-		flex: 1,
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'flex-start',
-		gap: 12,
-	},
-	textContainer: {
-		flex: 1,
-		alignItems: 'flex-start',
-		justifyContent: 'center',
-	},
-	titleContainer: {
-		width: '97%',
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'space-between',
-	},
-	descriptionContainer: {
-		width: '97%',
-		maxHeight: 40,
-	},
-});

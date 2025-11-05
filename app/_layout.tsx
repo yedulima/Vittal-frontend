@@ -1,24 +1,48 @@
-import ThemeProvider, { ThemeContext } from '@/contexts/ThemeContext';
-import { useAuthRedirect } from '@/hooks/useAuth';
+import { LightTheme } from '@/constants/Themes';
+import AuthProvider, { useAuthContext } from '@/contexts/AuthContext';
+import ThemeProvider, { useThemeContext } from '@/contexts/ThemeContext';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { useContext } from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-export default function RootLayout() {
-	const { isDark } = useContext(ThemeContext);
-	useAuthRedirect();
+import Loading from '@/components/Loading';
+
+const InitialLayout = () => {
+	const { isDarkMode } = useThemeContext();
+	const { isLoggedIn, loading } = useAuthContext();
+
+	if (!!loading && !isLoggedIn) {
+		return <Loading />;
+	}
 
 	return (
-		<SafeAreaProvider>
-			<ThemeProvider>
-				<StatusBar style={isDark ? 'dark' : 'light'} />
-				<Stack screenOptions={{ headerShown: false }}>
-					<Stack.Screen name="(auth)" />
-					<Stack.Screen name="(cuidador)" />
-					<Stack.Screen name="(idoso)" />
-				</Stack>
-			</ThemeProvider>
-		</SafeAreaProvider>
+		<Stack
+			screenOptions={{
+				headerShown: false,
+				contentStyle: {
+					backgroundColor: LightTheme.backgroudColor,
+				},
+			}}
+		>
+			<Stack.Protected guard={!!isLoggedIn}>
+				<Stack.Screen name="(tabs)" />
+			</Stack.Protected>
+			<Stack.Protected guard={!isLoggedIn}>
+				<Stack.Screen name="index" />
+				<Stack.Screen name="login" />
+				<Stack.Screen name="choose_user" />
+				<Stack.Screen name="register" />
+			</Stack.Protected>
+			<StatusBar style={isDarkMode ? 'dark' : 'light'} />
+		</Stack>
+	);
+};
+
+export default function RootLayout() {
+	return (
+		<ThemeProvider>
+			<AuthProvider>
+				<InitialLayout />
+			</AuthProvider>
+		</ThemeProvider>
 	);
 }

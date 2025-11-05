@@ -1,27 +1,21 @@
+import { useThemeContext } from '@/contexts/ThemeContext';
+import { optionsSectionStyles } from '@/styles/components/OptionsSectionStyles';
 import { ReactNode } from 'react';
-import { StyleProp, StyleSheet, View, ViewProps } from 'react-native';
+import { Text, View } from 'react-native';
 
-import ThemedText from '@/components/ThemedText';
-
-export type OptionsSectionProps = ViewProps & {
+interface OptionsSectionProps {
 	title: string;
 	children: ReactNode;
-	style?: StyleProp<ViewProps>;
-};
+}
 
-export default function OptionsSection({ title, style, children }: OptionsSectionProps) {
+export default function OptionsSection({ title, children }: OptionsSectionProps) {
+	const { colors } = useThemeContext();
+	const styles = optionsSectionStyles(colors!);
+
 	return (
-		<View style={[styles.optionsContainer, style]}>
-			<ThemedText text={title} type="subtitle" />
+		<View style={styles.container}>
+			<Text style={styles.title}>{title}</Text>
 			{children}
 		</View>
 	);
 }
-
-const styles = StyleSheet.create({
-	optionsContainer: {
-		width: '100%',
-		gap: 12,
-		marginBottom: 20,
-	},
-});

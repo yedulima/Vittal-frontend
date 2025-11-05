@@ -1,65 +1,35 @@
-import { useThemeColor } from '@/hooks/useThemeColor';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleSheet, TouchableOpacity, TouchableOpacityProps, View } from 'react-native';
+import { useThemeContext } from '@/contexts/ThemeContext';
+import { contactStyles } from '@/styles/components/ContactStyles';
+import { Feather } from '@expo/vector-icons';
+import { Image } from 'expo-image';
+import { Text, TouchableOpacity, View } from 'react-native';
 
-import ProfilePhoto from '@/components/ProfilePhoto';
-import ThemedText from '@/components/ThemedText';
+const PlaceHolderImage = require('@/assets/images/placeholder-image.jpg');
 
-export type ContactProps = TouchableOpacityProps & {
-	name: string;
-	status: 'Ativo' | 'Inativo';
-	onPress: () => void;
-};
+interface ContactProp {
+	data: {
+		name: string;
+		photo: string;
+		status: string;
+	};
+}
 
-const PlaceholderImage = require('@/assets/images/placeholder-image.png');
+export default function Contact({ data }: ContactProp) {
+	const { colors } = useThemeContext();
+	const styles = contactStyles(colors!);
 
-export default function Contact({ name, status, onPress, style, ...rest }: ContactProps) {
-	const { button, secondaryText } = useThemeColor();
+	const imageSource = data.photo ? { uri: data.photo } : PlaceHolderImage;
 
 	return (
-		<TouchableOpacity
-			onPress={onPress}
-			style={[{ borderBottomColor: button }, styles.container, style]}
-			activeOpacity={0.7}
-			{...rest}
-		>
-			<View style={styles.userInfoContainer}>
-				<ProfilePhoto imgSource={PlaceholderImage} style={styles.profilePhoto} />
-				<View style={styles.textContainer}>
-					<ThemedText text={name} type="default" />
-					<ThemedText text={status} type="light" style={[{ color: secondaryText }]} />
+		<TouchableOpacity style={styles.container} activeOpacity={0.8}>
+			<View style={styles.info}>
+				<Image source={imageSource} style={styles.photo} />
+				<View style={styles.userCredentials}>
+					<Text style={styles.name}>{data.name}</Text>
+					<Text style={styles.status}>{data.status}</Text>
 				</View>
 			</View>
-			<Ionicons name="arrow-forward" size={19} color={secondaryText} />
+			<Feather name="arrow-right" size={17} style={styles.icon} />
 		</TouchableOpacity>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'space-between',
-		width: '100%',
-		height: 60,
-		paddingHorizontal: 7,
-		paddingBottom: 10,
-		borderBottomWidth: 2,
-		marginBottom: 10,
-	},
-	userInfoContainer: {
-		flex: 1,
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'flex-start',
-		gap: 12,
-	},
-	profilePhoto: {
-		width: 45,
-		height: 45,
-	},
-	textContainer: {
-		alignItems: 'flex-start',
-		justifyContent: 'center',
-	},
-});
