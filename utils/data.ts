@@ -34,7 +34,7 @@ export const NOTIFICATIONS: NotificationInterface[] = [
 		title: 'Lembrete de Higiene Pessoal',
 		description: 'Hora de auxiliar com a higiene pessoal ou banho agendado.',
 		date: '14-02-2025-17:59',
-		iconName: 'droplet',
+		iconName: 'bell',
 		status: 'Normal',
 	},
 	{
@@ -42,7 +42,7 @@ export const NOTIFICATIONS: NotificationInterface[] = [
 		title: 'Estoque Baixo: Shampoo',
 		description: 'O item Shampoo na lista de suprimentos está acabando.',
 		date: '27-01-2025-11:47',
-		iconName: 'bell',
+		iconName: 'alert-triangle',
 		status: 'Alert',
 	},
 	{
@@ -58,7 +58,7 @@ export const NOTIFICATIONS: NotificationInterface[] = [
 		title: 'Paciente Relata Desconforto',
 		description: 'O paciente indicou um nível de dor. Avaliar medicação e conforto.',
 		date: '05-03-2025-17:21',
-		iconName: 'thermometer',
+		iconName: 'alert-triangle',
 		status: 'Alert',
 	},
 ];
