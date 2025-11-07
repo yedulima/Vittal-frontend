@@ -10,11 +10,12 @@ interface InputProps {
 	placeHolder: string;
 	value: string;
 	onChange: (t: string) => void;
+	errorMessage?: string;
 	isPassword?: boolean;
 	styleColors?: ThemeColors;
 }
 
-export default function Input({ title, placeHolder, value, onChange, isPassword, styleColors }: InputProps) {
+export default function Input({ title, placeHolder, value, onChange, errorMessage, isPassword, styleColors }: InputProps) {
 	const { colors } = useThemeContext();
 	const styles = inputStyles(styleColors ? styleColors : colors!);
 
@@ -38,6 +39,7 @@ export default function Input({ title, placeHolder, value, onChange, isPassword,
 					</TouchableOpacity>
 				)}
 			</View>
+			{errorMessage && <Text style={styles.errorMessage}>{errorMessage}</Text>}
 		</View>
 	);
 }

@@ -1,3 +1,4 @@
+import { Colors } from '@/constants/Colors';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
@@ -29,6 +30,13 @@ export const inputStyles = (colors: ThemeColors) => {
 			flex: 1,
 			color: colors.textColor,
 			outlineWidth: 0,
+		},
+		errorMessage: {
+			alignSelf: 'flex-start',
+			marginTop: 2,
+			paddingLeft: 3,
+			fontSize: 14,
+			color: Colors.red[400],
 		},
 		icon: {
 			color: colors.accentColor,

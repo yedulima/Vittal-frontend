@@ -23,15 +23,6 @@ export const loginStyles = (colors: ThemeColors) => {
 			marginBottom: 10,
 			gap: 15,
 		},
-		button: {
-			backgroundColor: colors.buttonColor,
-			borderRadius: 17,
-		},
-		buttonText: {
-			fontSize: 16,
-			fontWeight: 500,
-			color: Colors.white[800],
-		},
 		googleButton: {
 			padding: 17,
 			borderRadius: 17,
@@ -64,12 +55,6 @@ export const loginStyles = (colors: ThemeColors) => {
 			gap: 15,
 			marginTop: 17,
 			marginBottom: 17,
-		},
-		forgotPassword: {
-			fontSize: 15,
-			textDecorationLine: 'underline',
-			color: colors.textColor,
-			marginBottom: 15,
 		},
 		noAccountText: {
 			alignSelf: 'center',

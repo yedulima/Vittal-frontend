@@ -26,24 +26,22 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 	const [user, setUser] = useState<object | null>(null);
 	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(true);
+	const [initialized, setInitialized] = useState<boolean>(false);
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (user) => {
-			if (user) {
-				setIsLoggedIn(true);
-			} else {
-				setIsLoggedIn(false);
-			}
 			setUser(user);
+			setIsLoggedIn(!!user);
 			setLoading(false);
+			setInitialized(true);
 		});
 
 		return unsubscribe;
 	}, []);
 
 	const login = async (email: string, password: string) => {
-		setLoading(true);
 		try {
+			setLoading(true);
 			const response = await signInWithEmailAndPassword(FIREBASE_AUTH, email, password);
 
 			setUser(response?.user);
@@ -51,15 +49,14 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 
 			return response?.user;
 		} catch (error: any) {
-			throw error;
-		} finally {
 			setLoading(false);
+			throw error;
 		}
 	};
 
 	const register = async (email: string, password: string, username: string, profileUrl: string) => {
-		setLoading(true);
 		try {
+			setLoading(true);
 			const response = await createUserWithEmailAndPassword(FIREBASE_AUTH, email, password);
 			console.log(`Response: ${response.user}`);
 
@@ -74,16 +71,16 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 
 			return response?.user;
 		} catch (error: any) {
-			throw error;
-		} finally {
 			setLoading(false);
+			throw error;
 		}
 	};
 
 	const logout = async () => {
-		setLoading(true);
 		try {
+			setLoading(true);
 			await FIREBASE_AUTH.signOut();
+
 			setUser(null);
 			setIsLoggedIn(false);
 		} catch (error: any) {
@@ -101,6 +98,10 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 		logout,
 		loading,
 	};
+
+	if (!initialized) {
+		return null;
+	}
 
 	return <AuthContext.Provider value={parseData}>{children}</AuthContext.Provider>;
 }

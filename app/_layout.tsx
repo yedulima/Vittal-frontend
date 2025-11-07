@@ -10,7 +10,7 @@ const InitialLayout = () => {
 	const { isDarkMode } = useThemeContext();
 	const { isLoggedIn, loading } = useAuthContext();
 
-	if (!!loading && !isLoggedIn) {
+	if (loading) {
 		return <Loading />;
 	}
 
