@@ -3,19 +3,30 @@ import { useThemeContext } from '@/contexts/ThemeContext';
 import { inputStyles } from '@/styles/components/InputStyles';
 import { Feather } from '@expo/vector-icons';
 import { useState } from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { KeyboardType, Text, TextInput, TextInputProps, TouchableOpacity, View } from 'react-native';
 
-interface InputProps {
+interface InputProps extends Omit<TextInputProps, 'onChangeText'> {
 	title: string;
 	placeHolder: string;
 	value: string;
-	onChange: (t: string) => void;
+	onChangeText: (t: string) => void;
 	errorMessage?: string;
 	isPassword?: boolean;
+	keyType?: KeyboardType;
 	styleColors?: ThemeColors;
 }
 
-export default function Input({ title, placeHolder, value, onChange, errorMessage, isPassword, styleColors }: InputProps) {
+export default function Input({
+	title,
+	placeHolder,
+	value,
+	onChangeText,
+	errorMessage,
+	isPassword,
+	keyType,
+	styleColors,
+	...others
+}: InputProps) {
 	const { colors } = useThemeContext();
 	const styles = inputStyles(styleColors ? styleColors : colors!);
 
@@ -27,11 +38,13 @@ export default function Input({ title, placeHolder, value, onChange, errorMessag
 			<View style={styles.inputContainer}>
 				<TextInput
 					value={value}
-					onChangeText={onChange}
+					onChangeText={onChangeText}
 					placeholder={placeHolder}
 					placeholderTextColor={colors?.accentColor}
 					secureTextEntry={!show && isPassword}
 					style={styles.textInput}
+					keyboardType={keyType}
+					{...others}
 				/>
 				{isPassword && (
 					<TouchableOpacity onPress={() => setShow(!show)} activeOpacity={0.9}>

@@ -30,7 +30,7 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
 							title="Email"
 							placeHolder="Insira seu email"
 							value={field.value}
-							onChange={field.onChange}
+							onChangeText={field.onChange}
 							errorMessage={fieldState.error?.message}
 						/>
 					)}
@@ -43,7 +43,7 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
 							title="Senha"
 							placeHolder="Insira sua senha"
 							value={field.value}
-							onChange={field.onChange}
+							onChangeText={field.onChange}
 							errorMessage={fieldState.error?.message}
 							isPassword
 						/>

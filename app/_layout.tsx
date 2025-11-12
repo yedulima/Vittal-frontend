@@ -29,7 +29,6 @@ const InitialLayout = () => {
 			<Stack.Protected guard={!isLoggedIn}>
 				<Stack.Screen name="index" />
 				<Stack.Screen name="login" />
-				<Stack.Screen name="choose_user" />
 				<Stack.Screen name="register" />
 			</Stack.Protected>
 			<StatusBar style={isDarkMode ? 'dark' : 'light'} />

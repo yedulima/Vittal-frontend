@@ -53,7 +53,7 @@ export default function LoginScreen() {
 				/>
 				<Button
 					text="Criar conta"
-					onPress={() => router.navigate('/choose_user')}
+					onPress={() => router.navigate('/register')}
 					style={[styles.button, styles.registerButton]}
 					textStyle={[styles.buttonText, styles.registerButtonText]}
 				/>

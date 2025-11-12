@@ -42,7 +42,7 @@ export default function LoginScreen() {
 				style={styles.googleButton}
 			/>
 
-			<Link href={'/choose_user'} style={styles.noAccountText}>
+			<Link href={'/register'} style={styles.noAccountText}>
 				Não tem uma conta? Faça já seu <Text style={styles.registerDecoration}>cadastro!</Text>
 			</Link>
 		</SafeAreaView>
