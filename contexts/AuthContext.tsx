@@ -9,7 +9,7 @@ export interface AuthContextInterface {
 	loading: boolean;
 	login: (email: string, password: string) => Promise<object>;
 	logout: () => Promise<void>;
-	register: (email: string, password: string, username: string, birthday: string, role: string) => Promise<object>;
+	register: (email: string, password: string, name: string, birthday: string, role: string) => Promise<object>;
 }
 
 export const AuthContext = createContext<Partial<AuthContextInterface>>({});
@@ -56,18 +56,17 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 		}
 	};
 
-	const register = async (email: string, password: string, username: string, birthday: string, role: string) => {
+	const register = async (email: string, password: string, name: string, birthday: string, role: string) => {
 		try {
 			setLoading(true);
 			const response = await createUserWithEmailAndPassword(FIREBASE_AUTH, email, password);
 			console.log(`Response: ${response.user}`);
 
-			console.log(email, password, username, birthday);
-
 			await setDoc(doc(FIRESTORE_DB, 'users', response?.user?.uid), {
 				email,
-				username,
+				name,
 				birthday,
+				role,
 			});
 
 			await login(email, password);
@@ -76,8 +75,6 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 		} catch (error: any) {
 			setLoading(false);
 			throw error;
-		} finally {
-			setLoading(false);
 		}
 	};
 
