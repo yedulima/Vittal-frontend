@@ -1,8 +1,13 @@
 import { LightTheme } from '@/constants/Themes';
 import { RegisterSchema } from '@/forms/Register/RegisterSchema';
 import { registerFormStyles } from '@/styles/forms/RegisterFormStyles';
+import { Image } from 'expo-image';
+import * as ImagePicker from 'expo-image-picker';
+import { useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { Text, View } from 'react-native';
+
+const PlaceHolderImage = require('@/assets/images/Portrait_Placeholder.png');
 
 import Button from '@/components/Button';
 import Input from '@/components/Input';
@@ -18,6 +23,20 @@ export default function NameAndProfilePhotoForm({ onBack, onNext }: NameAndProfi
 
 	const styles = registerFormStyles(LightTheme);
 
+	const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
+
+	const pickImageAsync = async () => {
+		let result = await ImagePicker.launchImageLibraryAsync({
+			mediaTypes: ['images'],
+			allowsEditing: true,
+			quality: 1,
+		});
+
+		if (!result.canceled) {
+			setSelectedImage(result.assets[0].uri);
+		}
+	};
+
 	const handleNext = async () => {
 		const isValid = await trigger('name');
 		if (isValid) onNext();
@@ -27,6 +46,10 @@ export default function NameAndProfilePhotoForm({ onBack, onNext }: NameAndProfi
 		<View style={styles.container}>
 			<ProgressBar percentage={25} />
 			<Text style={styles.text}>Nome e foto de perfil</Text>
+
+			<Image source={PlaceHolderImage} style={styles.photo} />
+
+			{/* Adicionar botão para selecionar e mudar foto depois! */}
 
 			<View style={styles.inputsContainer}>
 				<Controller

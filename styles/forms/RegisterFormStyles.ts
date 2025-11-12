@@ -3,6 +3,8 @@ import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
 export const registerFormStyles = (colors: ThemeColors) => {
+	const photoSize = 145;
+
 	return StyleSheet.create({
 		container: {
 			flex: 1,
@@ -12,7 +14,6 @@ export const registerFormStyles = (colors: ThemeColors) => {
 			flex: 1,
 			justifyContent: 'flex-start',
 			width: '100%',
-			marginTop: 25,
 			marginBottom: 10,
 			gap: 15,
 		},
@@ -34,7 +35,7 @@ export const registerFormStyles = (colors: ThemeColors) => {
 			fontSize: 24,
 			fontWeight: 700,
 			color: colors.textColor,
-			marginBottom: 10,
+			marginBottom: 35,
 		},
 		selected: {
 			backgroundColor: Colors.green[200],
@@ -59,6 +60,16 @@ export const registerFormStyles = (colors: ThemeColors) => {
 			fontSize: 16,
 			fontWeight: 500,
 			color: colors.textColor,
+		},
+		photo: {
+			alignSelf: 'center',
+			width: photoSize,
+			height: photoSize,
+			borderRadius: 100,
+			borderWidth: 2,
+			marginBottom: 20,
+			borderColor: colors.accentColor,
+			backgroundColor: colors.imageBackgroundColor,
 		},
 	});
 };
