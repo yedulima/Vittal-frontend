@@ -23,6 +23,7 @@ export const configurationsStyles = (colors: ThemeColors) => {
 		buttonText: {
 			fontSize: 16,
 			fontFamily: 'Rubik_400Regular',
+			color: colors.textColor
 		},
 		logoutButton: {
 			width: '100%',

@@ -16,7 +16,7 @@ export const switchButtonStyles = (colors: ThemeColors) => {
 		text: {
 			flex: 1,
 			fontSize: 16,
-			color: colors.buttonTextColor,
+			color: colors.textColor,
 			fontFamily: 'Rubik_400Regular',
 		},
 	});

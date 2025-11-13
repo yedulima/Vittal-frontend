@@ -22,7 +22,7 @@ export default function RegisterForm({ onSubmit }: RegisterFormProps) {
 		defaultValues: { name: '', email: '', password: '', confirmPassword: '', birtdayDate: formattedDate, role: '' },
 	});
 
-	const [step, setStep] = useState<number>(3);
+	const [step, setStep] = useState<number>(1);
 
 	const onNext = () => {
 		setStep(step + 1);
