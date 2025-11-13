@@ -61,15 +61,5 @@ export const registerFormStyles = (colors: ThemeColors) => {
 			color: colors.textColor,
 			fontFamily: 'Rubik_600SemiBold',
 		},
-		photo: {
-			alignSelf: 'center',
-			width: photoSize,
-			height: photoSize,
-			borderRadius: 100,
-			borderWidth: 2,
-			marginBottom: 20,
-			borderColor: colors.accentColor,
-			backgroundColor: colors.imageBackgroundColor,
-		},
 	});
 };

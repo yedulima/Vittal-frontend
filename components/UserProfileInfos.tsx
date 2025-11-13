@@ -1,9 +1,10 @@
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { fetchUserData } from '@/hooks/fetchUserData';
 import { userProfileInfosStyles } from '@/styles/components/UserProfileInfosStyles';
-import { Image } from 'expo-image';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
+
+import UserProfilePhoto from '@/components/UserProfilePhoto';
 
 const PlaceHolderImage = require('@/assets/images/placeholder-image.jpg');
 
@@ -42,7 +43,7 @@ export default function UserProfileInfos({ photo }: UserProfileInfos) {
 
 	return (
 		<View style={styles.container}>
-			<Image source={imageSource} style={styles.photo} />
+			<UserProfilePhoto imgSource={imageSource} />
 			<View style={styles.userCredentials}>
 				{loading ? (
 					<ActivityIndicator color={colors?.accentColor} size={'large'} />
