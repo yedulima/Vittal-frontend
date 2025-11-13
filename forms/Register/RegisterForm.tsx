@@ -1,7 +1,7 @@
 import { RegisterSchema, registerSchema } from '@/forms/Register/RegisterSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
+import { FormProvider, useForm, UseFormReturn } from 'react-hook-form';
 import { View } from 'react-native';
 
 import ChooseUserForm from '@/forms/Register/steps/ChooseUserForm';
@@ -10,7 +10,7 @@ import EmailAndPasswordForm from '@/forms/Register/steps/EmailAndPasswordForm';
 import NameAndProfilePhotoForm from '@/forms/Register/steps/NameAndProfilePhotoForm';
 
 interface RegisterFormProps {
-	onSubmit: (data: RegisterSchema) => Promise<void>;
+	onSubmit: (data: RegisterSchema, formMethods: UseFormReturn<RegisterSchema>) => Promise<void>;
 }
 
 export default function RegisterForm({ onSubmit }: RegisterFormProps) {

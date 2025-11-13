@@ -1,8 +1,7 @@
 import { LightTheme } from '@/constants/Themes';
 import { RegisterSchema } from '@/forms/Register/RegisterSchema';
 import { registerFormStyles } from '@/styles/forms/RegisterFormStyles';
-import { checkEmailExists } from '@/utils/checkEmailExists';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, useFormContext, UseFormReturn } from 'react-hook-form';
 import { Text, View } from 'react-native';
 
 import Button from '@/components/Button';
@@ -11,26 +10,17 @@ import ProgressBar from '@/components/ProgressBar';
 
 interface EmailAndPasswordFormProps {
 	onBack: () => void;
-	onSubmit: (data: RegisterSchema) => Promise<void>;
+	onSubmit: (data: RegisterSchema, formMethods: UseFormReturn<RegisterSchema>) => Promise<void>;
 }
 
 export default function EmailAndPasswordForm({ onBack, onSubmit }: EmailAndPasswordFormProps) {
-	const { control, handleSubmit, setError } = useFormContext<RegisterSchema>();
+	const formMethods = useFormContext<RegisterSchema>();
+
+	const { control, handleSubmit } = formMethods;
 
 	const styles = registerFormStyles(LightTheme);
 
-	const handleSubmitForm = async (data: RegisterSchema) => {
-		const exists = await checkEmailExists(data.email);
-
-		if (exists) {
-			setError('email', {
-				message: 'E-mail já está em uso',
-			});
-			return;
-		}
-
-		await onSubmit(data);
-	};
+	const handleSubmitForm = (data: RegisterSchema) => onSubmit(data, formMethods);
 
 	return (
 		<View style={styles.container}>

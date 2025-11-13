@@ -29,6 +29,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 	const [initialized, setInitialized] = useState<boolean>(false);
 
 	useEffect(() => {
+		setLoading(true);
 		const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (user) => {
 			setUser(user);
 			setIsLoggedIn(!!user);
@@ -41,7 +42,6 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 
 	const login = async (email: string, password: string) => {
 		try {
-			setLoading(true);
 			const response = await signInWithEmailAndPassword(FIREBASE_AUTH, email, password);
 
 			setUser(response?.user);
@@ -49,16 +49,12 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 
 			return response?.user;
 		} catch (error: any) {
-			setLoading(false);
 			throw error;
-		} finally {
-			setLoading(false);
 		}
 	};
 
 	const register = async (email: string, password: string, name: string, birthday: string, role: string) => {
 		try {
-			setLoading(true);
 			const response = await createUserWithEmailAndPassword(FIREBASE_AUTH, email, password);
 			console.log(`Response: ${response.user}`);
 

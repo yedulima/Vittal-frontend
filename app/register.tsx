@@ -2,7 +2,9 @@ import { LightTheme } from '@/constants/Themes';
 import { useAuthContext } from '@/contexts/AuthContext';
 import { RegisterSchema } from '@/forms/Register/RegisterSchema';
 import { registerStyles } from '@/styles/screens/RegisterStyles';
-import { View } from 'react-native';
+import { AUTH_ERROR_MESSAGES, getFormErrorFromFirebaseError } from '@/utils/firebaseErrorMapper';
+import { UseFormReturn } from 'react-hook-form';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import RegisterForm from '@/forms/Register/RegisterForm';
 
@@ -10,18 +12,37 @@ export default function RegisterScreen() {
 	const { register } = useAuthContext();
 	const styles = registerStyles(LightTheme);
 
-	const handleRegister = async (data: RegisterSchema) => {
+	const handleRegister = async (data: RegisterSchema, formMethods: UseFormReturn<RegisterSchema>) => {
 		try {
 			await register!(data.email, data.password, data.name, data.birtdayDate, data.role);
 		} catch (error: any) {
 			const errorCode = error.code;
-			alert(errorCode);
+
+			const formError = getFormErrorFromFirebaseError(errorCode);
+
+			if (formError.message === AUTH_ERROR_MESSAGES.WEAK_PASSWORD) {
+				formMethods.setError('password', formError, { shouldFocus: true });
+				return;
+			}
+
+			if (formError.message === AUTH_ERROR_MESSAGES.EMAIL_ALREADY_IN_USE) {
+				formMethods.setError('email', formError, { shouldFocus: true });
+				return;
+			}
+
+			if (formError.message === AUTH_ERROR_MESSAGES.GENERIC_ERROR) {
+				console.error(errorCode);
+				alert(formError.message);
+			}
+
+			formMethods.setError('email', formError);
+			formMethods.setError('password', formError);
 		}
 	};
 
 	return (
-		<View style={styles.container}>
+		<SafeAreaView style={styles.container}>
 			<RegisterForm onSubmit={handleRegister} />
-		</View>
+		</SafeAreaView>
 	);
 }

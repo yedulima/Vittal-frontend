@@ -2,22 +2,27 @@ import { LightTheme } from '@/constants/Themes';
 import { LoginSchema, loginSchema } from '@/forms/Login/LoginSchema';
 import { loginFormStyles } from '@/styles/forms/LoginFormStyles';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, useForm, UseFormReturn } from 'react-hook-form';
 import { Text, View } from 'react-native';
 
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 
 interface LoginFormProps {
-	onSubmit: (data: LoginSchema) => Promise<void>;
+	onSubmit: (data: LoginSchema, formMethods: UseFormReturn<LoginSchema>) => Promise<void>;
 }
 
 export default function LoginForm({ onSubmit }: LoginFormProps) {
-	const { control, handleSubmit } = useForm<LoginSchema>({
+	const formMethods = useForm<LoginSchema>({
 		resolver: zodResolver(loginSchema),
 		defaultValues: { email: '', password: '' },
 	});
+
+	const { control, handleSubmit } = formMethods;
+
 	const styles = loginFormStyles(LightTheme);
+
+	const submitHandler = (data: LoginSchema) => onSubmit(data, formMethods);
 
 	return (
 		<View style={styles.container}>
@@ -57,7 +62,7 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
 
 			<Button
 				text="Entrar"
-				onPress={handleSubmit(onSubmit)}
+				onPress={handleSubmit(submitHandler)}
 				style={styles.button}
 				textStyle={styles.buttonText}
 			/>

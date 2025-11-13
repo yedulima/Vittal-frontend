@@ -1,7 +1,9 @@
 import { LightTheme } from '@/constants/Themes';
 import { useAuthContext } from '@/contexts/AuthContext';
 import { loginStyles } from '@/styles/screens/LoginStyles';
+import { AUTH_ERROR_MESSAGES, getFormErrorFromFirebaseError } from '@/utils/firebaseErrorMapper';
 import { Link } from 'expo-router';
+import { UseFormReturn } from 'react-hook-form';
 import { Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -14,12 +16,21 @@ export default function LoginScreen() {
 	const { login } = useAuthContext();
 	const styles = loginStyles(LightTheme);
 
-	const handleLogin = async (data: LoginSchema) => {
+	const handleLogin = async (data: LoginSchema, formMethods: UseFormReturn<LoginSchema>) => {
 		try {
 			await login!(data.email, data.password);
 		} catch (error: any) {
 			const errorCode = error.code;
-			alert(errorCode);
+
+			const formError = getFormErrorFromFirebaseError(errorCode);
+
+			if (formError.message === AUTH_ERROR_MESSAGES.GENERIC_ERROR) {
+				console.error(errorCode);
+				alert(formError.message);
+			}
+
+			formMethods.setError('email', formError);
+			formMethods.setError('password', formError);
 		}
 	};
 
