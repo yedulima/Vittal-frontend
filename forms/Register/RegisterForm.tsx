@@ -9,6 +9,8 @@ import DateOfBirthForm from '@/forms/Register/steps/DateOfBirthForm';
 import EmailAndPasswordForm from '@/forms/Register/steps/EmailAndPasswordForm';
 import NameAndProfilePhotoForm from '@/forms/Register/steps/NameAndProfilePhotoForm';
 
+const PlaceHolderImage = require('@/assets/images/Portrait_Placeholder.png');
+
 interface RegisterFormProps {
 	onSubmit: (data: RegisterSchema, formMethods: UseFormReturn<RegisterSchema>) => Promise<void>;
 }
@@ -19,7 +21,15 @@ export default function RegisterForm({ onSubmit }: RegisterFormProps) {
 
 	const form = useForm<RegisterSchema>({
 		resolver: zodResolver(registerSchema),
-		defaultValues: { name: '', email: '', password: '', confirmPassword: '', birtdayDate: formattedDate, role: '' },
+		defaultValues: {
+			name: '',
+			email: '',
+			password: '',
+			confirmPassword: '',
+			profilePhoto: PlaceHolderImage,
+			birtdayDate: formattedDate,
+			role: '',
+		},
 	});
 
 	const [step, setStep] = useState<number>(1);

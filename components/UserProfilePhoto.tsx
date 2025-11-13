@@ -10,15 +10,23 @@ import { ImageSourcePropType, TouchableOpacity, View } from 'react-native';
 interface UserProfilePhotoProps {
 	imgSource: ImageSourcePropType;
 	onPress?: () => void;
+	onImageChoiced?: (uri: string) => void;
 	styleColors?: ThemeColors;
 }
 
-export default function UserProfilePhoto({ imgSource, onPress, styleColors }: UserProfilePhotoProps) {
+export default function UserProfilePhoto({ imgSource, onPress, onImageChoiced, styleColors }: UserProfilePhotoProps) {
 	const { colors } = useThemeContext();
 	const styles = userProfilePhotoStyles(styleColors ? styleColors : colors!);
 
 	const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
-	const imageSource = selectedImage ? selectedImage : imgSource;
+
+	let imageSource: ImageSourcePropType = imgSource;
+
+	if (selectedImage) {
+		imageSource = { uri: selectedImage };
+	} else if (typeof imgSource === 'string') {
+		imageSource = { uri: imgSource };
+	}
 
 	const pickImageAsync = async () => {
 		let result = await ImagePicker.launchImageLibraryAsync({
@@ -28,7 +36,9 @@ export default function UserProfilePhoto({ imgSource, onPress, styleColors }: Us
 		});
 
 		if (!result.canceled) {
-			setSelectedImage(result.assets[0].uri);
+			const uri = result.assets[0].uri;
+			setSelectedImage(uri);
+			onImageChoiced?.(uri!);
 		}
 	};
 

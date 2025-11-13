@@ -31,7 +31,17 @@ export default function NameAndProfilePhotoForm({ onBack, onNext }: NameAndProfi
 			<ProgressBar percentage={25} />
 			<Text style={styles.text}>Nome e foto de perfil</Text>
 
-			<UserProfilePhoto imgSource={PlaceHolderImage} styleColors={LightTheme} />
+			<Controller
+				control={control}
+				name="profilePhoto"
+				render={() => (
+					<UserProfilePhoto
+						imgSource={PlaceHolderImage}
+						onImageChoiced={(uri: string) => setValue('profilePhoto', uri)}
+						styleColors={LightTheme}
+					/>
+				)}
+			/>
 
 			<View style={styles.inputsContainer}>
 				<Controller

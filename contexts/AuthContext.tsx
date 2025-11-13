@@ -1,15 +1,29 @@
-import { FIREBASE_AUTH, FIRESTORE_DB } from '@/FirebaseConfig';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
+import { FIREBASE_AUTH, FIREBASE_STORAGE, FIRESTORE_DB } from '@/FirebaseConfig';
+import {
+	createUserWithEmailAndPassword,
+	onAuthStateChanged,
+	signInWithEmailAndPassword,
+	updateProfile,
+	User,
+} from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 export interface AuthContextInterface {
 	isLoggedIn: boolean;
-	user: object | null;
+	user: User | null;
 	loading: boolean;
 	login: (email: string, password: string) => Promise<object>;
 	logout: () => Promise<void>;
-	register: (email: string, password: string, name: string, birthday: string, role: string) => Promise<object>;
+	register: (
+		email: string,
+		password: string,
+		name: string,
+		birthday: string,
+		role: string,
+		imageUri?: string
+	) => Promise<object>;
 }
 
 export const AuthContext = createContext<Partial<AuthContextInterface>>({});
@@ -23,7 +37,7 @@ export const useAuthContext = () => {
 };
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
-	const [user, setUser] = useState<object | null>(null);
+	const [user, setUser] = useState<User | null>(null);
 	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [initialized, setInitialized] = useState<boolean>(false);
@@ -53,16 +67,47 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 		}
 	};
 
-	const register = async (email: string, password: string, name: string, birthday: string, role: string) => {
+	const register = async (
+		email: string,
+		password: string,
+		name: string,
+		birthday: string,
+		role: string,
+		imageUri?: string
+	) => {
 		try {
 			const response = await createUserWithEmailAndPassword(FIREBASE_AUTH, email, password);
-			console.log(`Response: ${response.user}`);
+			const user = response.user;
+			let photoURL = null;
+
+			if (imageUri && user) {
+				const responseBlob = await fetch(imageUri);
+				const blob = await responseBlob.blob();
+
+				const storageRef = ref(FIREBASE_STORAGE, `profile_photos/${user.uid}.jpg`);
+
+				await uploadBytes(storageRef, blob);
+
+				const downloadUrl = await getDownloadURL(storageRef);
+				photoURL = downloadUrl;
+
+				await updateProfile(user, {
+					photoURL: downloadUrl,
+				});
+			}
+
+			if (user) {
+				await updateProfile(user, {
+					displayName: name,
+				});
+			}
 
 			await setDoc(doc(FIRESTORE_DB, 'users', response?.user?.uid), {
 				email,
 				name,
 				birthday,
 				role,
+				photoURL,
 			});
 
 			await login(email, password);

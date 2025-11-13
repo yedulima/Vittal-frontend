@@ -1,55 +1,37 @@
+import { useAuthContext } from '@/contexts/AuthContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
-import { fetchUserData } from '@/hooks/fetchUserData';
 import { headerStyles } from '@/styles/components/HeaderStyles';
 import { NOTIFICATIONS_LENGTH } from '@/utils/data';
 import { Image } from 'expo-image';
-import { useEffect, useState } from 'react';
-import { ActivityIndicator, Text, View } from 'react-native';
+import { useState } from 'react';
+import { ImageSourcePropType, Text, View } from 'react-native';
 
 const PlaceHolderImage = require('@/assets/images/placeholder-image.jpg');
 
 export default function Header() {
+	const { user } = useAuthContext();
 	const { colors } = useThemeContext();
 	const styles = headerStyles(colors!);
 
-	const [name, setName] = useState<string>('Nome');
-	const [loading, setLoading] = useState<boolean>(false);
+	const [name] = useState<string>(() => {
+		let name = user?.displayName?.split(' ');
+		return `${name?.[0]} ${name?.pop()}`;
+	});
 
-	useEffect(() => {
-		const getName = async () => {
-			setLoading(true);
-			try {
-				const userData = await fetchUserData();
+	let profilePhotoImage: ImageSourcePropType = PlaceHolderImage;
 
-				if (!userData) {
-					return null;
-				}
-
-				let name = userData!.name.split(' ');
-				name = `${name[0]} ${name.pop()}`;
-
-				setName(name);
-			} catch (error: any) {
-				console.error(error);
-			} finally {
-				setLoading(false);
-			}
-		};
-		getName();
-	}, []);
+	if (user?.photoURL) {
+		profilePhotoImage = { uri: user.photoURL };
+	}
 
 	return (
 		<View style={styles.container}>
 			<View style={styles.header}>
 				<View style={styles.userWelcomeContainer}>
 					<Text style={styles.hourWelcomeText}>Boa noite,</Text>
-					{loading ? (
-						<ActivityIndicator color={colors?.accentColor} size={'small'} />
-					) : (
-						<Text style={styles.name}>{name}</Text>
-					)}
+					<Text style={styles.name}>{name}</Text>
 				</View>
-				<Image source={PlaceHolderImage} style={styles.photo} />
+				<Image source={profilePhotoImage} style={styles.photo} />
 			</View>
 			{NOTIFICATIONS_LENGTH > 0 && (
 				<Text style={styles.adversimentMessage}>Você possui {NOTIFICATIONS_LENGTH} novas notificações</Text>
