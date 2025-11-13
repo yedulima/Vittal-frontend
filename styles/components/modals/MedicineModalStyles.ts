@@ -29,8 +29,8 @@ export const medicineModalStyles = (colors: ThemeColors) => {
 		},
 		title: {
 			fontSize: 25,
-			fontWeight: 500,
 			color: colors.textColor,
+			fontFamily: 'Rubik_500Medium',
 		},
 		descriptionContainer: {
 			gap: 6,
@@ -45,20 +45,21 @@ export const medicineModalStyles = (colors: ThemeColors) => {
 		},
 		topicText: {
 			fontSize: 17,
-			fontWeight: 600,
 			color: colors.textColor,
+			fontFamily: 'Rubik_600SemiBold',
 		},
 		text: {
-			fontSize: 17,
+			fontSize: 16,
 			color: colors.accentColor,
+			fontFamily: 'Rubik_400Regular',
 		},
 		button: {
 			backgroundColor: Colors.green[600],
 		},
 		buttonText: {
 			fontSize: 16,
-			fontWeight: 600,
 			color: Colors.white[800],
+			fontFamily: 'Rubik_600SemiBold',
 		},
 		icon: {
 			color: colors.iconColor,

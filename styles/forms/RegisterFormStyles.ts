@@ -23,8 +23,8 @@ export const registerFormStyles = (colors: ThemeColors) => {
 		},
 		buttonText: {
 			fontSize: 16,
-			fontWeight: 500,
-			color: Colors.white[800],
+			color: Colors.white[700],
+			fontFamily: 'Rubik_600SemiBold',
 		},
 		cardsContainer: {
 			flex: 1,
@@ -33,13 +33,13 @@ export const registerFormStyles = (colors: ThemeColors) => {
 		text: {
 			alignSelf: 'center',
 			fontSize: 24,
-			fontWeight: 700,
 			color: colors.textColor,
 			marginBottom: 35,
+			fontFamily: 'Rubik_700Bold',
 		},
 		selected: {
 			backgroundColor: Colors.green[200],
-			borderColor: Colors.green[400],
+			borderColor: Colors.green[600],
 		},
 		unselected: {
 			backgroundColor: colors.cardColor,
@@ -50,16 +50,16 @@ export const registerFormStyles = (colors: ThemeColors) => {
 		},
 		chooseText: {
 			fontSize: 16,
-			fontWeight: 500,
 			color: Colors.white[800],
+			fontFamily: 'Rubik_600SemiBold',
 		},
 		backButton: {
 			backgroundColor: 'transparent',
 		},
 		backText: {
 			fontSize: 16,
-			fontWeight: 500,
 			color: colors.textColor,
+			fontFamily: 'Rubik_600SemiBold',
 		},
 		photo: {
 			alignSelf: 'center',

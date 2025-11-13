@@ -16,6 +16,7 @@ export const buttonStyles = (colors: ThemeColors) => {
 		text: {
 			flex: 1,
 			color: colors.buttonTextColor,
+			fontFamily: 'Rubik_300Light',
 		},
 	});
 };

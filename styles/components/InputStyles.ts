@@ -11,9 +11,9 @@ export const inputStyles = (colors: ThemeColors) => {
 		title: {
 			alignSelf: 'flex-start',
 			fontSize: 16,
-			fontWeight: 500,
 			color: colors.textColor,
 			marginBottom: 4,
+			fontFamily: 'Rubik_500Medium',
 		},
 		inputContainer: {
 			width: '100%',
@@ -30,13 +30,15 @@ export const inputStyles = (colors: ThemeColors) => {
 			flex: 1,
 			color: colors.textColor,
 			outlineWidth: 0,
+			fontFamily: 'Rubik_400Regular',
 		},
 		errorMessage: {
 			alignSelf: 'flex-start',
-			marginTop: 2,
+			marginTop: 5,
 			paddingLeft: 3,
 			fontSize: 14,
 			color: Colors.red[400],
+			fontFamily: 'Rubik_500Medium',
 		},
 		icon: {
 			color: colors.accentColor,

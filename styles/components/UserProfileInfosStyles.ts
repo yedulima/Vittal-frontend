@@ -25,12 +25,13 @@ export const userProfileInfosStyles = (colors: ThemeColors) => {
 		},
 		name: {
 			fontSize: 18,
-			fontWeight: 600,
 			color: colors.textColor,
+			fontFamily: 'Rubik_600SemiBold',
 		},
 		email: {
 			fontSize: 15,
 			color: colors.accentColor,
+			fontFamily: 'Rubik_400Regular',
 		},
 	});
 };

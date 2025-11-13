@@ -42,6 +42,7 @@ export default function DateOfBirthForm({ onBack, onNext }: DateOfBirthFormProps
 							keyType="numeric"
 							onChangeText={(t: string) => field.onChange(formatDate(t))}
 							errorMessage={fieldState.error?.message}
+							styleColors={LightTheme}
 						/>
 					)}
 				/>

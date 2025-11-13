@@ -1,7 +1,7 @@
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { contactsListStyles } from '@/styles/components/ContactsListStyles';
-import { FlatList, Text, View } from 'react-native';
 import { UserInterface } from '@/utils/data';
+import { FlatList, Text, View } from 'react-native';
 
 import Contact from '@/components/Contact';
 
@@ -23,7 +23,7 @@ export default function ContactsList({ data }: ContactListProp) {
 				ItemSeparatorComponent={() => <View style={styles.separator} />}
 				ListEmptyComponent={() => (
 					<View style={styles.noDataContainer}>
-						<Text style={styles.text}>Nenhum usuário encontrado.</Text>
+						<Text style={styles.text}>Nenhum usuário encontrado</Text>
 					</View>
 				)}
 			/>

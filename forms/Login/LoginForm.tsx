@@ -32,6 +32,7 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
 							value={field.value}
 							onChangeText={field.onChange}
 							errorMessage={fieldState.error?.message}
+							styleColors={LightTheme}
 						/>
 					)}
 				/>
@@ -45,6 +46,7 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
 							value={field.value}
 							onChangeText={field.onChange}
 							errorMessage={fieldState.error?.message}
+							styleColors={LightTheme}
 							isPassword
 						/>
 					)}

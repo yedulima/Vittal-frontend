@@ -22,18 +22,18 @@ export const defaultConfigsModalStyles = (colors: ThemeColors) => {
 		},
 		titleContainer: {
 			flex: 1,
-            justifyContent: "center",
-            gap: 2,
+			justifyContent: 'center',
+			gap: 2,
 		},
 		title: {
 			fontSize: 20,
-			fontWeight: 500,
 			color: colors.textColor,
+			fontFamily: 'Rubik_500Medium',
 		},
 		subTitle: {
 			fontSize: 15,
-			fontWeight: 400,
 			color: colors.accentColor,
+			fontFamily: 'Rubik_400Regular',
 		},
 		icon: {
 			color: colors.iconColor,

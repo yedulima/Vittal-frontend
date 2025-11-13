@@ -13,18 +13,16 @@ export const configurationsStyles = (colors: ThemeColors) => {
 		title: {
 			alignSelf: 'flex-start',
 			fontSize: 30,
-			fontWeight: 700,
 			color: colors.textColor,
 			marginBottom: 20,
-		},
-		text: {
-			color: colors.textColor,
+			fontFamily: 'Rubik_700Bold',
 		},
 		button: {
 			backgroundColor: colors.cardColor,
 		},
 		buttonText: {
 			fontSize: 16,
+			fontFamily: 'Rubik_400Regular',
 		},
 		logoutButton: {
 			width: '100%',
@@ -33,6 +31,7 @@ export const configurationsStyles = (colors: ThemeColors) => {
 		logoutText: {
 			fontSize: 16,
 			color: Colors.white[800],
+			fontFamily: 'Rubik_400Regular',
 		},
 	});
 };

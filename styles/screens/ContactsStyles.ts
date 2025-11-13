@@ -12,15 +12,16 @@ export const contactsStyles = (colors: ThemeColors) => {
 		title: {
 			alignSelf: 'flex-start',
 			fontSize: 30,
-			fontWeight: 700,
 			color: colors.textColor,
+			fontFamily: 'Rubik_700Bold',
 		},
 		text: {
-            alignSelf: "flex-start",
-            fontSize: 16,
-            color: colors.accentColor,
-            marginBottom: 20,
-        },
+			alignSelf: 'flex-start',
+			fontSize: 16,
+			color: colors.accentColor,
+			marginBottom: 20,
+			fontFamily: 'Rubik_400Regular',
+		},
 		scrollViewContainer: {
 			paddingBottom: 24,
 		},

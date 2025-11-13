@@ -22,11 +22,13 @@ export const loginFormStyles = (colors: ThemeColors) => {
 			fontSize: 16,
 			fontWeight: 500,
 			color: Colors.white[800],
+			fontFamily: 'Rubik_500Medium',
 		},
 		forgotPassword: {
 			fontSize: 15,
 			color: colors.textColor,
 			marginBottom: 15,
+			fontFamily: 'Rubik_400Regular',
 		},
 	});
 };

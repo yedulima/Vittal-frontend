@@ -11,7 +11,7 @@ export const optionsSectionStyles = (colors: ThemeColors) => {
 		title: {
 			color: colors.textColor,
 			fontSize: 20,
-			fontWeight: 600,
+			fontFamily: 'Rubik_600SemiBold',
 		},
 	});
 };

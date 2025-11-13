@@ -12,8 +12,9 @@ export const backArrowStyles = (colors: ThemeColors) => {
 			gap: 5,
 		},
 		text: {
-			fontWeight: 500,
+			textAlign: 'center',
 			color: colors.accentColor,
+			fontFamily: 'Rubik_500Medium',
 		},
 		icon: {
 			color: colors.iconColor,

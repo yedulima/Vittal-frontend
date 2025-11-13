@@ -16,9 +16,10 @@ export const googleButtonStyles = (colors: ThemeColors) => {
 			gap: 8,
 		},
 		text: {
-            fontSize: 15,
+			fontSize: 15,
 			fontWeight: 600,
 			color: colors.textColor,
+			fontFamily: 'Rubik_300Light',
 		},
 		googleIcon: {
 			width: iconSize,

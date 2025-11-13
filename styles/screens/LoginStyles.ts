@@ -10,12 +10,6 @@ export const loginStyles = (colors: ThemeColors) => {
 			paddingHorizontal: Measures.horizontal,
 			paddingVertical: Measures.vertical,
 		},
-		text: {
-			alignSelf: 'center',
-			fontSize: 30,
-			fontWeight: 700,
-			color: colors.textColor,
-		},
 		inputsContainer: {
 			justifyContent: 'center',
 			width: '100%',
@@ -41,6 +35,7 @@ export const loginStyles = (colors: ThemeColors) => {
 			alignSelf: 'center',
 			fontSize: 15,
 			color: colors.accentColor,
+			fontFamily: 'Rubik_500Medium',
 		},
 		separationLine: {
 			backgroundColor: Colors.gray[100],
@@ -60,8 +55,9 @@ export const loginStyles = (colors: ThemeColors) => {
 			alignSelf: 'center',
 			position: 'fixed',
 			fontSize: 15,
-			bottom: 0 + Measures.vertical,
+			bottom: Measures.vertical,
 			color: colors.accentColor,
+			fontFamily: 'Rubik_400Regular',
 		},
 		registerDecoration: {
 			color: Colors.green[500],

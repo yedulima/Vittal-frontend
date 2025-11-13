@@ -62,6 +62,7 @@ export default function NameAndProfilePhotoForm({ onBack, onNext }: NameAndProfi
 							value={field.value}
 							onChangeText={field.onChange}
 							errorMessage={fieldState.error?.message}
+							styleColors={LightTheme}
 						/>
 					)}
 				/>

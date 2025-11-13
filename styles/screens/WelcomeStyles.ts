@@ -15,9 +15,6 @@ export const welcomeStyles = (colors: ThemeColors) => {
 			justifyContent: 'flex-end',
 			marginBottom: 50,
 		},
-		text: {
-			color: colors.textColor,
-		},
 		image: {
 			position: 'absolute',
 			top: 0,
@@ -45,13 +42,15 @@ export const welcomeStyles = (colors: ThemeColors) => {
 			color: colors.accentColor,
 			textTransform: 'uppercase',
 			letterSpacing: 1.5,
+			fontFamily: 'Rubik_400Regular',
 		},
 		subTitle: {
 			fontSize: 27,
 			color: colors.textColor,
-			fontWeight: 'bold',
 			textTransform: 'capitalize',
 			textAlign: 'center',
+			fontFamily: 'Rubik_700Bold',
+			letterSpacing: 1,
 		},
 		greenSubTitle: {
 			color: Colors.green[500],
@@ -75,8 +74,8 @@ export const welcomeStyles = (colors: ThemeColors) => {
 		},
 		buttonText: {
 			fontSize: 18,
-			fontWeight: 600,
 			color: Colors.white[800],
+			fontFamily: 'Rubik_600SemiBold',
 		},
 		registerButtonText: {
 			color: Colors.green[500],

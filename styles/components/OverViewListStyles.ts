@@ -7,8 +7,5 @@ export const overViewListStyles = (colors: ThemeColors) => {
 			width: '100%',
 			marginTop: 20,
 		},
-		text: {
-			color: colors.textColor,
-		},
 	});
 };

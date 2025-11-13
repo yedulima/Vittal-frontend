@@ -14,6 +14,7 @@ export const searchBarStyles = (colors: ThemeColors) => {
 		textInput: {
 			color: colors.textColor,
 			outlineWidth: 0,
+			fontFamily: 'Rubik_400Regular',
 		},
 	});
 };

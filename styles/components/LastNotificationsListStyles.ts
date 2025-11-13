@@ -15,18 +15,19 @@ export const lastNotificationsListStyles = (colors: ThemeColors) => {
 		},
 		title: {
 			fontSize: 17,
-			fontWeight: 600,
 			color: colors.textColor,
+			fontFamily: 'Rubik_600SemiBold',
 		},
 		moreContainer: {
-			flexDirection: "row",
-			alignItems: "center",
-			justifyContent: "center",
+			flexDirection: 'row',
+			alignItems: 'center',
+			justifyContent: 'center',
 		},
 		moreText: {
 			fontSize: 16,
 			color: colors.accentColor,
 			marginRight: 5,
+			fontFamily: 'Rubik_400Regular',
 		},
 		separator: {
 			width: '100%',

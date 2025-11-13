@@ -14,19 +14,20 @@ export const overViewStyles = (colors: ThemeColors) => {
 			borderRadius: 10,
 			padding: 18,
 			margin: 3,
-            gap: 9,
+			gap: 9,
 		},
-        infos: {
-            flex: 1,
-        },
+		infos: {
+			flex: 1,
+		},
 		count: {
 			fontSize: 20,
-			fontWeight: 700,
 			color: colors.textColor,
+			fontFamily: 'Rubik_700Bold',
 		},
 		name: {
-			fontSize: 16,
+			fontSize: 14,
 			color: colors.textColor,
+			fontFamily: 'Rubik_500Medium',
 		},
 		icon: {
 			color: colors.iconColor,

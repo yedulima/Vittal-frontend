@@ -31,12 +31,13 @@ export const contactStyles = (colors: ThemeColors) => {
 		},
 		name: {
 			fontSize: 15,
-			fontWeight: 500,
 			color: colors.textColor,
+			fontFamily: 'Rubik_500Medium',
 		},
 		status: {
 			fontSize: 13,
 			color: colors.accentColor,
+			fontFamily: 'Rubik_300Light',
 		},
 		icon: {
 			color: colors.iconColor,

@@ -21,7 +21,7 @@ export default function SearchBar({ placeholder, onChange }: SearchBarProps) {
 		setQuery(query);
 	};
 
-	const filteredData = useMemo(() => {
+	useMemo(() => {
 		let result: UserInterface[];
 
 		if (!query) {

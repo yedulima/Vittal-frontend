@@ -48,6 +48,7 @@ export default function EmailAndPasswordForm({ onBack, onSubmit }: EmailAndPassw
 							value={field.value}
 							onChangeText={field.onChange}
 							errorMessage={fieldState.error?.message}
+							styleColors={LightTheme}
 						/>
 					)}
 				/>
@@ -61,6 +62,7 @@ export default function EmailAndPasswordForm({ onBack, onSubmit }: EmailAndPassw
 							value={field.value}
 							onChangeText={field.onChange}
 							errorMessage={fieldState.error?.message}
+							styleColors={LightTheme}
 							isPassword
 						/>
 					)}
@@ -75,6 +77,7 @@ export default function EmailAndPasswordForm({ onBack, onSubmit }: EmailAndPassw
 							value={field.value}
 							onChangeText={field.onChange}
 							errorMessage={fieldState.error?.message}
+							styleColors={LightTheme}
 							isPassword
 						/>
 					)}

@@ -17,6 +17,7 @@ export const contactsListStyles = (colors: ThemeColors) => {
 		text: {
 			color: colors.accentColor,
 			fontSize: 16,
+			fontFamily: 'Rubik_400Regular'
 		},
 		separator: {
 			width: '100%',

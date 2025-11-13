@@ -33,14 +33,15 @@ export const notificationStyles = (colors: ThemeColors) => {
 		},
 		title: {
 			fontSize: 15,
-			fontWeight: 500,
 			color: colors.textColor,
-			width: "95%",
+			width: '95%',
+			fontFamily: 'Rubik_500Medium',
 		},
 		description: {
 			fontSize: 14,
 			color: colors.accentColor,
-			width: "95%",
+			width: '95%',
+			fontFamily: 'Rubik_300Light',
 		},
 		icon: {
 			color: colors.iconColor,
