@@ -40,6 +40,9 @@ export const inputStyles = (colors: ThemeColors) => {
 			color: Colors.red[400],
 			fontFamily: 'Rubik_500Medium',
 		},
+		pressOpacity: {
+			outlineWidth: 0,
+		},
 		icon: {
 			color: colors.accentColor,
 		},

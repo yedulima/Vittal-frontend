@@ -2,7 +2,7 @@ import { ThemeColors } from '@/constants/Themes';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { inputStyles } from '@/styles/components/InputStyles';
 import { Feather } from '@expo/vector-icons';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { KeyboardType, Text, TextInput, TextInputProps, TouchableOpacity, View } from 'react-native';
 
 interface InputProps extends Omit<TextInputProps, 'onChangeText'> {
@@ -10,6 +10,8 @@ interface InputProps extends Omit<TextInputProps, 'onChangeText'> {
 	placeHolder: string;
 	value: string;
 	onChangeText: (t: string) => void;
+	rightIcon?: React.ComponentProps<typeof Feather>['name'];
+	rightIconPress?: () => void;
 	errorMessage?: string;
 	isPassword?: boolean;
 	keyType?: KeyboardType;
@@ -21,6 +23,8 @@ export default function Input({
 	placeHolder,
 	value,
 	onChangeText,
+	rightIcon,
+	rightIconPress,
 	errorMessage,
 	isPassword,
 	keyType,
@@ -46,8 +50,19 @@ export default function Input({
 					keyboardType={keyType}
 					{...others}
 				/>
+				{rightIcon && (
+					<TouchableOpacity
+						onPress={() => {
+							rightIconPress?.();
+						}}
+						style={styles.pressOpacity}
+						activeOpacity={rightIconPress ? 0.9 : 1}
+					>
+						<Feather name={rightIcon} size={17} style={styles.icon} />
+					</TouchableOpacity>
+				)}
 				{isPassword && (
-					<TouchableOpacity onPress={() => setShow(!show)} activeOpacity={0.9}>
+					<TouchableOpacity onPress={() => setShow(!show)} style={styles.pressOpacity} activeOpacity={0.9}>
 						<Feather name={show ? 'eye' : 'eye-off'} size={17} style={styles.icon} />
 					</TouchableOpacity>
 				)}

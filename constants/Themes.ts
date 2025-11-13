@@ -25,7 +25,7 @@ export const LightTheme: ThemeColors = {
 	backgroudColor: Colors.white[500],
 	textColor: Colors.black,
 	buttonColor: Colors.green[500],
-	buttonTextColor: Colors.gray[600],
+	buttonTextColor: Colors.white[800],
 	iconColor: Colors.gray[400],
 	accentColor: Colors.gray[300],
 	imageBackgroundColor: Colors.white[500],
