@@ -16,7 +16,7 @@ export interface AuthContextInterface {
 	user: User | null;
 	role: 'cuidador' | 'idoso' | null,
 	loading: boolean;
-	login: (email: string, password: string) => Promise<object>;
+	login: (email: string, password: string) => Promise<User>;
 	logout: () => Promise<void>;
 	register: (
 		email: string,
@@ -25,7 +25,7 @@ export interface AuthContextInterface {
 		birthday: string,
 		role: string,
 		imageUri?: string
-	) => Promise<object>;
+	) => Promise<User>;
 }
 
 export const AuthContext = createContext<Partial<AuthContextInterface>>({});
