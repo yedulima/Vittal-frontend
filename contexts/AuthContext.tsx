@@ -7,13 +7,14 @@ import {
 	updateProfile,
 	User,
 } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 export interface AuthContextInterface {
 	isLoggedIn: boolean;
 	user: User | null;
+	role: 'cuidador' | 'idoso' | null,
 	loading: boolean;
 	login: (email: string, password: string) => Promise<object>;
 	logout: () => Promise<void>;
@@ -39,13 +40,31 @@ export const useAuthContext = () => {
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
 	const [user, setUser] = useState<User | null>(null);
+	const [role, setRole] = useState<'cuidador' | 'idoso' | null>(null);
 	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [initialized, setInitialized] = useState<boolean>(false);
 
 	useEffect(() => {
 		setLoading(true);
-		const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (user) => {
+		const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, async (user) => {
+			if (user) {
+				setUser(user);
+				setIsLoggedIn(true);
+
+				const userDocRef = doc(FIRESTORE_DB, 'users', user.uid);
+				const userDocSnap = await getDoc(userDocRef);
+
+				if (userDocSnap.exists()) {
+					const firestoreData = userDocSnap.data();
+					setRole(firestoreData.role as 'cuidador' | 'idoso' | null);
+				}
+			} else {
+				setUser(null);
+				setIsLoggedIn(false);
+				setRole(null);
+			}
+
 			setUser(user);
 			setIsLoggedIn(!!user);
 			setLoading(false);
@@ -70,6 +89,16 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 					code: 'auth/email-not-verified',
 					message: 'Email not verified. Please check your inbox and try again.',
 				};
+			}
+
+			if (userCrendtial) {
+				const userDocRef = doc(FIRESTORE_DB, 'users', userCrendtial.uid);
+				const userDocSnap = await getDoc(userDocRef);
+
+				if (userDocSnap.exists()) {
+					const firestoreData = userDocSnap.data();
+					setRole(firestoreData.role as 'cuidador' | 'idoso' | null);
+				}
 			}
 
 			setUser(response?.user);
@@ -148,6 +177,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 
 			setUser(null);
 			setIsLoggedIn(false);
+			setRole(null);
 		} catch (error: any) {
 			console.error(error.message);
 		} finally {
@@ -157,6 +187,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 
 	const parseData = {
 		user,
+		role,
 		isLoggedIn,
 		login,
 		register,
