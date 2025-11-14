@@ -1,9 +1,10 @@
 export const AUTH_ERROR_MESSAGES = {
 	INVALID_CREDENTIALS: 'E-mail ou senha incorretos',
 	USER_NOT_FOUND: 'Usuário não encontrado',
-	GENERIC_ERROR: 'Ocorreu um erro inesperado. Tente novamente mais tarde.',
+	GENERIC_ERROR: 'Ocorreu um erro inesperado. Tente novamente mais tarde',
 	EMAIL_ALREADY_IN_USE: 'Este e-mail já está sendo usado',
 	WEAK_PASSWORD: 'Senha muito fraca',
+	EMAIL_NOT_VERIFIED: 'E-mail não verificado. Confira sua inbox para verificar seu email',
 };
 
 const FIREBASE_ERROR_MAP = {
@@ -12,6 +13,7 @@ const FIREBASE_ERROR_MAP = {
 	'auth/user-not-found': AUTH_ERROR_MESSAGES.USER_NOT_FOUND,
 	'auth/email-already-in-use': AUTH_ERROR_MESSAGES.EMAIL_ALREADY_IN_USE,
 	'auth/weak-password': AUTH_ERROR_MESSAGES.WEAK_PASSWORD,
+	'auth/email-not-verified': AUTH_ERROR_MESSAGES.EMAIL_NOT_VERIFIED,
 	'auth/too-many-requests': 'Acesso temporariamente bloqueado. Tente mais tarde.',
 };
 

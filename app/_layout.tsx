@@ -16,7 +16,7 @@ import Loading from '@/components/Loading';
 
 const InitialLayout = () => {
 	const { isDarkMode } = useThemeContext();
-	const { isLoggedIn, loading } = useAuthContext();
+	const { isLoggedIn, loading, user } = useAuthContext();
 	const [fontsLoaded] = useFonts({
 		Rubik_300Light,
 		Rubik_400Regular,
@@ -38,7 +38,7 @@ const InitialLayout = () => {
 				},
 			}}
 		>
-			<Stack.Protected guard={!!isLoggedIn}>
+			<Stack.Protected guard={!!isLoggedIn && !!user?.emailVerified}>
 				<Stack.Screen name="(tabs)" />
 			</Stack.Protected>
 			<Stack.Protected guard={!isLoggedIn}>

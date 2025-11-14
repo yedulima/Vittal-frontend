@@ -2,6 +2,7 @@ import { FIREBASE_AUTH, FIREBASE_STORAGE, FIRESTORE_DB } from '@/FirebaseConfig'
 import {
 	createUserWithEmailAndPassword,
 	onAuthStateChanged,
+	sendEmailVerification,
 	signInWithEmailAndPassword,
 	updateProfile,
 	User,
@@ -57,6 +58,19 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 	const login = async (email: string, password: string) => {
 		try {
 			const response = await signInWithEmailAndPassword(FIREBASE_AUTH, email, password);
+			const userCrendtial = response.user;
+
+			if (userCrendtial && !userCrendtial.emailVerified) {
+				setUser(null);
+				setIsLoggedIn(false);
+
+				await FIREBASE_AUTH.signOut();
+
+				throw {
+					code: 'auth/email-not-verified',
+					message: 'Email not verified. Please check your inbox and try again.',
+				};
+			}
 
 			setUser(response?.user);
 			setIsLoggedIn(true);
@@ -75,34 +89,38 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 		role: string,
 		imageUri?: string
 	) => {
+		setLoading(true);
 		try {
 			const response = await createUserWithEmailAndPassword(FIREBASE_AUTH, email, password);
-			const user = response.user;
+			const userCrendtial = response.user;
 			let photoURL = null;
 
-			if (imageUri && user) {
+			if (imageUri && userCrendtial) {
 				const responseBlob = await fetch(imageUri);
 				const blob = await responseBlob.blob();
 
-				const storageRef = ref(FIREBASE_STORAGE, `profile_photos/${user.uid}.jpg`);
+				const storageRef = ref(FIREBASE_STORAGE, `profile_photos/${userCrendtial.uid}.jpg`);
 
 				await uploadBytes(storageRef, blob);
 
 				const downloadUrl = await getDownloadURL(storageRef);
 				photoURL = downloadUrl;
 
-				await updateProfile(user, {
+				await updateProfile(userCrendtial, {
 					photoURL: downloadUrl,
 				});
 			}
 
-			if (user) {
-				await updateProfile(user, {
+			if (userCrendtial) {
+				await updateProfile(userCrendtial, {
 					displayName: name,
 				});
 			}
 
+			sendEmailVerification(userCrendtial);
+
 			await setDoc(doc(FIRESTORE_DB, 'users', response?.user?.uid), {
+				createdAt: new Date(),
 				email,
 				name,
 				birthday,
@@ -110,7 +128,11 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 				photoURL,
 			});
 
-			await login(email, password);
+			await FIREBASE_AUTH.signOut();
+
+			setUser(null);
+			setIsLoggedIn(false);
+			setLoading(false);
 
 			return response?.user;
 		} catch (error: any) {

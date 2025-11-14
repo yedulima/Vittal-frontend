@@ -1,5 +1,4 @@
 import { LightTheme } from '@/constants/Themes';
-import { useAuthContext } from '@/contexts/AuthContext';
 import { welcomeStyles } from '@/styles/screens/WelcomeStyles';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -11,17 +10,7 @@ import Button from '@/components/Button';
 
 export default function LoginScreen() {
 	const styles = welcomeStyles(LightTheme);
-	const { login } = useAuthContext();
-
 	const router = useRouter();
-
-	const handleLogin = async (email: string, password: string) => {
-		try {
-			await login!(email, password);
-		} catch (error: any) {
-			console.error(`From login screen error: ${error}`);
-		}
-	};
 
 	return (
 		<SafeAreaView style={styles.container}>

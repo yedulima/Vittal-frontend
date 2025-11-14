@@ -24,6 +24,11 @@ export default function LoginScreen() {
 
 			const formError = getFormErrorFromFirebaseError(errorCode);
 
+			if (formError.message === AUTH_ERROR_MESSAGES.EMAIL_NOT_VERIFIED) {
+				formMethods.setError('email', formError);
+				return;
+			}
+
 			if (formError.message === AUTH_ERROR_MESSAGES.GENERIC_ERROR) {
 				console.error(errorCode);
 				alert(formError.message);
