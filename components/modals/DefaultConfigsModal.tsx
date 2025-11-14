@@ -25,18 +25,20 @@ export default function DefaultConfigsModal({
 
 	return (
 		<View>
-			<Modal animationType="slide" transparent={true} visible={isVisible}>
-				<View style={styles.content}>
-					<View style={styles.header}>
-						<View style={styles.titleContainer}>
-							<Text style={styles.title}>{title}</Text>
-							<Text style={styles.subTitle}>{subTitle}</Text>
+			<Modal animationType="none" transparent={true} visible={isVisible}>
+				<View style={styles.container}>
+					<View style={styles.content}>
+						<View style={styles.header}>
+							<View style={styles.titleContainer}>
+								<Text style={styles.title}>{title}</Text>
+								<Text style={styles.subTitle}>{subTitle}</Text>
+							</View>
+							<TouchableOpacity onPress={onClose} activeOpacity={0.9}>
+								<Feather name="x" size={23} style={styles.icon} />
+							</TouchableOpacity>
 						</View>
-						<TouchableOpacity onPress={onClose} activeOpacity={0.9}>
-							<Feather name="x" size={20} style={styles.icon} />
-						</TouchableOpacity>
+						{children}
 					</View>
-					{children}
 				</View>
 			</Modal>
 		</View>

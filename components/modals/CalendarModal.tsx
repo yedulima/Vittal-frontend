@@ -61,7 +61,7 @@ export default function CalendarModal({
 
 	return (
 		<View>
-			<Modal animationType="slide" transparent={true} backdropColor={'#000'} visible={isVisible}>
+			<Modal animationType="slide" transparent={true} visible={isVisible}>
 				<View style={styles.content}>
 					<View style={styles.header}>
 						<View style={styles.titleContainer}>

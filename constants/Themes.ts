@@ -16,6 +16,8 @@ export interface ThemeColors {
 	tabBarActiveTintColor: string;
 	tabBarInactiveTintColor: string;
 
+	backDropColor: string;
+
 	// Switch button colors
 	trackActiveColor: string;
 	trackInactiveColor: string;
@@ -37,6 +39,8 @@ export const LightTheme: ThemeColors = {
 	tabBarActiveTintColor: Colors.green[500],
 	tabBarInactiveTintColor: Colors.gray[300],
 
+	backDropColor: 'rgba(0, 0, 0, 0.5)',
+
 	trackActiveColor: Colors.white[200],
 	trackInactiveColor: Colors.white[500],
 };
@@ -56,6 +60,8 @@ export const DarkTheme: ThemeColors = {
 	tabBarColor: Colors.gray[800],
 	tabBarActiveTintColor: Colors.gray[100],
 	tabBarInactiveTintColor: Colors.gray[400],
+
+	backDropColor: 'rgba(0, 0, 0, 0.5)',
 
 	trackActiveColor: Colors.gray[400],
 	trackInactiveColor: Colors.gray[300],

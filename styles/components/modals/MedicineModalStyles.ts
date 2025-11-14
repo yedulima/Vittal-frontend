@@ -5,12 +5,19 @@ import { StyleSheet } from 'react-native';
 
 export const medicineModalStyles = (colors: ThemeColors) => {
 	return StyleSheet.create({
+		container: {
+			flex: 1,
+			justifyContent: 'center',
+			alignItems: 'center',
+			backgroundColor: colors.backDropColor,
+		},
 		content: {
-			position: 'absolute',
-			bottom: 0,
-			width: '100%',
-			height: '50%',
+			width: '90%',
+			minHeight: '45%',
 			paddingHorizontal: Measures.horizontal,
+			paddingVertical: Measures.vertical + 5,
+			borderRadius: 12,
+			justifyContent: 'space-between',
 			paddingTop: 10,
 			backgroundColor: colors.cardColor,
 		},
@@ -28,9 +35,9 @@ export const medicineModalStyles = (colors: ThemeColors) => {
 			gap: 2,
 		},
 		title: {
-			fontSize: 25,
+			fontSize: 28,
 			color: colors.textColor,
-			fontFamily: 'Rubik_500Medium',
+			fontFamily: 'Rubik_600SemiBold',
 		},
 		descriptionContainer: {
 			gap: 6,

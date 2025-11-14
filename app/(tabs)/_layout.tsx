@@ -35,7 +35,7 @@ export default function TabsLayout() {
 				name="notifications"
 				options={{ tabBarIcon: ({ color, size }) => <Feather name="bell" color={color} size={size} /> }}
 			/>
-			<Tabs.Protected guard={role === 'idoso'}>
+			<Tabs.Protected guard={role === 'cuidador'}>
 				<Tabs.Screen
 					name="medicines"
 					options={{

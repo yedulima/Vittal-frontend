@@ -4,12 +4,18 @@ import { StyleSheet } from 'react-native';
 
 export const defaultConfigsModalStyles = (colors: ThemeColors) => {
 	return StyleSheet.create({
+		container: {
+			flex: 1,
+			justifyContent: 'center',
+			alignItems: 'center',
+			backgroundColor: colors.backDropColor,
+		},
 		content: {
-			position: 'absolute',
-			bottom: 0,
-			width: '100%',
+			width: '90%',
 			height: '40%',
 			paddingHorizontal: Measures.horizontal,
+			paddingVertical: Measures.vertical + 5,
+			borderRadius: 12,
 			paddingTop: 10,
 			backgroundColor: colors.cardColor,
 			gap: 10,
@@ -19,6 +25,8 @@ export const defaultConfigsModalStyles = (colors: ThemeColors) => {
 			flexDirection: 'row',
 			alignItems: 'center',
 			justifyContent: 'space-between',
+			marginTop: 15,
+			marginBottom: 15,
 		},
 		titleContainer: {
 			flex: 1,
@@ -26,9 +34,9 @@ export const defaultConfigsModalStyles = (colors: ThemeColors) => {
 			gap: 2,
 		},
 		title: {
-			fontSize: 20,
+			fontSize: 28,
 			color: colors.textColor,
-			fontFamily: 'Rubik_500Medium',
+			fontFamily: 'Rubik_600SemiBold',
 		},
 		subTitle: {
 			fontSize: 15,
