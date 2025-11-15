@@ -17,7 +17,7 @@ interface NameAndProfilePhotoFormProps {
 }
 
 export default function NameAndProfilePhotoForm({ onBack, onNext }: NameAndProfilePhotoFormProps) {
-	const { control, setValue, trigger } = useFormContext<RegisterSchema>();
+	const { control, setValue, trigger, reset } = useFormContext<RegisterSchema>();
 
 	const styles = registerFormStyles(LightTheme);
 
@@ -33,11 +33,11 @@ export default function NameAndProfilePhotoForm({ onBack, onNext }: NameAndProfi
 
 			<Controller
 				control={control}
-				name="profilePhoto"
+				name="photoURL"
 				render={() => (
 					<UserProfilePhoto
 						imgSource={PlaceHolderImage}
-						onImageChoiced={(uri: string) => setValue('profilePhoto', uri)}
+						onImageChoiced={(uri: string) => setValue('photoURL', uri)}
 						styleColors={LightTheme}
 					/>
 				)}
@@ -65,8 +65,7 @@ export default function NameAndProfilePhotoForm({ onBack, onNext }: NameAndProfi
 				<Button
 					text="Voltar"
 					onPress={() => {
-						setValue('role', '');
-						setValue('name', '');
+						reset();
 						onBack();
 					}}
 					style={styles.backButton}

@@ -1,14 +1,14 @@
-import { FIREBASE_AUTH, FIREBASE_STORAGE, FIRESTORE_DB } from '@/FirebaseConfig';
+import { createUser } from '@/api/services/user.service';
+import { FIREBASE_AUTH, FIRESTORE_DB } from '@/FirebaseConfig';
+import { RegisterSchema } from '@/forms/Register/RegisterSchema';
 import {
 	createUserWithEmailAndPassword,
 	onAuthStateChanged,
 	sendEmailVerification,
 	signInWithEmailAndPassword,
-	updateProfile,
 	User,
 } from 'firebase/auth';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { doc, getDoc } from 'firebase/firestore';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 export interface AuthContextInterface {
@@ -18,14 +18,7 @@ export interface AuthContextInterface {
 	loading: boolean;
 	login: (email: string, password: string) => Promise<User>;
 	logout: () => Promise<void>;
-	register: (
-		email: string,
-		password: string,
-		name: string,
-		birthday: string,
-		role: string,
-		imageUri?: string
-	) => Promise<User>;
+	register: (data: RegisterSchema) => Promise<User>;
 }
 
 export const AuthContext = createContext<Partial<AuthContextInterface>>({});
@@ -112,51 +105,14 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 		}
 	};
 
-	const register = async (
-		email: string,
-		password: string,
-		name: string,
-		birthday: string,
-		role: string,
-		imageUri?: string
-	) => {
+	const register = async (data: RegisterSchema) => {
 		try {
-			const response = await createUserWithEmailAndPassword(FIREBASE_AUTH, email, password);
+			const response = await createUserWithEmailAndPassword(FIREBASE_AUTH, data.email, data.password);
 			const userCrendtial = response.user;
-			let photoURL = null;
 
-			if (imageUri && userCrendtial) {
-				const responseBlob = await fetch(imageUri);
-				const blob = await responseBlob.blob();
-
-				const storageRef = ref(FIREBASE_STORAGE, `profile_photos/${userCrendtial.uid}.jpg`);
-
-				await uploadBytes(storageRef, blob);
-
-				const downloadUrl = await getDownloadURL(storageRef);
-				photoURL = downloadUrl;
-
-				await updateProfile(userCrendtial, {
-					photoURL: downloadUrl,
-				});
-			}
-
-			if (userCrendtial) {
-				await updateProfile(userCrendtial, {
-					displayName: name,
-				});
-			}
-
-			sendEmailVerification(userCrendtial);
-
-			await setDoc(doc(FIRESTORE_DB, 'users', response?.user?.uid), {
-				createdAt: new Date(),
-				email,
-				name,
-				birthday,
-				role,
-				photoURL,
-			});
+			await createUser(userCrendtial.uid, data);
+			
+			await sendEmailVerification(userCrendtial);
 
 			await FIREBASE_AUTH.signOut();
 

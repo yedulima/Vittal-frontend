@@ -16,7 +16,7 @@ export default function RegisterScreen() {
 
 	const handleRegister = async (data: RegisterSchema, formMethods: UseFormReturn<RegisterSchema>) => {
 		try {
-			await register!(data.email, data.password, data.name, data.birtdayDate, data.role, data.profilePhoto!);
+			await register!(data);
 			router.navigate('/login');
 		} catch (error: any) {
 			const errorCode = error.code;

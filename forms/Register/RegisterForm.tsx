@@ -26,8 +26,9 @@ export default function RegisterForm({ onSubmit }: RegisterFormProps) {
 			email: '',
 			password: '',
 			confirmPassword: '',
-			profilePhoto: PlaceHolderImage,
-			birtdayDate: formattedDate,
+			photoURL: PlaceHolderImage,
+			birthday: formattedDate,
+			phoneNumber: '',
 			role: '',
 		},
 	});

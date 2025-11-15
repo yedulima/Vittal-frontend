@@ -11,10 +11,11 @@ export const registerSchema = z
 		email: z.string({ required_error: 'Campo obrigatório' }).nonempty('Campo obrigatório').email('Email inválido'),
 		password: z.string({ required_error: 'Campo obrigatório' }).nonempty('Campo obrigatório'),
 		confirmPassword: z.string({ required_error: 'Campo obrigatório' }).nonempty('Campo obrigatório'),
-		profilePhoto: z.string().optional(),
-		birtdayDate: z
+		photoURL: z.string(),
+		birthday: z
 			.string({ required_error: 'Insira sua data de nascimento' })
 			.refine((v) => checkValidDate(v), 'Data de nascimento inválida'),
+		phoneNumber: z.string().optional(),
 		role: z.enum(['idoso', 'cuidador']).or(z.literal('')),
 	})
 	.refine(({ password, confirmPassword }) => password === confirmPassword, {

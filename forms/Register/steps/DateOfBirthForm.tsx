@@ -24,7 +24,7 @@ export default function DateOfBirthForm({ onBack, onNext }: DateOfBirthFormProps
 	const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
 	const handleNext = async () => {
-		const isValid = await trigger('birtdayDate');
+		const isValid = await trigger('birthday');
 		if (isValid) onNext();
 	};
 
@@ -36,7 +36,7 @@ export default function DateOfBirthForm({ onBack, onNext }: DateOfBirthFormProps
 			<View style={styles.inputsContainer}>
 				<Controller
 					control={control}
-					name="birtdayDate"
+					name="birthday"
 					render={({ field, fieldState }) => (
 						<>
 							<Input
@@ -54,7 +54,7 @@ export default function DateOfBirthForm({ onBack, onNext }: DateOfBirthFormProps
 							<CalendarModal
 								isVisible={isModalVisible}
 								onClose={() => setIsModalVisible(false)}
-								onSelect={(date: string) => setValue('birtdayDate', date)}
+								onSelect={(date: string) => setValue('birthday', date)}
 								currentDay={field.value}
 								type="Past"
 								styleColors={LightTheme}
