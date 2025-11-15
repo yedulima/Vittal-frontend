@@ -20,7 +20,6 @@ export default function RegisterScreen() {
 			router.navigate('/login');
 		} catch (error: any) {
 			const errorCode = error.code;
-
 			const formError = getFormErrorFromFirebaseError(errorCode);
 
 			if (formError.message === AUTH_ERROR_MESSAGES.WEAK_PASSWORD) {

@@ -14,7 +14,7 @@ import { createContext, ReactNode, useContext, useEffect, useState } from 'react
 export interface AuthContextInterface {
 	isLoggedIn: boolean;
 	user: User | null;
-	role: 'cuidador' | 'idoso' | null,
+	role: 'cuidador' | 'idoso' | null;
 	loading: boolean;
 	login: (email: string, password: string) => Promise<User>;
 	logout: () => Promise<void>;
@@ -48,27 +48,33 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 	useEffect(() => {
 		setLoading(true);
 		const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, async (user) => {
-			if (user) {
-				setUser(user);
-				setIsLoggedIn(true);
+			try {
+				if (user) {
+					setUser(user);
+					setIsLoggedIn(true);
 
-				const userDocRef = doc(FIRESTORE_DB, 'users', user.uid);
-				const userDocSnap = await getDoc(userDocRef);
+					const userDocRef = doc(FIRESTORE_DB, 'users', user.uid);
+					const userDocSnap = await getDoc(userDocRef);
 
-				if (userDocSnap.exists()) {
-					const firestoreData = userDocSnap.data();
-					setRole(firestoreData.role as 'cuidador' | 'idoso' | null);
+					if (userDocSnap.exists()) {
+						const firestoreData = userDocSnap.data();
+						setRole(firestoreData.role as 'cuidador' | 'idoso' | null);
+					}
+				} else {
+					setUser(null);
+					setIsLoggedIn(false);
+					setRole(null);
 				}
-			} else {
+			} catch (error: any) {
+				console.error(error);
+
 				setUser(null);
 				setIsLoggedIn(false);
 				setRole(null);
+			} finally {
+				setLoading(false);
+				setInitialized(true);
 			}
-
-			setUser(user);
-			setIsLoggedIn(!!user);
-			setLoading(false);
-			setInitialized(true);
 		});
 
 		return unsubscribe;
@@ -80,11 +86,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 			const userCrendtial = response.user;
 
 			if (userCrendtial && !userCrendtial.emailVerified) {
-				setUser(null);
-				setIsLoggedIn(false);
-
 				await FIREBASE_AUTH.signOut();
-
 				throw {
 					code: 'auth/email-not-verified',
 					message: 'Email not verified. Please check your inbox and try again.',
@@ -118,7 +120,6 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 		role: string,
 		imageUri?: string
 	) => {
-		setLoading(true);
 		try {
 			const response = await createUserWithEmailAndPassword(FIREBASE_AUTH, email, password);
 			const userCrendtial = response.user;
@@ -161,11 +162,9 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 
 			setUser(null);
 			setIsLoggedIn(false);
-			setLoading(false);
 
 			return response?.user;
 		} catch (error: any) {
-			setLoading(false);
 			throw error;
 		}
 	};
