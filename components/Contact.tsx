@@ -3,22 +3,19 @@ import { contactStyles } from '@/styles/components/ContactStyles';
 import { Feather } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { Text, TouchableOpacity, View } from 'react-native';
+import { ContactInterface } from '@/api/interfaces';
 
 const PlaceHolderImage = require('@/assets/images/placeholder-image.jpg');
 
 interface ContactProp {
-	data: {
-		name: string;
-		photo: string;
-		status: string;
-	};
+	data: ContactInterface;
 }
 
 export default function Contact({ data }: ContactProp) {
 	const { colors } = useThemeContext();
 	const styles = contactStyles(colors!);
 
-	const imageSource = data.photo ? { uri: data.photo } : PlaceHolderImage;
+	const imageSource = data.photoURL ? { uri: data.photoURL } : PlaceHolderImage;
 
 	return (
 		<TouchableOpacity style={styles.container} activeOpacity={0.8}>

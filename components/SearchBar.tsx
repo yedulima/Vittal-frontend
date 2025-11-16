@@ -1,17 +1,18 @@
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { searchBarStyles } from '@/styles/components/SearchBarStyles';
-import { USERS, UserInterface } from '@/utils/data';
 import { useMemo, useState } from 'react';
 import { TextInput, View } from 'react-native';
+import { ContactInterface } from '@/api/interfaces';
 
 import filter from 'lodash.filter';
 
 interface SearchBarProps {
 	placeholder: string;
-	onChange: (filteredData: UserInterface[]) => void;
+	dataToSearch: ContactInterface[];
+	onChange: (filteredData: ContactInterface[]) => void;
 }
 
-export default function SearchBar({ placeholder, onChange }: SearchBarProps) {
+export default function SearchBar({ placeholder, dataToSearch, onChange }: SearchBarProps) {
 	const { colors } = useThemeContext();
 	const styles = searchBarStyles(colors!);
 
@@ -22,20 +23,20 @@ export default function SearchBar({ placeholder, onChange }: SearchBarProps) {
 	};
 
 	useMemo(() => {
-		let result: UserInterface[];
+		let result: ContactInterface[];
 
 		if (!query) {
-			result = USERS as UserInterface[];
+			result = dataToSearch;
 		}
 		const formattedQuery = query.toLowerCase();
-		result = filter(USERS, (user: UserInterface) => {
+		result = filter(dataToSearch, (user: ContactInterface) => {
 			const name = user.name.toLowerCase();
 			return name.includes(formattedQuery);
-		}) as UserInterface[];
+		}) as ContactInterface[];
 
 		onChange(result);
 		return result;
-	}, [query]);
+	}, [query, dataToSearch]);
 
 	return (
 		<View style={styles.container}>

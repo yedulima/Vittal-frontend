@@ -1,12 +1,12 @@
+import { ContactInterface } from '@/api/interfaces';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { contactsListStyles } from '@/styles/components/ContactsListStyles';
-import { UserInterface } from '@/utils/data';
 import { FlatList, Text, View } from 'react-native';
 
 import Contact from '@/components/Contact';
 
 interface ContactListProp {
-	data: UserInterface[];
+	data: ContactInterface[];
 }
 
 export default function ContactsList({ data }: ContactListProp) {

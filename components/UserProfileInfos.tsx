@@ -26,7 +26,7 @@ export default function UserProfileInfos() {
 				<Text style={styles.name}>{user?.displayName}</Text>
 				<View style={styles.emailContainer}>
 					<Text style={styles.email}>{user?.email}</Text>
-					{!user?.emailVerified && (
+					{user?.emailVerified && (
 						<MaterialIcons name="verified-user" size={13} style={styles.verifiedBadge} />
 					)}
 				</View>
