@@ -1,20 +1,13 @@
 import { createUser } from '@/api/services/user.service';
-import { FIREBASE_AUTH, FIRESTORE_DB } from '@/FirebaseConfig';
+import { FIREBASE_AUTH } from '@/FirebaseConfig';
 import { RegisterSchema } from '@/forms/Register/RegisterSchema';
-import {
-	createUserWithEmailAndPassword,
-	onAuthStateChanged,
-	sendEmailVerification,
-	signInWithEmailAndPassword,
-	User,
-} from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, User } from 'firebase/auth';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 export interface AuthContextInterface {
 	isLoggedIn: boolean;
 	user: User | null;
-	role: 'cuidador' | 'idoso' | null;
+	role: string | null;
 	loading: boolean;
 	login: (email: string, password: string) => Promise<User>;
 	logout: () => Promise<void>;
@@ -33,7 +26,7 @@ export const useAuthContext = () => {
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
 	const [user, setUser] = useState<User | null>(null);
-	const [role, setRole] = useState<'cuidador' | 'idoso' | null>(null);
+	const [role, setRole] = useState<string | null>(null);
 	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [initialized, setInitialized] = useState<boolean>(false);
@@ -46,12 +39,12 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 					setUser(user);
 					setIsLoggedIn(true);
 
-					const userDocRef = doc(FIRESTORE_DB, 'users', user.uid);
-					const userDocSnap = await getDoc(userDocRef);
+					const userTokenResult = await user.getIdTokenResult();
 
-					if (userDocSnap.exists()) {
-						const firestoreData = userDocSnap.data();
-						setRole(firestoreData.role as 'cuidador' | 'idoso' | null);
+					if (!!userTokenResult.claims.role) {
+						setRole(userTokenResult.claims.role as string);
+					} else {
+						await logout();
 					}
 				} else {
 					setUser(null);
@@ -76,28 +69,19 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 	const login = async (email: string, password: string) => {
 		try {
 			const response = await signInWithEmailAndPassword(FIREBASE_AUTH, email, password);
-			const userCrendtial = response.user;
+			const user = response.user;
 
-			if (userCrendtial && !userCrendtial.emailVerified) {
-				await FIREBASE_AUTH.signOut();
-				throw {
-					code: 'auth/email-not-verified',
-					message: 'Email not verified. Please check your inbox and try again.',
-				};
-			}
+			const userTokenResult = await user.getIdTokenResult();
 
-			if (userCrendtial) {
-				const userDocRef = doc(FIRESTORE_DB, 'users', userCrendtial.uid);
-				const userDocSnap = await getDoc(userDocRef);
-
-				if (userDocSnap.exists()) {
-					const firestoreData = userDocSnap.data();
-					setRole(firestoreData.role as 'cuidador' | 'idoso' | null);
-				}
+			if (!!userTokenResult.claims.role) {
+				setRole(userTokenResult.claims.role as string);
+			} else {
+				await logout();
 			}
 
 			setUser(response?.user);
 			setIsLoggedIn(true);
+			setLoading(false);
 
 			return response?.user;
 		} catch (error: any) {
@@ -108,16 +92,15 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 	const register = async (data: RegisterSchema) => {
 		try {
 			const response = await createUserWithEmailAndPassword(FIREBASE_AUTH, data.email, data.password);
-			const userCrendtial = response.user;
+			const user = response.user;
 
-			await createUser(userCrendtial.uid, data);
-			
-			await sendEmailVerification(userCrendtial);
+			await logout();
 
-			await FIREBASE_AUTH.signOut();
+			await createUser(user.uid, data);
 
-			setUser(null);
-			setIsLoggedIn(false);
+			setLoading(true);
+
+			await login(data.email, data.password);
 
 			return response?.user;
 		} catch (error: any) {

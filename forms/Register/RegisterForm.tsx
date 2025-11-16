@@ -28,7 +28,7 @@ export default function RegisterForm({ onSubmit }: RegisterFormProps) {
 			confirmPassword: '',
 			photoURL: PlaceHolderImage,
 			birthday: formattedDate,
-			phoneNumber: '',
+			phoneNumber: '(85) 99158-2279',
 			role: '',
 		},
 	});

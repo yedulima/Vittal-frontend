@@ -18,10 +18,19 @@ export const userProfileInfosStyles = (colors: ThemeColors) => {
 			color: colors.textColor,
 			fontFamily: 'Rubik_600SemiBold',
 		},
+		emailContainer: {
+			flexDirection: 'row',
+			alignItems: 'center',
+			justifyContent: 'center',
+			gap: 5,
+		},
 		email: {
 			fontSize: 15,
 			color: colors.accentColor,
 			fontFamily: 'Rubik_400Regular',
+		},
+		verifiedBadge: {
+			color: colors.iconColor,
 		},
 	});
 };

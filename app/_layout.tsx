@@ -38,7 +38,7 @@ const InitialLayout = () => {
 				},
 			}}
 		>
-			<Stack.Protected guard={!!isLoggedIn && !!user?.emailVerified}>
+			<Stack.Protected guard={!!isLoggedIn}>
 				<Stack.Screen name="(tabs)" />
 			</Stack.Protected>
 			<Stack.Protected guard={!isLoggedIn}>

@@ -1,6 +1,7 @@
 import { useAuthContext } from '@/contexts/AuthContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { userProfileInfosStyles } from '@/styles/components/UserProfileInfosStyles';
+import { MaterialIcons } from '@expo/vector-icons';
 import { ImageSourcePropType, Text, View } from 'react-native';
 
 import UserProfilePhoto from '@/components/UserProfilePhoto';
@@ -23,7 +24,12 @@ export default function UserProfileInfos() {
 			<UserProfilePhoto imgSource={imageSource} />
 			<View style={styles.userCredentials}>
 				<Text style={styles.name}>{user?.displayName}</Text>
-				<Text style={styles.email}>{user?.email}</Text>
+				<View style={styles.emailContainer}>
+					<Text style={styles.email}>{user?.email}</Text>
+					{!user?.emailVerified && (
+						<MaterialIcons name="verified-user" size={13} style={styles.verifiedBadge} />
+					)}
+				</View>
 			</View>
 		</View>
 	);

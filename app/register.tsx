@@ -3,7 +3,6 @@ import { useAuthContext } from '@/contexts/AuthContext';
 import { RegisterSchema } from '@/forms/Register/RegisterSchema';
 import { registerStyles } from '@/styles/screens/RegisterStyles';
 import { AUTH_ERROR_MESSAGES, getFormErrorFromFirebaseError } from '@/utils/firebaseErrorMapper';
-import { useRouter } from 'expo-router';
 import { UseFormReturn } from 'react-hook-form';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -12,12 +11,10 @@ import RegisterForm from '@/forms/Register/RegisterForm';
 export default function RegisterScreen() {
 	const { register } = useAuthContext();
 	const styles = registerStyles(LightTheme);
-	const router = useRouter();
 
 	const handleRegister = async (data: RegisterSchema, formMethods: UseFormReturn<RegisterSchema>) => {
 		try {
 			await register!(data);
-			router.navigate('/login');
 		} catch (error: any) {
 			const errorCode = error.code;
 			const formError = getFormErrorFromFirebaseError(errorCode);
