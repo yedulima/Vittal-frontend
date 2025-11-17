@@ -1,4 +1,5 @@
 import { createUser } from '@/api/services/user.service';
+import { useThemeContext } from '@/contexts/ThemeContext';
 import { FIREBASE_AUTH } from '@/FirebaseConfig';
 import { RegisterSchema } from '@/forms/Register/RegisterSchema';
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, User } from 'firebase/auth';
@@ -30,6 +31,8 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [initialized, setInitialized] = useState<boolean>(false);
+
+	const { setTheme } = useThemeContext();
 
 	useEffect(() => {
 		setLoading(true);
@@ -112,6 +115,8 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 		try {
 			setLoading(true);
 			await FIREBASE_AUTH.signOut();
+
+			await setTheme!('light');
 
 			setUser(null);
 			setIsLoggedIn(false);

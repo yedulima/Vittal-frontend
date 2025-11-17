@@ -6,6 +6,7 @@ export interface ThemeContextInterface {
 	isDarkMode: boolean;
 	colors: ThemeColors;
 	toggleTheme: () => Promise<void>;
+	setTheme: (theme: 'light' | 'dark') => Promise<void>;
 }
 
 export const ThemeContext = createContext<Partial<ThemeContextInterface>>({});
@@ -50,12 +51,24 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
 		}
 	};
 
+	const setTheme = async (theme: 'light' | 'dark') => {
+		try {
+			const newTheme = theme === 'dark';
+			setIsDarkMode(newTheme);
+
+			await AsyncStorage.setItem(contextKey, JSON.stringify(newTheme));
+		} catch (error) {
+			console.error(`Error saving theme: ${error}`);
+		}
+	};
+
 	const themeColors = isDarkMode ? DarkTheme : LightTheme;
 
 	const parseData = {
 		isDarkMode,
 		colors: themeColors,
 		toggleTheme,
+		setTheme,
 	};
 
 	return <ThemeContext.Provider value={parseData}>{children}</ThemeContext.Provider>;
