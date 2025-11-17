@@ -25,6 +25,8 @@ export const contactStyles = (colors: ThemeColors) => {
 			height: photoSize,
 			borderRadius: 25,
 			backgroundColor: colors.imageBackgroundColor,
+			borderWidth: 2,
+			borderColor: colors.cardBorderColor,
 		},
 		userCredentials: {
 			justifyContent: 'center',

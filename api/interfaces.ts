@@ -8,17 +8,16 @@ export interface UserInterface {
 }
 
 export interface Medicine {
-	name: {
-		datePeriod: {
-			start: Date;
-			end: Date;
-		};
-		dosage: string;
-		description: string;
-		schedules: string[];
-		instructions: string;
-		status: string;
+	name: string;
+	datePeriod: {
+		start: string;
+		end: string;
 	};
+	dosage: string;
+	description: string;
+	schedules: string[];
+	instructions: string;
+	status: string;
 }
 
 export interface TecnicalSheet {
@@ -32,7 +31,7 @@ export interface IdosoInterface {
 	cuidador_ref?: string;
 	emergency_numbers?: string[];
 	address?: string;
-	technical_sheet?: TecnicalSheet[];
+	technical_sheet?: TecnicalSheet;
 	status?: string;
 }
 
