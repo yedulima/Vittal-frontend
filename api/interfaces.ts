@@ -7,6 +7,10 @@ export interface UserInterface {
 	phoneNumber?: string;
 }
 
+export interface UserData extends UserInterface {
+	createdAt: Date,
+}
+
 export interface Medicine {
 	name: string;
 	datePeriod: {

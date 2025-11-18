@@ -23,7 +23,7 @@ export const configurationsStyles = (colors: ThemeColors) => {
 		buttonText: {
 			fontSize: 16,
 			fontFamily: 'Rubik_400Regular',
-			color: colors.textColor
+			color: colors.textColor,
 		},
 		logoutButton: {
 			width: '100%',
@@ -33,6 +33,9 @@ export const configurationsStyles = (colors: ThemeColors) => {
 			fontSize: 16,
 			color: Colors.white[800],
 			fontFamily: 'Rubik_400Regular',
+		},
+		scrollViewContainer: {
+			paddingBottom: 24,
 		},
 	});
 };

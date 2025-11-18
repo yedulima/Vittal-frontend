@@ -2,14 +2,15 @@ import { useAuthContext } from '@/contexts/AuthContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { configurationsStyles } from '@/styles/screens/ConfigurationsStyles';
 import { useState } from 'react';
-import { Text } from 'react-native';
+import { ScrollView, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Button from '@/components/Button';
+import DefaultConfigsModal from '@/components/modals/DefaultConfigsModal';
 import OptionsSection from '@/components/OptionsSection';
 import SwitchButton from '@/components/SwitchButton';
+import UserPersonalInfos from '@/components/UserPersonalInfos';
 import UserProfileInfos from '@/components/UserProfileInfos';
-import DefaultConfigsModal from '@/components/modals/DefaultConfigsModal';
 
 export default function ConfigurationsScreen() {
 	const { colors, toggleTheme, isDarkMode } = useThemeContext();
@@ -30,39 +31,42 @@ export default function ConfigurationsScreen() {
 		<SafeAreaView style={styles.container}>
 			<Text style={styles.title}>Configurações</Text>
 
-			<UserProfileInfos />
+			<ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollViewContainer}>
+				<UserProfileInfos />
+				<UserPersonalInfos />
 
-			<OptionsSection title="Aparência">
-				<SwitchButton value={!!isDarkMode} text="Tema escuro" onPress={() => toggleTheme!()} />
-			</OptionsSection>
+				<OptionsSection title="Aparência">
+					<SwitchButton value={!!isDarkMode} text="Tema escuro" onPress={() => toggleTheme!()} />
+				</OptionsSection>
 
-			<OptionsSection title="Acessibilidade">
+				<OptionsSection title="Acessibilidade">
+					<Button
+						text="Tamanho do texto"
+						rightIconName="arrow-right"
+						onPress={() => setIsModalVisible(true)}
+						style={styles.button}
+						textStyle={styles.buttonText}
+					/>
+				</OptionsSection>
+
 				<Button
-					text="Tamanho do texto"
-					rightIconName="arrow-right"
-					onPress={() => setIsModalVisible(true)}
-					style={styles.button}
-					textStyle={styles.buttonText}
+					text="Encerrar sessão"
+					leftIconName="corner-up-left"
+					onPress={handleLogout}
+					style={styles.logoutButton}
+					textStyle={styles.logoutText}
+					iconColor="#fff"
 				/>
-			</OptionsSection>
 
-			<Button
-				text="Encerrar sessão"
-				leftIconName="corner-up-left"
-				onPress={handleLogout}
-				style={styles.logoutButton}
-				textStyle={styles.logoutText}
-				iconColor="#fff"
-			/>
-
-			<DefaultConfigsModal
-				isVisible={isModalVisible}
-				title="Text size"
-				subTitle="Altere o tamanho da letra"
-				onClose={() => setIsModalVisible(false)}
-			>
-				{/* <Text style={styles.text}>Ata</Text> */}
-			</DefaultConfigsModal>
+				<DefaultConfigsModal
+					isVisible={isModalVisible}
+					title="Text size"
+					subTitle="Altere o tamanho da letra"
+					onClose={() => setIsModalVisible(false)}
+				>
+					{/* <Text style={styles.text}>Ata</Text> */}
+				</DefaultConfigsModal>
+			</ScrollView>
 		</SafeAreaView>
 	);
 }

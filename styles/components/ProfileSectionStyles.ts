@@ -16,7 +16,7 @@ export const profileSectionStyles = (colors: ThemeColors) => {
 		},
 		sectionContent: {
 			backgroundColor: colors.backgroudColor,
-			borderRadius: 12,
+			borderRadius: 5,
 			padding: 15,
 			gap: 20,
 		},
@@ -32,12 +32,12 @@ export const profileSectionStyles = (colors: ThemeColors) => {
 			fontFamily: 'Rubik_500Medium',
 		},
 		content: {
-			fontSize: 15,
+			fontSize: 16,
 			color: colors.textColor,
 			fontFamily: 'Rubik_400Regular',
 		},
         noContent: {
-            fontSize: 15,
+            fontSize: 16,
 			color: colors.accentColor,
 			fontFamily: 'Rubik_400Regular',
         },
@@ -58,7 +58,7 @@ export const profileSectionStyles = (colors: ThemeColors) => {
 			padding: 8,
 		},
 		multiplesItemsText: {
-			fontSize: 15,
+			fontSize: 16,
 			color: colors.textColor,
 			fontFamily: 'Rubik_400Regular',
 		},

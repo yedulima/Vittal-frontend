@@ -2,6 +2,8 @@ import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
 export const userProfileInfosStyles = (colors: ThemeColors) => {
+	const photoSize = 145;
+
 	return StyleSheet.create({
 		container: {
 			width: '100%',
@@ -31,6 +33,16 @@ export const userProfileInfosStyles = (colors: ThemeColors) => {
 		},
 		verifiedBadge: {
 			color: colors.iconColor,
+		},
+		photo: {
+			alignSelf: 'center',
+			width: photoSize,
+			height: photoSize,
+			borderRadius: 100,
+			borderWidth: 2,
+			marginBottom: 5,
+			borderColor: colors.accentColor,
+			backgroundColor: colors.imageBackgroundColor,
 		},
 	});
 };

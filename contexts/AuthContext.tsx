@@ -1,4 +1,5 @@
-import { createUser } from '@/api/services/user.service';
+import { UserData } from '@/api/interfaces';
+import { createUser, getUserById } from '@/api/services/user.service';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { FIREBASE_AUTH } from '@/FirebaseConfig';
 import { RegisterSchema } from '@/forms/Register/RegisterSchema';
@@ -8,6 +9,7 @@ import { createContext, ReactNode, useContext, useEffect, useState } from 'react
 export interface AuthContextInterface {
 	isLoggedIn: boolean;
 	user: User | null;
+	userData: UserData | null;
 	role: string | null;
 	loading: boolean;
 	login: (email: string, password: string) => Promise<User>;
@@ -27,6 +29,7 @@ export const useAuthContext = () => {
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
 	const [user, setUser] = useState<User | null>(null);
+	const [userData, setUserData] = useState<UserData | null>(null);
 	const [role, setRole] = useState<string | null>(null);
 	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(true);
@@ -34,21 +37,28 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 
 	const { setTheme } = useThemeContext();
 
+	const setUserFunc = async (user: User) => {
+		setUser(user);
+		setIsLoggedIn(true);
+
+		const userTokenResult = await user.getIdTokenResult();
+
+		if (!!userTokenResult.claims.role) {
+			setRole(userTokenResult.claims.role as string);
+		} else {
+			await logout();
+		}
+
+		const result = await getUserById(user.uid);
+		setUserData(result?.data.data);
+	};
+
 	useEffect(() => {
 		setLoading(true);
 		const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, async (user) => {
 			try {
 				if (user) {
-					setUser(user);
-					setIsLoggedIn(true);
-
-					const userTokenResult = await user.getIdTokenResult();
-
-					if (!!userTokenResult.claims.role) {
-						setRole(userTokenResult.claims.role as string);
-					} else {
-						await logout();
-					}
+					await setUserFunc(user);
 				} else {
 					setUser(null);
 					setIsLoggedIn(false);
@@ -74,20 +84,12 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 			const response = await signInWithEmailAndPassword(FIREBASE_AUTH, email, password);
 			const user = response.user;
 
-			const userTokenResult = await user.getIdTokenResult();
-
-			if (!!userTokenResult.claims.role) {
-				setRole(userTokenResult.claims.role as string);
-			} else {
-				await logout();
-			}
-
-			setUser(response?.user);
-			setIsLoggedIn(true);
+			await setUserFunc(user);
 			setLoading(false);
 
 			return response?.user;
 		} catch (error: any) {
+			setLoading(false);
 			throw error;
 		}
 	};
@@ -99,9 +101,9 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 
 			await logout();
 
-			await createUser(user.uid, data);
-
 			setLoading(true);
+
+			await createUser(user.uid, data);
 
 			await login(data.email, data.password);
 
@@ -130,6 +132,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 
 	const parseData = {
 		user,
+		userData,
 		role,
 		isLoggedIn,
 		login,

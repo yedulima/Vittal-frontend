@@ -3,8 +3,7 @@ import { useThemeContext } from '@/contexts/ThemeContext';
 import { userProfileInfosStyles } from '@/styles/components/UserProfileInfosStyles';
 import { MaterialIcons } from '@expo/vector-icons';
 import { ImageSourcePropType, Text, View } from 'react-native';
-
-import UserProfilePhoto from '@/components/UserProfilePhoto';
+import { Image } from 'expo-image';
 
 const PlaceHolderImage = require('@/assets/images/placeholder-image.jpg');
 
@@ -21,7 +20,7 @@ export default function UserProfileInfos() {
 
 	return (
 		<View style={styles.container}>
-			<UserProfilePhoto imgSource={imageSource} />
+			<Image source={imageSource} style={styles.photo} />
 			<View style={styles.userCredentials}>
 				<Text style={styles.name}>{user?.displayName}</Text>
 				<View style={styles.emailContainer}>
