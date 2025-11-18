@@ -31,7 +31,7 @@ export const idosoProfileModalStyles = (colors: ThemeColors) => {
 			fontFamily: 'Rubik_600SemiBold',
 		},
 		text: {
-			fontSize: 15,
+			fontSize: 16,
 			color: colors.accentColor,
 			fontFamily: 'Rubik_400Regular',
 		},

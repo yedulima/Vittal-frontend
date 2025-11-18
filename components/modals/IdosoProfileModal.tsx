@@ -37,13 +37,11 @@ export default function IdosoProfileModal({ data, isVisible, onClose }: IdosoPro
 		return () => unsubscribe();
 	}, [isVisible]);
 
-	if (!isVisible) return null;
-
 	const { allergies, bloodType, medicines } = liveData.technical_sheet as TecnicalSheet;
 
 	return (
 		<View>
-			<Modal animationType="none" transparent={true} visible={isVisible}>
+			<Modal animationType="slide" transparent={true} visible={isVisible}>
 				<View style={styles.content}>
 					<View style={styles.header}>
 						<TouchableOpacity onPress={onClose} activeOpacity={0.9}>
