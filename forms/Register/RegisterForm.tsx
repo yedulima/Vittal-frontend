@@ -8,6 +8,7 @@ import ChooseUserForm from '@/forms/Register/steps/ChooseUserForm';
 import DateOfBirthForm from '@/forms/Register/steps/DateOfBirthForm';
 import EmailAndPasswordForm from '@/forms/Register/steps/EmailAndPasswordForm';
 import NameAndProfilePhotoForm from '@/forms/Register/steps/NameAndProfilePhotoForm';
+import PhoneNumberForm from '@/forms/Register/steps/PhoneNumberForm';
 
 const PlaceHolderImage = require('@/assets/images/Portrait_Placeholder.png');
 
@@ -28,7 +29,7 @@ export default function RegisterForm({ onSubmit }: RegisterFormProps) {
 			confirmPassword: '',
 			photoURL: PlaceHolderImage,
 			birthday: formattedDate,
-			phoneNumber: '(85) 99158-2279',
+			phoneNumber: '',
 			role: '',
 		},
 	});
@@ -48,8 +49,9 @@ export default function RegisterForm({ onSubmit }: RegisterFormProps) {
 			<View style={{ flex: 1 }}>
 				{step === 1 && <ChooseUserForm onNext={onNext} />}
 				{step === 2 && <NameAndProfilePhotoForm onBack={onBack} onNext={onNext} />}
-				{step === 3 && <DateOfBirthForm onBack={onBack} onNext={onNext} />}
-				{step === 4 && <EmailAndPasswordForm onBack={onBack} onSubmit={onSubmit} />}
+				{step === 3 && <PhoneNumberForm onBack={onBack} onNext={onNext} />}
+				{step === 4 && <DateOfBirthForm onBack={onBack} onNext={onNext} />}
+				{step === 5 && <EmailAndPasswordForm onBack={onBack} onSubmit={onSubmit} />}
 			</View>
 		</FormProvider>
 	);

@@ -24,7 +24,7 @@ export default function EmailAndPasswordForm({ onBack, onSubmit }: EmailAndPassw
 
 	return (
 		<View style={styles.container}>
-			<ProgressBar percentage={75} />
+			<ProgressBar percentage={100} />
 			<Text style={styles.text}>E-mail e senha</Text>
 
 			<View style={styles.inputsContainer}>
@@ -76,7 +76,7 @@ export default function EmailAndPasswordForm({ onBack, onSubmit }: EmailAndPassw
 
 			<>
 				<Button
-					text="Próximo"
+					text="Criar"
 					onPress={handleSubmit(handleSubmitForm)}
 					style={styles.button}
 					textStyle={styles.buttonText}

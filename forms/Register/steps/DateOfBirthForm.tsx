@@ -30,7 +30,7 @@ export default function DateOfBirthForm({ onBack, onNext }: DateOfBirthFormProps
 
 	return (
 		<View style={styles.container}>
-			<ProgressBar percentage={50} />
+			<ProgressBar percentage={75} />
 			<Text style={styles.text}>Data de nascimento</Text>
 
 			<View style={styles.inputsContainer}>

@@ -15,7 +15,7 @@ export const registerSchema = z
 		birthday: z
 			.string({ required_error: 'Insira sua data de nascimento' })
 			.refine((v) => checkValidDate(v), 'Data de nascimento inválida'),
-		phoneNumber: z.string().optional(),
+		phoneNumber: z.string({ required_error: 'Campo obrigatório' }).nonempty('Campo obrigatório'),
 		role: z.enum(['idoso', 'cuidador']).or(z.literal('')),
 	})
 	.refine(({ password, confirmPassword }) => password === confirmPassword, {
