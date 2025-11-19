@@ -2,8 +2,9 @@ import { ContactInterface } from '@/api/interfaces';
 import { listIdosos } from '@/api/services/cuidador.service';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { contactsStyles } from '@/styles/screens/ContactsStyles';
+import { Feather } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
-import { ScrollView, Text } from 'react-native';
+import { ScrollView, Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import ContactsList from '@/components/ContactsList';
@@ -42,6 +43,10 @@ export default function ContactsScreen() {
 			<ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollViewContainer}>
 				<ContactsList data={data} />
 			</ScrollView>
+
+			<TouchableOpacity activeOpacity={0.8} style={styles.addContainer}>
+				<Feather name="plus" size={30} style={styles.icon} />
+			</TouchableOpacity>
 		</SafeAreaView>
 	);
 }
