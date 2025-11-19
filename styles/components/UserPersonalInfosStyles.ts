@@ -49,6 +49,11 @@ export const userPersonalInfosStyles = (colors: ThemeColors) => {
 			color: colors.accentColor,
 			fontFamily: 'Rubik_400Regular',
 		},
+		verifiedText: {
+			fontSize: 14,
+			color: colors.accentColor,
+			fontFamily: 'Rubik_400Regular',
+		},
 		icon: {
 			color: colors.iconColor,
 		},

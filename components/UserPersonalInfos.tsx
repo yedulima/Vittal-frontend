@@ -8,7 +8,7 @@ export default function UserPersonalInfos() {
 	const { colors } = useThemeContext();
 	const styles = userPersonalInfosStyles(colors!);
 
-	const { userData } = useAuthContext();
+	const { user, userData } = useAuthContext();
 
 	return (
 		<View style={styles.optionsSectionContainer}>
@@ -31,6 +31,7 @@ export default function UserPersonalInfos() {
 					<View>
 						<View style={styles.nameContainer}>
 							<Text style={styles.name}>Email</Text>
+							{!user?.emailVerified && <Text style={styles.verifiedText}>(Não verificado)</Text>}
 						</View>
 						<Text style={userData?.email ? styles.content : styles.noContent}>
 							{userData?.email ? userData?.email : 'Nenhum email de usuário'}
