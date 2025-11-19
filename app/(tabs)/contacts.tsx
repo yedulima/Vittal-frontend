@@ -9,6 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import ContactsList from '@/components/ContactsList';
 import SearchBar from '@/components/SearchBar';
+import AddIdosoModal from '@/components/modals/AddIdosoModal';
 
 export default function ContactsScreen() {
 	const { colors } = useThemeContext();
@@ -17,14 +18,17 @@ export default function ContactsScreen() {
 	const [data, setData] = useState<ContactInterface[]>([]);
 	const [originalData, setOriginalData] = useState<ContactInterface[]>([]);
 
+	const [isVisible, setIsVisible] = useState<boolean>(false);
+
+	const fetchIdosos = async () => {
+		const result = await listIdosos();
+		const data = result?.data?.data || [];
+		setOriginalData(data);
+		setData(data);
+	};
+
 	useEffect(() => {
-		const listar = async () => {
-			const result = await listIdosos();
-			const data = result?.data?.data || [];
-			setOriginalData(data);
-			setData(data);
-		};
-		listar();
+		fetchIdosos();
 	}, []);
 
 	const onChangeQuery = (filteredData: ContactInterface[]) => {
@@ -44,9 +48,11 @@ export default function ContactsScreen() {
 				<ContactsList data={data} />
 			</ScrollView>
 
-			<TouchableOpacity activeOpacity={0.8} style={styles.addContainer}>
+			<TouchableOpacity onPress={() => setIsVisible(true)} activeOpacity={0.8} style={styles.addContainer}>
 				<Feather name="plus" size={30} style={styles.icon} />
 			</TouchableOpacity>
+
+			<AddIdosoModal isVisible={isVisible} onClose={() => setIsVisible(false)} onIdosoAdded={fetchIdosos} />
 		</SafeAreaView>
 	);
 }

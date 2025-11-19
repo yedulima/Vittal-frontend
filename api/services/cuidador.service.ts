@@ -22,6 +22,7 @@ export const addIdoso = async (userId: string) => {
 		return result;
 	} catch (error: any) {
 		console.error(error);
+		throw error;
 	}
 };
 
