@@ -17,7 +17,7 @@ interface OverViewListProps {
 
 export default function OverViewList({ data }: OverViewListProps) {
 	const { colors } = useThemeContext();
-	const styles = overViewListStyles(colors!);
+	const styles = overViewListStyles(colors);
 
 	return (
 		<View style={styles.container}>

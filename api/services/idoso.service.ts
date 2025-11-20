@@ -10,8 +10,11 @@ export const createIdoso = async (data: IdosoInterface) => {
 	try {
 		const result = (await createIdosoCallback(data)) as CloudFunctionDataResponse;
 		return result;
-	} catch (error: any) {
-		console.error(error);
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			console.error(`Idoso service error: ${error}`);
+		}
+		throw error;
 	}
 };
 
@@ -19,8 +22,11 @@ export const deleteIdoso = async () => {
 	try {
 		const result = (await deleteIdosoCallback()) as CloudFunctionDataResponse;
 		return result;
-	} catch (error: any) {
-		console.error(error);
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			console.error(`Idoso service error: ${error}`);
+		}
+		throw error;
 	}
 };
 

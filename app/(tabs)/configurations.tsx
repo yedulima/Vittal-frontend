@@ -14,17 +14,13 @@ import UserProfileInfos from '@/components/UserProfileInfos';
 
 export default function ConfigurationsScreen() {
 	const { colors, toggleTheme, isDarkMode } = useThemeContext();
-	const styles = configurationsStyles(colors!);
+	const styles = configurationsStyles(colors);
 
 	const { logout } = useAuthContext();
 	const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
 	const handleLogout = async () => {
-		try {
-			await logout!();
-		} catch (error: any) {
-			console.error(`On configurations screen error: ${error}`);
-		}
+		await logout();
 	};
 
 	return (
@@ -36,7 +32,7 @@ export default function ConfigurationsScreen() {
 				<UserPersonalInfos />
 
 				<OptionsSection title="Aparência">
-					<SwitchButton value={!!isDarkMode} text="Tema escuro" onPress={() => toggleTheme!()} />
+					<SwitchButton value={!!isDarkMode} text="Tema escuro" onPress={() => toggleTheme()} />
 				</OptionsSection>
 
 				<OptionsSection title="Acessibilidade">

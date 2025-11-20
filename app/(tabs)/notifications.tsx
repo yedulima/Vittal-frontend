@@ -8,7 +8,7 @@ import NotificationsList from '@/components/NotificationsList';
 
 export default function NotificationsScreen() {
 	const { colors } = useThemeContext();
-	const styles = notificationsStyles(colors!);
+	const styles = notificationsStyles(colors);
 
 	return (
 		<SafeAreaView style={styles.container}>

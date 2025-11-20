@@ -15,7 +15,7 @@ interface NotificationProp {
 
 export default function Notification({ data }: NotificationProp) {
 	const { colors } = useThemeContext();
-	const styles = notificationStyles(colors!);
+	const styles = notificationStyles(colors);
 
 	return (
 		<TouchableOpacity style={styles.container} activeOpacity={0.8}>

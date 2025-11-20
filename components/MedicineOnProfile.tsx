@@ -10,7 +10,7 @@ interface MedicineOnProfileProps {
 
 export default function MedicineOnProfile({ data }: MedicineOnProfileProps) {
 	const { colors } = useThemeContext();
-	const styles = medicineOnProfileStyles(colors!);
+	const styles = medicineOnProfileStyles(colors);
 
 	return (
 		<TouchableOpacity activeOpacity={0.8}>

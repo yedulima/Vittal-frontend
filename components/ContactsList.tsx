@@ -11,7 +11,7 @@ interface ContactListProp {
 
 export default function ContactsList({ data }: ContactListProp) {
 	const { colors } = useThemeContext();
-	const styles = contactsListStyles(colors!);
+	const styles = contactsListStyles(colors);
 
 	return (
 		<View style={styles.container}>

@@ -18,7 +18,7 @@ interface MedicineProp {
 
 export default function Medicine({ data }: MedicineProp) {
 	const { colors } = useThemeContext();
-	const styles = medicineStyles(colors!);
+	const styles = medicineStyles(colors);
 
 	const [isVisible, setIsVisible] = useState<boolean>(false);
 

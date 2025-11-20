@@ -32,7 +32,7 @@ export default function Input({
 	...others
 }: InputProps) {
 	const { colors } = useThemeContext();
-	const styles = inputStyles(styleColors ? styleColors : colors!);
+	const styles = inputStyles(styleColors ? styleColors : colors);
 
 	const [show, setShow] = useState<boolean>(false);
 

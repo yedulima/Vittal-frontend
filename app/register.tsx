@@ -14,7 +14,7 @@ export default function RegisterScreen() {
 
 	const handleRegister = async (data: RegisterSchema, formMethods: UseFormReturn<RegisterSchema>) => {
 		try {
-			await register!(data);
+			await register(data);
 		} catch (error: any) {
 			const errorCode = error.code;
 			const formError = getFormErrorFromFirebaseError(errorCode);
@@ -30,7 +30,7 @@ export default function RegisterScreen() {
 			}
 
 			if (formError.message === AUTH_ERROR_MESSAGES.GENERIC_ERROR) {
-				console.error(errorCode);
+				console.error(`Register error: ${errorCode}`);
 				alert(formError.message);
 			}
 

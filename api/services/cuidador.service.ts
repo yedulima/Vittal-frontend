@@ -11,8 +11,11 @@ export const createCuidador = async (data: CuidadorInterface) => {
 	try {
 		const result = await createCuidadorCallback(data);
 		return result;
-	} catch (error: any) {
-		console.error(error);
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			console.error(`Cuidador service error: ${error}`);
+		}
+		throw error;
 	}
 };
 
@@ -20,8 +23,10 @@ export const addIdoso = async (userId: string) => {
 	try {
 		const result = (await addIdosoCallback({ user_ref: userId })) as CloudFunctionDataResponse;
 		return result;
-	} catch (error: any) {
-		console.error(error);
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			console.error(`Cuidador service error: ${error}`);
+		}
 		throw error;
 	}
 };
@@ -30,8 +35,11 @@ export const listIdosos = async () => {
 	try {
 		const result = (await listIdososCallback()) as CloudFunctionDataResponse;
 		return result;
-	} catch (error: any) {
-		console.error(error);
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			console.error(`Cuidador service error: ${error}`);
+		}
+		throw error;
 	}
 };
 
@@ -39,7 +47,10 @@ export const deleteCuidador = async () => {
 	try {
 		const result = (await deleteCuidadorCallback()) as CloudFunctionDataResponse;
 		return result;
-	} catch (error: any) {
-		console.error(error);
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			console.error(`Cuidador service error: ${error}`);
+		}
+		throw error;
 	}
 };

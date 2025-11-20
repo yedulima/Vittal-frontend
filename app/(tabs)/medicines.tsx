@@ -8,7 +8,7 @@ import MedicinesList from '@/components/MedicinesList';
 
 export default function MedicinesScreen() {
 	const { colors } = useThemeContext();
-	const styles = medicinesStyles(colors!);
+	const styles = medicinesStyles(colors);
 
 	return (
 		<SafeAreaView style={styles.container}>

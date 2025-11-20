@@ -13,7 +13,7 @@ import AddIdosoModal from '@/components/modals/AddIdosoModal';
 
 export default function ContactsScreen() {
 	const { colors } = useThemeContext();
-	const styles = contactsStyles(colors!);
+	const styles = contactsStyles(colors);
 
 	const [data, setData] = useState<ContactInterface[]>([]);
 	const [originalData, setOriginalData] = useState<ContactInterface[]>([]);

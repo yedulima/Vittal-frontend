@@ -6,7 +6,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 
 export default function UserPersonalInfos() {
 	const { colors } = useThemeContext();
-	const styles = userPersonalInfosStyles(colors!);
+	const styles = userPersonalInfosStyles(colors);
 
 	const { user, userData } = useAuthContext();
 

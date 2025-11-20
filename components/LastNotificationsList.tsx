@@ -19,7 +19,7 @@ interface NotificationListProps {
 
 export default function LastNotificationsList({ data }: NotificationListProps) {
 	const { colors } = useThemeContext();
-	const styles = lastNotificationsListStyles(colors!);
+	const styles = lastNotificationsListStyles(colors);
 
 	const slicedData = data.slice(0, 2);
 

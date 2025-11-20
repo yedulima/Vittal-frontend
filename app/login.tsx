@@ -18,7 +18,7 @@ export default function LoginScreen() {
 
 	const handleLogin = async (data: LoginSchema, formMethods: UseFormReturn<LoginSchema>) => {
 		try {
-			await login!(data.email, data.password);
+			await login(data.email, data.password);
 		} catch (error: any) {
 			const errorCode = error.code;
 
@@ -30,7 +30,7 @@ export default function LoginScreen() {
 			}
 
 			if (formError.message === AUTH_ERROR_MESSAGES.GENERIC_ERROR) {
-				console.error(errorCode);
+				console.error(`Login error: ${errorCode}`);
 				alert(formError.message);
 			}
 
@@ -53,7 +53,7 @@ export default function LoginScreen() {
 
 			<GoogleButton
 				text="Entrar com Google"
-				onPress={() => console.log('a')}
+				onPress={() => {}}
 				styleColors={LightTheme}
 				style={styles.googleButton}
 			/>

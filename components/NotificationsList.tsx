@@ -12,7 +12,7 @@ interface NotificationListProps {
 
 export default function NotificationsList({ data }: NotificationListProps) {
 	const { colors } = useThemeContext();
-	const styles = notificationsListStyles(colors!);
+	const styles = notificationsListStyles(colors);
 
 	return (
 		<View style={styles.container}>

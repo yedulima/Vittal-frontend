@@ -10,7 +10,7 @@ interface OptionsSectionProps {
 
 export default function OptionsSection({ title, children }: OptionsSectionProps) {
 	const { colors } = useThemeContext();
-	const styles = optionsSectionStyles(colors!);
+	const styles = optionsSectionStyles(colors);
 
 	return (
 		<View style={styles.container}>

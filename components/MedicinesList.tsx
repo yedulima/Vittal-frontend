@@ -12,7 +12,7 @@ interface MedicinesListProps {
 
 export default function MedicinesList({ data }: MedicinesListProps) {
 	const { colors } = useThemeContext();
-	const styles = medicinesListStyles(colors!);
+	const styles = medicinesListStyles(colors);
 
 	const pedingMedicines = data.filter((item) => item.done === false);
 

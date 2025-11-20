@@ -15,7 +15,7 @@ interface GoogleButtonProps {
 
 export default function GoogleButton({ text, onPress, styleColors, style }: GoogleButtonProps) {
 	const { colors } = useThemeContext();
-	const styles = googleButtonStyles(styleColors ? styleColors : colors!);
+	const styles = googleButtonStyles(styleColors ? styleColors : colors);
 
 	return (
 		<TouchableOpacity onPress={onPress} activeOpacity={0.9} style={[styles.container, style]}>

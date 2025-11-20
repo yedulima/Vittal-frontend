@@ -6,7 +6,7 @@ import { Text, TouchableOpacity } from 'react-native';
 
 export default function BackArrow() {
 	const { colors } = useThemeContext();
-	const styles = backArrowStyles(colors!);
+	const styles = backArrowStyles(colors);
 
 	const router = useRouter();
 

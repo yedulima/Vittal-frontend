@@ -26,7 +26,7 @@ export default function Button({
 	...others
 }: ButtonProps) {
 	const { colors } = useThemeContext();
-	const styles = buttonStyles(colors!);
+	const styles = buttonStyles(colors);
 
 	const iconFinalColor = iconColor || colors?.iconColor;
 	const isUsingIcons = leftIconName || rightIconName;

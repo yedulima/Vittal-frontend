@@ -16,7 +16,7 @@ interface UserProfilePhotoProps {
 
 export default function UserProfilePhoto({ imgSource, onPress, onImageChoiced, styleColors }: UserProfilePhotoProps) {
 	const { colors } = useThemeContext();
-	const styles = userProfilePhotoStyles(styleColors ? styleColors : colors!);
+	const styles = userProfilePhotoStyles(styleColors ? styleColors : colors);
 
 	const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
 

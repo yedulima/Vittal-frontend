@@ -11,7 +11,7 @@ import OverViewList from '@/components/OverViewList';
 export default function HomeScreen() {
 	const { role } = useAuthContext();
 	const { colors } = useThemeContext();
-	const styles = homeStyles(colors!);
+	const styles = homeStyles(colors);
 
 	return (
 		<SafeAreaView style={styles.container}>

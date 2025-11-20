@@ -16,7 +16,7 @@ import Loading from '@/components/Loading';
 
 const InitialLayout = () => {
 	const { isDarkMode } = useThemeContext();
-	const { isLoggedIn, loading, user } = useAuthContext();
+	const { isLoggedIn, loading } = useAuthContext();
 	const [fontsLoaded] = useFonts({
 		Rubik_300Light,
 		Rubik_400Regular,

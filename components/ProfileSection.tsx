@@ -18,7 +18,7 @@ interface ProfileSectionProps {
 
 export default function ProfileSection({ title, items }: ProfileSectionProps) {
 	const { colors } = useThemeContext();
-	const styles = profileSectionStyles(colors!);
+	const styles = profileSectionStyles(colors);
 
 	const copyToClipboard = async (title: string, text: string) => {
 		await Clipboard.setStringAsync(text);

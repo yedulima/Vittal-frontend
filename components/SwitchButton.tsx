@@ -12,7 +12,7 @@ interface SwitchButtonProps extends SwitchProps {
 
 export default function SwitchButton({ text, onPress, value, style }: SwitchButtonProps) {
 	const { colors } = useThemeContext();
-	const styles = switchButtonStyles(colors!);
+	const styles = switchButtonStyles(colors);
 
 	return (
 		<TouchableOpacity onPress={onPress} activeOpacity={0.9} style={[styles.container, style]}>

@@ -14,7 +14,7 @@ interface SearchBarProps {
 
 export default function SearchBar({ placeholder, dataToSearch, onChange }: SearchBarProps) {
 	const { colors } = useThemeContext();
-	const styles = searchBarStyles(colors!);
+	const styles = searchBarStyles(colors);
 
 	const [query, setQuery] = useState<string>('');
 

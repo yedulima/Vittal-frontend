@@ -10,7 +10,7 @@ const PlaceHolderImage = require('@/assets/images/placeholder-image.jpg');
 export default function UserProfileInfos() {
 	const { user } = useAuthContext();
 	const { colors } = useThemeContext();
-	const styles = userProfileInfosStyles(colors!);
+	const styles = userProfileInfosStyles(colors);
 
 	let imageSource: ImageSourcePropType = PlaceHolderImage;
 

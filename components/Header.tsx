@@ -11,7 +11,7 @@ const PlaceHolderImage = require('@/assets/images/placeholder-image.jpg');
 export default function Header() {
 	const { user } = useAuthContext();
 	const { colors } = useThemeContext();
-	const styles = headerStyles(colors!);
+	const styles = headerStyles(colors);
 
 	const [name] = useState<string>(() => {
 		let name = user?.displayName?.split(' ');

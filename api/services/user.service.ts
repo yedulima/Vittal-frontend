@@ -1,4 +1,4 @@
-import { CuidadorInterface, IdosoInterface, UserInterface, CloudFunctionDataResponse } from '@/api/interfaces';
+import { CloudFunctionDataResponse, CuidadorInterface, IdosoInterface, UserInterface } from '@/api/interfaces';
 import { createCuidador } from '@/api/services/cuidador.service';
 import { createIdoso } from '@/api/services/idoso.service';
 import { FIREBASE_FUNCTIONS } from '@/FirebaseConfig';
@@ -34,8 +34,11 @@ export const createUser = async (uid: string, data: UserInterface) => {
 
 		const result = (await createUserCallback({ uid, ...finalData })) as CloudFunctionDataResponse;
 		return result;
-	} catch (error: any) {
-		console.error(error);
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			console.error(`User service error: ${error}`);
+		}
+		throw error;
 	}
 };
 
@@ -43,8 +46,11 @@ export const getUserById = async (userId: string) => {
 	try {
 		const result = (await getUserCallback({ userId: userId })) as CloudFunctionDataResponse;
 		return result;
-	} catch (error: any) {
-		console.error(error);
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			console.error(`User service error: ${error}`);
+		}
+		throw error;
 	}
 };
 
@@ -52,8 +58,11 @@ export const listUsers = async (range: number) => {
 	try {
 		const result = (await listUsersCallback({ range: range })) as CloudFunctionDataResponse;
 		return result;
-	} catch (error: any) {
-		console.error(error);
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			console.error(`User service error: ${error}`);
+		}
+		throw error;
 	}
 };
 
@@ -72,8 +81,11 @@ export const updateUser = async (uid: string, data: UserInterface) => {
 
 		const result = (await updateUserCallback(finalData)) as CloudFunctionDataResponse;
 		return result;
-	} catch (error: any) {
-		console.error(error);
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			console.error(`User service error: ${error}`);
+		}
+		throw error;
 	}
 };
 
@@ -81,7 +93,10 @@ export const deleteUser = async () => {
 	try {
 		const result = (await deleteUserCallback()) as CloudFunctionDataResponse;
 		return result;
-	} catch (error: any) {
-		console.error(error);
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			console.error(`User service error: ${error}`);
+		}
+		throw error;
 	}
 };

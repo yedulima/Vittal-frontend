@@ -9,7 +9,12 @@ export interface ThemeContextInterface {
 	setTheme: (theme: 'light' | 'dark') => Promise<void>;
 }
 
-export const ThemeContext = createContext<Partial<ThemeContextInterface>>({});
+export const ThemeContext = createContext<ThemeContextInterface>({
+	isDarkMode: false,
+	colors: LightTheme,
+	toggleTheme: async () => {},
+	setTheme: async () => {},
+});
 
 export const useThemeContext = () => {
 	const context = useContext(ThemeContext);
@@ -32,8 +37,10 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
 				if (savedTheme !== null) {
 					setIsDarkMode(JSON.parse(savedTheme));
 				}
-			} catch (error) {
-				console.error(error);
+			} catch (error: unknown) {
+				if (error instanceof Error) {
+					console.error(`Theme loading error: ${error}`);
+				}
 			}
 		};
 
@@ -46,8 +53,10 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
 			setIsDarkMode(newTheme);
 
 			await AsyncStorage.setItem(contextKey, JSON.stringify(newTheme));
-		} catch (error) {
-			console.error(`Error saving theme: ${error}`);
+		} catch (error: unknown) {
+			if (error instanceof Error) {
+				console.error(`Error saving theme: ${error}`);
+			}
 		}
 	};
 
@@ -57,8 +66,10 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
 			setIsDarkMode(newTheme);
 
 			await AsyncStorage.setItem(contextKey, JSON.stringify(newTheme));
-		} catch (error) {
-			console.error(`Error saving theme: ${error}`);
+		} catch (error: unknown) {
+			if (error instanceof Error) {
+				console.error(`Error saving theme: ${error}`);
+			}
 		}
 	};
 

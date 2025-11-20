@@ -17,7 +17,20 @@ export interface AuthContextInterface {
 	register: (data: RegisterSchema) => Promise<User>;
 }
 
-export const AuthContext = createContext<Partial<AuthContextInterface>>({});
+export const AuthContext = createContext<AuthContextInterface>({
+	isLoggedIn: false,
+	user: null,
+	userData: null,
+	role: null,
+	loading: false,
+	login: async () => {
+		throw new Error('Login not implemented.');
+	},
+	logout: async () => {},
+	register: async () => {
+		throw new Error('Register not implemented.');
+	},
+});
 
 export const useAuthContext = () => {
 	const context = useContext(AuthContext);
@@ -64,8 +77,10 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 					setIsLoggedIn(false);
 					setRole(null);
 				}
-			} catch (error: any) {
-				console.error(error);
+			} catch (error: unknown) {
+				if (error instanceof Error) {
+					console.error(`Auth state change error: ${error}`);
+				}
 
 				setUser(null);
 				setIsLoggedIn(false);
@@ -88,7 +103,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 			setLoading(false);
 
 			return response?.user;
-		} catch (error: any) {
+		} catch (error: unknown) {
 			setLoading(false);
 			throw error;
 		}
@@ -108,7 +123,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 			await login(data.email, data.password);
 
 			return response?.user;
-		} catch (error: any) {
+		} catch (error: unknown) {
 			throw error;
 		}
 	};
@@ -123,8 +138,11 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 			setUser(null);
 			setIsLoggedIn(false);
 			setRole(null);
-		} catch (error: any) {
-			console.error(error.message);
+		} catch (error: unknown) {
+			if (error instanceof Error) {
+				console.error(error.message);
+			}
+			throw error;
 		} finally {
 			setLoading(false);
 		}

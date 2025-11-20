@@ -16,7 +16,7 @@ interface ContactProp {
 
 export default function Contact({ data }: ContactProp) {
 	const { colors } = useThemeContext();
-	const styles = contactStyles(colors!);
+	const styles = contactStyles(colors);
 
 	const [isVisible, setIsVisible] = useState<boolean>(false);
 
