@@ -34,7 +34,7 @@ const InitialLayout = () => {
 			screenOptions={{
 				headerShown: false,
 				contentStyle: {
-					backgroundColor: LightTheme.backgroudColor,
+					backgroundColor: LightTheme.backgroundColor,
 				},
 			}}
 		>

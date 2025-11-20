@@ -74,7 +74,7 @@ export const idosoProfileModalStyles = (colors: ThemeColors) => {
 			fontFamily: 'Rubik_600SemiBold',
 		},
 		medicinesContent: {
-			backgroundColor: colors.backgroudColor,
+			backgroundColor: colors.backgroundColor,
 			borderRadius: 12,
 			padding: 15,
 			gap: 20,

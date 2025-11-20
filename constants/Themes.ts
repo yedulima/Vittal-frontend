@@ -1,7 +1,7 @@
 import { Colors } from '@/constants/Colors';
 
 export interface ThemeColors {
-	backgroudColor: string;
+	backgroundColor: string;
 	textColor: string;
 	buttonColor: string;
 	buttonTextColor: string;
@@ -24,7 +24,7 @@ export interface ThemeColors {
 }
 
 export const LightTheme: ThemeColors = {
-	backgroudColor: Colors.white[500],
+	backgroundColor: Colors.white[500],
 	textColor: Colors.black,
 	buttonColor: Colors.green[500],
 	buttonTextColor: Colors.white[800],
@@ -46,7 +46,7 @@ export const LightTheme: ThemeColors = {
 };
 
 export const DarkTheme: ThemeColors = {
-	backgroudColor: Colors.gray[700],
+	backgroundColor: Colors.gray[700],
 	textColor: Colors.white[700],
 	buttonColor: Colors.gray[400],
 	buttonTextColor: Colors.white[400],

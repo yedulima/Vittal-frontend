@@ -15,7 +15,7 @@ export const profileSectionStyles = (colors: ThemeColors) => {
 			alignSelf: 'flex-start',
 		},
 		sectionContent: {
-			backgroundColor: colors.backgroudColor,
+			backgroundColor: colors.backgroundColor,
 			borderRadius: 5,
 			padding: 15,
 			gap: 20,

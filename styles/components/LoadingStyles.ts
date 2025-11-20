@@ -5,7 +5,7 @@ export const loadingStyles = () => {
 	return StyleSheet.create({
 		container: {
 			flex: 1,
-			backgroundColor: LightTheme.backgroudColor,
+			backgroundColor: LightTheme.backgroundColor,
 			justifyContent: 'center',
 			alignItems: 'center',
 		},
