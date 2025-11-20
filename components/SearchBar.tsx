@@ -1,8 +1,9 @@
+import { ContactInterface } from '@/api/interfaces';
 import { useThemeContext } from '@/contexts/ThemeContext';
+import { useDebounce } from '@/hooks/useDebounce';
 import { searchBarStyles } from '@/styles/components/SearchBarStyles';
 import { useMemo, useState } from 'react';
 import { TextInput, View } from 'react-native';
-import { ContactInterface } from '@/api/interfaces';
 
 import filter from 'lodash.filter';
 
@@ -17,6 +18,7 @@ export default function SearchBar({ placeholder, dataToSearch, onChange }: Searc
 	const styles = searchBarStyles(colors);
 
 	const [query, setQuery] = useState<string>('');
+	const debounceQuery = useDebounce(query, 300);
 
 	const handleSearch = (query: string) => {
 		setQuery(query);
@@ -25,18 +27,18 @@ export default function SearchBar({ placeholder, dataToSearch, onChange }: Searc
 	useMemo(() => {
 		let result: ContactInterface[];
 
-		if (!query) {
+		if (!debounceQuery) {
 			result = dataToSearch;
+		} else {
+			const formattedQuery = debounceQuery.toLowerCase();
+			result = filter(dataToSearch, (user: ContactInterface) => {
+				const name = user.name.toLowerCase();
+				return name.includes(formattedQuery);
+			}) as ContactInterface[];
 		}
-		const formattedQuery = query.toLowerCase();
-		result = filter(dataToSearch, (user: ContactInterface) => {
-			const name = user.name.toLowerCase();
-			return name.includes(formattedQuery);
-		}) as ContactInterface[];
 
 		onChange(result);
-		return result;
-	}, [query, dataToSearch]);
+	}, [debounceQuery, query, dataToSearch]);
 
 	return (
 		<View style={styles.container}>
