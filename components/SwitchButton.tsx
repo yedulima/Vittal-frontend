@@ -1,7 +1,7 @@
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { StyleProp, Switch, SwitchProps, Text, TouchableOpacity, ViewStyle } from 'react-native';
 
-import { switchButtonStyles } from '@/styles/components/SwtichButtonStyles';
+import { switchButtonStyles } from '@/styles/components/SwitchButtonStyles';
 
 interface SwitchButtonProps extends SwitchProps {
 	text: string;
