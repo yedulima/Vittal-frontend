@@ -24,16 +24,16 @@ export interface ThemeColors {
 }
 
 export const LightTheme: ThemeColors = {
-	backgroundColor: Colors.white[500],
+	backgroundColor: Colors.white[600],
 	textColor: Colors.black,
 	buttonColor: Colors.green[500],
 	buttonTextColor: Colors.white[800],
 	iconColor: Colors.gray[400],
-	accentColor: Colors.gray[300],
+	accentColor: Colors.gray[550],
 	imageBackgroundColor: Colors.white[500],
 
-	cardColor: Colors.white[600],
-	cardBorderColor: Colors.white[300],
+	cardColor: Colors.white[800],
+	cardBorderColor: Colors.gray[100],
 
 	tabBarColor: Colors.white[700],
 	tabBarActiveTintColor: Colors.green[500],
@@ -46,20 +46,20 @@ export const LightTheme: ThemeColors = {
 };
 
 export const DarkTheme: ThemeColors = {
-	backgroundColor: Colors.gray[700],
+	backgroundColor: Colors.navy[950],
 	textColor: Colors.white[700],
-	buttonColor: Colors.gray[400],
-	buttonTextColor: Colors.white[400],
+	buttonColor: Colors.navy[925],
+	buttonTextColor: Colors.white[700],
 	iconColor: Colors.gray[300],
-	accentColor: Colors.gray[300],
+	accentColor: Colors.blue[350],
 	imageBackgroundColor: Colors.gray[500],
 
-	cardColor: Colors.gray[600],
-	cardBorderColor: Colors.gray[500],
+	cardColor: Colors.navy[925],
+	cardBorderColor: Colors.navy[750],
 
-	tabBarColor: Colors.gray[800],
-	tabBarActiveTintColor: Colors.gray[100],
-	tabBarInactiveTintColor: Colors.gray[400],
+	tabBarColor: Colors.navy[800],
+	tabBarActiveTintColor: Colors.green[500],
+	tabBarInactiveTintColor: Colors.navy[700],
 
 	backDropColor: 'rgba(0, 0, 0, 0.5)',
 

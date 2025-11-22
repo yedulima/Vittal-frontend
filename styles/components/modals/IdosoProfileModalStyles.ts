@@ -3,7 +3,7 @@ import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
 export const idosoProfileModalStyles = (colors: ThemeColors) => {
-	const photoSize = 145;
+	const photoSize = 110;
 
 	return StyleSheet.create({
 		content: {
@@ -11,7 +11,7 @@ export const idosoProfileModalStyles = (colors: ThemeColors) => {
 			paddingHorizontal: Measures.horizontal,
 			paddingVertical: Measures.vertical,
 			paddingTop: 10,
-			backgroundColor: colors.cardColor,
+			backgroundColor: colors.backgroundColor,
 			gap: 10,
 		},
 		scrollViewContainer: {
@@ -41,6 +41,11 @@ export const idosoProfileModalStyles = (colors: ThemeColors) => {
 			alignItems: 'center',
 			marginTop: 10,
 			marginBottom: 25,
+			padding: 25,
+			borderWidth: 1,
+			borderColor: colors.cardBorderColor,
+			backgroundColor: colors.cardColor,
+			borderRadius: 15,
 			gap: 4,
 		},
 		name: {
@@ -57,7 +62,7 @@ export const idosoProfileModalStyles = (colors: ThemeColors) => {
 			width: photoSize,
 			height: photoSize,
 			borderRadius: 100,
-			borderWidth: 3,
+			borderWidth: 1,
 			marginBottom: 15,
 			borderColor: colors.accentColor,
 			backgroundColor: colors.imageBackgroundColor,
@@ -80,6 +85,9 @@ export const idosoProfileModalStyles = (colors: ThemeColors) => {
 			gap: 20,
 		},
 		plusIcon: {
+			color: colors.textColor,
+		},
+		closeIcon: {
 			color: colors.textColor,
 		},
 		icon: {

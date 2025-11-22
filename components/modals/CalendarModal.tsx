@@ -31,7 +31,7 @@ export default function CalendarModal({
 	styleColors,
 }: CalendarModalProps) {
 	const { colors } = useThemeContext();
-	const styles = calendarModalStyles(styleColors ? styleColors : colors!);
+	const styles = calendarModalStyles(styleColors ? styleColors : colors);
 
 	const initialDateYMD = convertDMYToYMD(currentDay);
 	const todayString = new Date().toISOString().split('T')[0];

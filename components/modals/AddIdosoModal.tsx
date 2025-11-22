@@ -29,7 +29,7 @@ export default function AddIdosoModal({ isVisible, onClose, onIdosoAdded }: AddI
 	});
 
 	const { colors } = useThemeContext();
-	const styles = addIdosoModalStyles(colors!);
+	const styles = addIdosoModalStyles(colors);
 
 	const submitHandler = async (data: AddIdosoSchema) => {
 		try {

@@ -4,14 +4,19 @@ import { Feather } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { Text, TouchableOpacity } from 'react-native';
 
-export default function BackArrow() {
+interface BackArrorProps {
+	onPress?: () => void;
+}
+
+export default function BackArrow({ onPress }: BackArrorProps) {
 	const { colors } = useThemeContext();
 	const styles = backArrowStyles(colors);
 
 	const router = useRouter();
+	const action = () => (onPress ? onPress() : router.back());
 
 	return (
-		<TouchableOpacity activeOpacity={0.9} onPress={() => router.back()} style={styles.container}>
+		<TouchableOpacity activeOpacity={0.9} onPress={action} style={styles.container}>
 			<Feather name="arrow-left" size={20} style={styles.icon} />
 			<Text style={styles.text}>Voltar</Text>
 		</TouchableOpacity>

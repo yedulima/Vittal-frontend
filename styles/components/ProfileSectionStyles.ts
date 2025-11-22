@@ -9,14 +9,16 @@ export const profileSectionStyles = (colors: ThemeColors) => {
 			gap: 10,
 		},
 		title: {
-			fontSize: 20,
+			fontSize: 18,
 			color: colors.textColor,
-			fontFamily: 'Rubik_600SemiBold',
+			fontFamily: 'Rubik_400Regular',
 			alignSelf: 'flex-start',
 		},
 		sectionContent: {
-			backgroundColor: colors.backgroundColor,
-			borderRadius: 5,
+			borderWidth: 1,
+			borderColor: colors.cardBorderColor,
+			backgroundColor: colors.cardColor,
+			borderRadius: 15,
 			padding: 15,
 			gap: 20,
 		},
@@ -27,9 +29,9 @@ export const profileSectionStyles = (colors: ThemeColors) => {
             gap: 8,
         },
 		name: {
-			fontSize: 17,
+			fontSize: 16,
 			color: colors.accentColor,
-			fontFamily: 'Rubik_500Medium',
+			fontFamily: 'Rubik_300Light',
 		},
 		content: {
 			fontSize: 16,

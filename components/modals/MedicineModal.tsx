@@ -21,7 +21,7 @@ interface DefaultConfigsModalProps {
 
 export default function MedicineModal({ data, isVisible, onClose }: DefaultConfigsModalProps) {
 	const { colors } = useThemeContext();
-	const styles = medicineModalStyles(colors!);
+	const styles = medicineModalStyles(colors);
 
 	const [state, setState] = useState<boolean>(data.done);
 

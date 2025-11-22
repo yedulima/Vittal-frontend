@@ -13,11 +13,11 @@ export const backArrowStyles = (colors: ThemeColors) => {
 		},
 		text: {
 			textAlign: 'center',
-			color: colors.accentColor,
+			color: colors.textColor,
 			fontFamily: 'Rubik_500Medium',
 		},
 		icon: {
-			color: colors.iconColor,
+			color: colors.textColor,
 		},
 	});
 };

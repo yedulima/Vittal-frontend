@@ -30,24 +30,26 @@ const InitialLayout = () => {
 	}
 
 	return (
-		<Stack
-			screenOptions={{
-				headerShown: false,
-				contentStyle: {
-					backgroundColor: LightTheme.backgroundColor,
-				},
-			}}
-		>
-			<Stack.Protected guard={!!isLoggedIn}>
-				<Stack.Screen name="(tabs)" />
-			</Stack.Protected>
-			<Stack.Protected guard={!isLoggedIn}>
-				<Stack.Screen name="index" />
-				<Stack.Screen name="login" />
-				<Stack.Screen name="register" />
-			</Stack.Protected>
+		<>
+			<Stack
+				screenOptions={{
+					headerShown: false,
+					contentStyle: {
+						backgroundColor: LightTheme.backgroundColor,
+					},
+				}}
+			>
+				<Stack.Protected guard={!!isLoggedIn}>
+					<Stack.Screen name="(tabs)" />
+				</Stack.Protected>
+				<Stack.Protected guard={!isLoggedIn}>
+					<Stack.Screen name="index" />
+					<Stack.Screen name="login" />
+					<Stack.Screen name="register" />
+				</Stack.Protected>
+			</Stack>
 			<StatusBar style={isDarkMode ? 'dark' : 'light'} />
-		</Stack>
+		</>
 	);
 };
 

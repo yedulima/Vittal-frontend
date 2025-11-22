@@ -21,7 +21,7 @@ export default function DefaultConfigsModal({
 	children,
 }: DefaultConfigsModalProps) {
 	const { colors } = useThemeContext();
-	const styles = defaultConfigsModalStyles(colors!);
+	const styles = defaultConfigsModalStyles(colors);
 
 	return (
 		<View>
