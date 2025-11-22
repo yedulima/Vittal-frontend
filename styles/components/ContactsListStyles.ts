@@ -1,8 +1,11 @@
+import { FontSize, FontText } from '@/constants/FontText';
 import { Measures } from '@/constants/SafeAreaMeasures';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
-export const contactsListStyles = (colors: ThemeColors) => {
+export const contactsListStyles = (colors: ThemeColors, size: FontSize) => {
+	const fonts = FontText(colors, size);
+
 	return StyleSheet.create({
 		container: {
 			flex: 1,
@@ -11,13 +14,11 @@ export const contactsListStyles = (colors: ThemeColors) => {
 		},
 		noDataContainer: {
 			flex: 1,
-			alignItems: "center",
+			alignItems: 'center',
 			paddingTop: 15,
 		},
 		text: {
-			color: colors.accentColor,
-			fontSize: 16,
-			fontFamily: 'Rubik_400Regular'
+			...fonts.accent,
 		},
 		separator: {
 			width: '100%',

@@ -1,3 +1,4 @@
+import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { notificationsListStyles } from '@/styles/components/NotificationsListStyles';
 import { NotificationInterface } from '@/utils/data';
@@ -12,7 +13,8 @@ interface NotificationListProps {
 
 export default function NotificationsList({ data }: NotificationListProps) {
 	const { colors } = useThemeContext();
-	const styles = notificationsListStyles(colors);
+	const { fontSize } = useFontTextContext();
+	const styles = notificationsListStyles(colors, fontSize);
 
 	return (
 		<View style={styles.container}>

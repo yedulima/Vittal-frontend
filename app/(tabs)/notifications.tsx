@@ -1,3 +1,4 @@
+import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { notificationsStyles } from '@/styles/screens/NotificationsStyles';
 import { NOTIFICATIONS } from '@/utils/data';
@@ -8,7 +9,8 @@ import NotificationsList from '@/components/NotificationsList';
 
 export default function NotificationsScreen() {
 	const { colors } = useThemeContext();
-	const styles = notificationsStyles(colors);
+	const { fontSize } = useFontTextContext();
+	const styles = notificationsStyles(colors, fontSize);
 
 	return (
 		<SafeAreaView style={styles.container}>

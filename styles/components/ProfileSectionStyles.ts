@@ -1,7 +1,10 @@
+import { FontSize, FontText } from '@/constants/FontText';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
-export const profileSectionStyles = (colors: ThemeColors) => {
+export const profileSectionStyles = (colors: ThemeColors, size: FontSize) => {
+	const fonts = FontText(colors, size);
+
 	return StyleSheet.create({
 		container: {
 			width: '100%',
@@ -9,9 +12,7 @@ export const profileSectionStyles = (colors: ThemeColors) => {
 			gap: 10,
 		},
 		title: {
-			fontSize: 18,
-			color: colors.textColor,
-			fontFamily: 'Rubik_400Regular',
+			...fonts.body,
 			alignSelf: 'flex-start',
 		},
 		sectionContent: {
@@ -22,27 +23,23 @@ export const profileSectionStyles = (colors: ThemeColors) => {
 			padding: 15,
 			gap: 20,
 		},
-        nameContainer: {
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginBottom: 8,
-            gap: 8,
-        },
+		nameContainer: {
+			flexDirection: 'row',
+			alignItems: 'center',
+			marginBottom: 8,
+			gap: 8,
+		},
 		name: {
-			fontSize: 16,
-			color: colors.accentColor,
-			fontFamily: 'Rubik_300Light',
+			...fonts.accent,
 		},
 		content: {
-			fontSize: 16,
+			...fonts.accent,
+			...fonts.medium,
 			color: colors.textColor,
-			fontFamily: 'Rubik_400Regular',
 		},
-        noContent: {
-            fontSize: 16,
-			color: colors.accentColor,
-			fontFamily: 'Rubik_400Regular',
-        },
+		noContent: {
+			...fonts.accent,
+		},
 		copyContainer: {
 			flexDirection: 'row',
 			alignItems: 'center',
@@ -60,9 +57,8 @@ export const profileSectionStyles = (colors: ThemeColors) => {
 			padding: 8,
 		},
 		multiplesItemsText: {
-			fontSize: 16,
+			...fonts.accent,
 			color: colors.textColor,
-			fontFamily: 'Rubik_400Regular',
 		},
 		icon: {
 			color: colors.iconColor,

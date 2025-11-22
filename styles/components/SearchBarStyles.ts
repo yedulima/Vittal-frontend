@@ -1,7 +1,10 @@
+import { FontSize, FontText } from '@/constants/FontText';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
-export const searchBarStyles = (colors: ThemeColors) => {
+export const searchBarStyles = (colors: ThemeColors, size: FontSize) => {
+	const fonts = FontText(colors, size);
+
 	return StyleSheet.create({
 		container: {
 			padding: 12,
@@ -12,9 +15,9 @@ export const searchBarStyles = (colors: ThemeColors) => {
 			marginBottom: 15,
 		},
 		textInput: {
+			...fonts.accent,
 			color: colors.textColor,
 			outlineWidth: 0,
-			fontFamily: 'Rubik_400Regular',
 		},
 	});
 };

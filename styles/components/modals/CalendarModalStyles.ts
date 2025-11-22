@@ -1,8 +1,11 @@
+import { FontSize, FontText } from '@/constants/FontText';
 import { Measures } from '@/constants/SafeAreaMeasures';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
-export const calendarModalStyles = (colors: ThemeColors) => {
+export const calendarModalStyles = (colors: ThemeColors, size: FontSize) => {
+	const fonts = FontText(colors, size);
+
 	return StyleSheet.create({
 		content: {
 			position: 'absolute',
@@ -28,9 +31,7 @@ export const calendarModalStyles = (colors: ThemeColors) => {
 			gap: 2,
 		},
 		title: {
-			fontSize: 20,
-			color: colors.textColor,
-			fontFamily: 'Rubik_500Medium',
+			...fonts.h3,
 		},
 		calendarContainer: {
 			justifyContent: 'space-between',
@@ -42,14 +43,14 @@ export const calendarModalStyles = (colors: ThemeColors) => {
 			backgroundColor: 'transparent',
 		},
 		textDay: {
-			fontFamily: 'Rubik_400Regular',
+			...fonts.regular,
 		},
 		selectButton: {
 			backgroundColor: colors.buttonColor,
 		},
 		selectButtonText: {
+			...fonts.regular,
 			fontSize: 16,
-			fontFamily: 'Rubik_500Medium',
 			color: colors.buttonTextColor,
 		},
 		icon: {

@@ -1,3 +1,4 @@
+import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { profileSectionStyles } from '@/styles/components/ProfileSectionStyles';
 import { Feather, FontAwesome5 } from '@expo/vector-icons';
@@ -18,7 +19,8 @@ interface ProfileSectionProps {
 
 export default function ProfileSection({ title, items }: ProfileSectionProps) {
 	const { colors } = useThemeContext();
-	const styles = profileSectionStyles(colors);
+	const { fontSize } = useFontTextContext();
+	const styles = profileSectionStyles(colors, fontSize);
 
 	const copyToClipboard = async (title: string, text: string) => {
 		await Clipboard.setStringAsync(text);
@@ -39,7 +41,7 @@ export default function ProfileSection({ title, items }: ProfileSectionProps) {
 										<Text style={styles.name}>{item.name}</Text>
 										{item.onEdit && (
 											<TouchableOpacity onPress={item.onEdit} activeOpacity={0.8}>
-												<FontAwesome5 name="edit" size={16} style={styles.icon} />
+												<FontAwesome5 name="edit" size={fontSize.iconSize} style={styles.icon} />
 											</TouchableOpacity>
 										)}
 									</View>
@@ -61,7 +63,7 @@ export default function ProfileSection({ title, items }: ProfileSectionProps) {
 										<Text style={styles.name}>{item.name}</Text>
 										{item.onEdit && (
 											<TouchableOpacity onPress={item.onEdit} activeOpacity={0.8}>
-												<FontAwesome5 name="edit" size={16} style={styles.icon} />
+												<FontAwesome5 name="edit" size={fontSize.iconSize} style={styles.icon} />
 											</TouchableOpacity>
 										)}
 									</View>
@@ -71,7 +73,7 @@ export default function ProfileSection({ title, items }: ProfileSectionProps) {
 										activeOpacity={0.9}
 									>
 										<Text style={styles.content}>{item.content}</Text>
-										<Feather name="copy" size={14} style={styles.icon} />
+										<Feather name="copy" size={fontSize.iconSize} style={styles.icon} />
 									</TouchableOpacity>
 								</View>
 							);
@@ -83,7 +85,7 @@ export default function ProfileSection({ title, items }: ProfileSectionProps) {
 									<Text style={styles.name}>{item.name}</Text>
 									{item.onEdit && (
 										<TouchableOpacity onPress={item.onEdit} activeOpacity={0.8}>
-											<FontAwesome5 name="edit" size={16} style={styles.icon} />
+											<FontAwesome5 name="edit" size={fontSize.iconSize} style={styles.icon} />
 										</TouchableOpacity>
 									)}
 								</View>

@@ -1,3 +1,4 @@
+import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { medicinesStyles } from '@/styles/screens/MedicinesStyles';
 import { MEDICINES } from '@/utils/data';
@@ -8,7 +9,8 @@ import MedicinesList from '@/components/MedicinesList';
 
 export default function MedicinesScreen() {
 	const { colors } = useThemeContext();
-	const styles = medicinesStyles(colors);
+	const { fontSize } = useFontTextContext();
+	const styles = medicinesStyles(colors, fontSize);
 
 	return (
 		<SafeAreaView style={styles.container}>

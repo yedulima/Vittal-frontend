@@ -1,7 +1,7 @@
+import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
-import { StyleProp, Switch, SwitchProps, Text, TouchableOpacity, ViewStyle } from 'react-native';
-
 import { switchButtonStyles } from '@/styles/components/SwitchButtonStyles';
+import { StyleProp, Switch, SwitchProps, Text, TouchableOpacity, ViewStyle } from 'react-native';
 
 interface SwitchButtonProps extends SwitchProps {
 	text: string;
@@ -12,14 +12,15 @@ interface SwitchButtonProps extends SwitchProps {
 
 export default function SwitchButton({ text, onPress, value, style }: SwitchButtonProps) {
 	const { colors } = useThemeContext();
-	const styles = switchButtonStyles(colors);
+	const { fontSize } = useFontTextContext();
+	const styles = switchButtonStyles(colors, fontSize);
 
 	return (
 		<TouchableOpacity onPress={onPress} activeOpacity={0.9} style={[styles.container, style]}>
 			<Text style={styles.text}>{text}</Text>
 			<Switch
 				value={value}
-				trackColor={{ true: colors!.trackActiveColor, false: colors!.trackInactiveColor }}
+				trackColor={{ true: colors.trackActiveColor, false: colors.trackInactiveColor }}
 				activeThumbColor="#fff"
 			/>
 		</TouchableOpacity>

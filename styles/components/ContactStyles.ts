@@ -1,8 +1,11 @@
+import { FontSize, FontText } from '@/constants/FontText';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
-export const contactStyles = (colors: ThemeColors) => {
+export const contactStyles = (colors: ThemeColors, size: FontSize) => {
 	const photoSize = 50;
+
+	const fonts = FontText(colors, size);
 
 	return StyleSheet.create({
 		container: {
@@ -29,17 +32,16 @@ export const contactStyles = (colors: ThemeColors) => {
 			borderColor: colors.cardBorderColor,
 		},
 		userCredentials: {
+			flex: 1,
 			justifyContent: 'center',
 		},
 		name: {
-			fontSize: 15,
+			...fonts.accent,
 			color: colors.textColor,
-			fontFamily: 'Rubik_500Medium',
+			width: '95%',
 		},
 		status: {
-			fontSize: 13,
-			color: colors.accentColor,
-			fontFamily: 'Rubik_300Light',
+			...fonts.small,
 		},
 		icon: {
 			color: colors.iconColor,

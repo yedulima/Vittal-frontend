@@ -1,9 +1,9 @@
+import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
+import { medicineModalStyles } from '@/styles/components/modals/MedicineModalStyles';
 import { Feather } from '@expo/vector-icons';
 import { useState } from 'react';
 import { Modal, Text, TouchableOpacity, View } from 'react-native';
-
-import { medicineModalStyles } from '@/styles/components/modals/MedicineModalStyles';
 
 import Button from '@/components/Button';
 
@@ -21,7 +21,8 @@ interface DefaultConfigsModalProps {
 
 export default function MedicineModal({ data, isVisible, onClose }: DefaultConfigsModalProps) {
 	const { colors } = useThemeContext();
-	const styles = medicineModalStyles(colors);
+	const { fontSize } = useFontTextContext();
+	const styles = medicineModalStyles(colors, fontSize);
 
 	const [state, setState] = useState<boolean>(data.done);
 

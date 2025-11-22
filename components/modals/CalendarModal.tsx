@@ -1,5 +1,6 @@
 import { Colors } from '@/constants/Colors';
 import { ThemeColors } from '@/constants/Themes';
+import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { calendarModalStyles } from '@/styles/components/modals/CalendarModalStyles';
 import { configureCalendarLocale } from '@/utils/calendarLocale';
@@ -31,7 +32,8 @@ export default function CalendarModal({
 	styleColors,
 }: CalendarModalProps) {
 	const { colors } = useThemeContext();
-	const styles = calendarModalStyles(styleColors ? styleColors : colors);
+	const { fontSize } = useFontTextContext();
+	const styles = calendarModalStyles(styleColors ? styleColors : colors, fontSize);
 
 	const initialDateYMD = convertDMYToYMD(currentDay);
 	const todayString = new Date().toISOString().split('T')[0];

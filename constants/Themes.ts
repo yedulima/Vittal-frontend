@@ -41,7 +41,7 @@ export const LightTheme: ThemeColors = {
 
 	backDropColor: 'rgba(0, 0, 0, 0.5)',
 
-	trackActiveColor: Colors.white[200],
+	trackActiveColor: Colors.green[500],
 	trackInactiveColor: Colors.white[500],
 };
 
@@ -50,7 +50,7 @@ export const DarkTheme: ThemeColors = {
 	textColor: Colors.white[700],
 	buttonColor: Colors.navy[925],
 	buttonTextColor: Colors.white[700],
-	iconColor: Colors.gray[300],
+	iconColor: Colors.blue[350],
 	accentColor: Colors.blue[350],
 	imageBackgroundColor: Colors.gray[500],
 
@@ -63,6 +63,6 @@ export const DarkTheme: ThemeColors = {
 
 	backDropColor: 'rgba(0, 0, 0, 0.5)',
 
-	trackActiveColor: Colors.gray[400],
+	trackActiveColor: Colors.green[500],
 	trackInactiveColor: Colors.gray[300],
 };

@@ -1,13 +1,14 @@
-import { Feather } from '@expo/vector-icons';
-import React from 'react';
-import { StyleProp, Text, TextStyle, TouchableOpacity, TouchableOpacityProps, ViewStyle } from 'react-native';
-
+import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { buttonStyles } from '@/styles/components/ButtonStyles';
+import { Feather } from '@expo/vector-icons';
+import React from 'react';
+import { StyleProp, Text, TextStyle, TouchableOpacity, TouchableOpacityProps, View, ViewStyle } from 'react-native';
 
 interface ButtonProps extends TouchableOpacityProps {
 	text: string;
 	onPress: () => void;
+	subText?: string;
 	style?: StyleProp<ViewStyle>;
 	textStyle?: StyleProp<TextStyle>;
 	leftIconName?: React.ComponentProps<typeof Feather>['name'];
@@ -18,6 +19,7 @@ interface ButtonProps extends TouchableOpacityProps {
 export default function Button({
 	text,
 	onPress,
+	subText,
 	style,
 	textStyle,
 	leftIconName,
@@ -26,7 +28,8 @@ export default function Button({
 	...others
 }: ButtonProps) {
 	const { colors } = useThemeContext();
-	const styles = buttonStyles(colors);
+	const { fontSize } = useFontTextContext();
+	const styles = buttonStyles(colors, fontSize);
 
 	const iconFinalColor = iconColor || colors?.iconColor;
 	const isUsingIcons = leftIconName || rightIconName;
@@ -38,9 +41,12 @@ export default function Button({
 			style={[styles.container, { flexDirection: isUsingIcons ? 'row' : 'column' }, style]}
 			{...others}
 		>
-			{leftIconName && <Feather name={leftIconName} size={18} color={iconFinalColor} />}
-			<Text style={[styles.text, textStyle]}>{text}</Text>
-			{rightIconName && <Feather name={rightIconName} size={18} color={iconFinalColor} />}
+			{leftIconName && <Feather name={leftIconName} size={fontSize.iconSize} color={iconFinalColor} />}
+			<View style={styles.textContainer}>
+				<Text style={[styles.text, textStyle]}>{text}</Text>
+				{subText && <Text style={styles.caption}>{subText}</Text>}
+			</View>
+			{rightIconName && <Feather name={rightIconName} size={fontSize.iconSize} color={iconFinalColor} />}
 		</TouchableOpacity>
 	);
 }

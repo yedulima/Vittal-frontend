@@ -20,7 +20,7 @@ export const userProfilePhotoStyles = (colors: ThemeColors) => {
 			borderRadius: 100,
 			borderWidth: 2,
 			marginBottom: 20,
-			borderColor: colors.accentColor,
+			borderColor: colors.cardBorderColor,
 			backgroundColor: colors.imageBackgroundColor,
 		},
 		selectButton: {

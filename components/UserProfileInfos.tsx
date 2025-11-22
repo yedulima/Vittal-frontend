@@ -1,16 +1,18 @@
 import { useAuthContext } from '@/contexts/AuthContext';
+import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { userProfileInfosStyles } from '@/styles/components/UserProfileInfosStyles';
 import { MaterialIcons } from '@expo/vector-icons';
-import { ImageSourcePropType, Text, View } from 'react-native';
 import { Image } from 'expo-image';
+import { ImageSourcePropType, Text, View } from 'react-native';
 
 const PlaceHolderImage = require('@/assets/images/placeholder-image.jpg');
 
 export default function UserProfileInfos() {
 	const { user } = useAuthContext();
 	const { colors } = useThemeContext();
-	const styles = userProfileInfosStyles(colors);
+	const { fontSize } = useFontTextContext();
+	const styles = userProfileInfosStyles(colors, fontSize);
 
 	let imageSource: ImageSourcePropType = PlaceHolderImage;
 

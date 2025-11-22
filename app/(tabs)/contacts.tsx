@@ -1,5 +1,6 @@
 import { ContactInterface } from '@/api/interfaces';
 import { listIdosos } from '@/api/services/cuidador.service';
+import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { contactsStyles } from '@/styles/screens/ContactsStyles';
 import { Feather } from '@expo/vector-icons';
@@ -13,7 +14,8 @@ import AddIdosoModal from '@/components/modals/AddIdosoModal';
 
 export default function ContactsScreen() {
 	const { colors } = useThemeContext();
-	const styles = contactsStyles(colors);
+	const { fontSize } = useFontTextContext();
+	const styles = contactsStyles(colors, fontSize);
 
 	const [data, setData] = useState<ContactInterface[]>([]);
 	const [originalData, setOriginalData] = useState<ContactInterface[]>([]);

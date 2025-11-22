@@ -1,3 +1,4 @@
+import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { medicineStyles } from '@/styles/components/MedicineStyles';
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -18,7 +19,8 @@ interface MedicineProp {
 
 export default function Medicine({ data }: MedicineProp) {
 	const { colors } = useThemeContext();
-	const styles = medicineStyles(colors);
+	const { fontSize } = useFontTextContext();
+	const styles = medicineStyles(colors, fontSize);
 
 	const [isVisible, setIsVisible] = useState<boolean>(false);
 

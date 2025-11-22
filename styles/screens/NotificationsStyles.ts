@@ -1,8 +1,11 @@
+import { FontSize, FontText } from '@/constants/FontText';
 import { Measures } from '@/constants/SafeAreaMeasures';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
-export const notificationsStyles = (colors: ThemeColors) => {
+export const notificationsStyles = (colors: ThemeColors, size: FontSize) => {
+	const fonts = FontText(colors, size);
+
 	return StyleSheet.create({
 		container: {
 			flex: 1,
@@ -10,17 +13,11 @@ export const notificationsStyles = (colors: ThemeColors) => {
 			paddingVertical: Measures.vertical,
 		},
 		title: {
-			alignSelf: 'flex-start',
-			fontSize: 30,
-			color: colors.textColor,
-			fontFamily: 'Rubik_700Bold',
+			...fonts.h1,
 		},
 		text: {
-			alignSelf: 'flex-start',
-			fontSize: 16,
-			color: colors.accentColor,
+			...fonts.accent,
 			marginBottom: 20,
-			fontFamily: 'Rubik_400Regular',
 		},
 		scrollViewContainer: {
 			paddingBottom: 24,

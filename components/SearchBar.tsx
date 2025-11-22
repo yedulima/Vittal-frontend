@@ -1,4 +1,5 @@
 import { ContactInterface } from '@/api/interfaces';
+import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { useDebounce } from '@/hooks/useDebounce';
 import { searchBarStyles } from '@/styles/components/SearchBarStyles';
@@ -15,7 +16,8 @@ interface SearchBarProps {
 
 export default function SearchBar({ placeholder, dataToSearch, onChange }: SearchBarProps) {
 	const { colors } = useThemeContext();
-	const styles = searchBarStyles(colors);
+	const { fontSize } = useFontTextContext();
+	const styles = searchBarStyles(colors, fontSize);
 
 	const [query, setQuery] = useState<string>('');
 	const debounceQuery = useDebounce(query, 300);

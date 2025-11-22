@@ -1,8 +1,11 @@
+import { FontSize, FontText } from '@/constants/FontText';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
-export const googleButtonStyles = (colors: ThemeColors) => {
+export const googleButtonStyles = (colors: ThemeColors, size: FontSize) => {
 	const iconSize = 20;
+
+	const fonts = FontText(colors, size);
 
 	return StyleSheet.create({
 		container: {
@@ -16,10 +19,9 @@ export const googleButtonStyles = (colors: ThemeColors) => {
 			gap: 8,
 		},
 		text: {
-			fontSize: 15,
-			fontWeight: 600,
+			...fonts.accent,
+			...fonts.medium,
 			color: colors.textColor,
-			fontFamily: 'Rubik_300Light',
 		},
 		googleIcon: {
 			width: iconSize,

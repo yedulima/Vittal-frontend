@@ -1,4 +1,5 @@
 import { addIdoso } from '@/api/services/cuidador.service';
+import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { addIdosoModalStyles } from '@/styles/components/modals/AddIdosoModalStyles';
 import { Feather } from '@expo/vector-icons';
@@ -29,7 +30,8 @@ export default function AddIdosoModal({ isVisible, onClose, onIdosoAdded }: AddI
 	});
 
 	const { colors } = useThemeContext();
-	const styles = addIdosoModalStyles(colors);
+	const { fontSize } = useFontTextContext();
+	const styles = addIdosoModalStyles(colors, fontSize);
 
 	const submitHandler = async (data: AddIdosoSchema) => {
 		try {

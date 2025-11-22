@@ -1,13 +1,16 @@
+import { FontSize, FontText } from '@/constants/FontText';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
-export const medicineStyles = (colors: ThemeColors) => {
+export const medicineStyles = (colors: ThemeColors, size: FontSize) => {
+	const fonts = FontText(colors, size);
+
 	return StyleSheet.create({
 		container: {
 			flexDirection: 'row',
 			alignItems: 'center',
 			backgroundColor: colors.cardColor,
-			borderRadius: 5,
+			borderRadius: 15,
 			padding: 15,
 			borderWidth: 1,
 			borderColor: colors.cardBorderColor,
@@ -32,21 +35,18 @@ export const medicineStyles = (colors: ThemeColors) => {
 			flex: 1,
 		},
 		title: {
-			fontSize: 15,
+			...fonts.accent,
+			...fonts.medium,
 			color: colors.textColor,
-			width: '75%',
-			fontFamily: 'Rubik_500Medium',
 		},
 		description: {
-			fontSize: 14,
-			color: colors.accentColor,
+			...fonts.caption,
+			...fonts.light,
 			width: '95%',
-			fontFamily: 'Rubik_300Light',
 		},
 		time: {
-			fontSize: 14,
-			color: colors.accentColor,
-			fontFamily: 'Rubik_300Light',
+			...fonts.small,
+			...fonts.light,
 		},
 		infosHeader: {
 			flexDirection: 'row',

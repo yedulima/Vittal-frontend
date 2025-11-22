@@ -1,8 +1,11 @@
+import { FontSize, FontText } from '@/constants/FontText';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
-export const headerStyles = (colors: ThemeColors) => {
+export const headerStyles = (colors: ThemeColors, size: FontSize) => {
 	const photoSize = 65;
+
+	const fonts = FontText(colors, size);
 
 	return StyleSheet.create({
 		container: {
@@ -24,10 +27,8 @@ export const headerStyles = (colors: ThemeColors) => {
 			fontFamily: 'Rubik_400Regular',
 		},
 		name: {
-			fontSize: 30,
-			color: colors.textColor,
+			...fonts.h1,
 			width: '100%',
-			fontFamily: 'Rubik_700Bold',
 		},
 		photo: {
 			backgroundColor: colors.imageBackgroundColor,
@@ -38,9 +39,7 @@ export const headerStyles = (colors: ThemeColors) => {
 			borderColor: colors.cardBorderColor,
 		},
 		adversimentMessage: {
-			fontSize: 15,
-			color: colors.accentColor,
-			fontFamily: 'Rubik_300Light',
+			...fonts.accent,
 		},
 	});
 };

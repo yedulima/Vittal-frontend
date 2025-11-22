@@ -1,7 +1,10 @@
+import { FontSize, FontText } from '@/constants/FontText';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
-export const backArrowStyles = (colors: ThemeColors) => {
+export const backArrowStyles = (colors: ThemeColors, size: FontSize) => {
+	const fonts = FontText(colors, size);
+
 	return StyleSheet.create({
 		container: {
 			alignSelf: 'flex-start',
@@ -12,9 +15,9 @@ export const backArrowStyles = (colors: ThemeColors) => {
 			gap: 5,
 		},
 		text: {
-			textAlign: 'center',
+			...fonts.accent,
+			...fonts.regular,
 			color: colors.textColor,
-			fontFamily: 'Rubik_500Medium',
 		},
 		icon: {
 			color: colors.textColor,

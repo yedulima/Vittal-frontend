@@ -1,7 +1,10 @@
+import { FontSize, FontText } from '@/constants/FontText';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
-export const notificationsListStyles = (colors: ThemeColors) => {
+export const notificationsListStyles = (colors: ThemeColors, size: FontSize) => {
+	const fonts = FontText(colors, size);
+
 	return StyleSheet.create({
 		container: {
 			width: '100%',
@@ -12,9 +15,7 @@ export const notificationsListStyles = (colors: ThemeColors) => {
 			paddingTop: 15,
 		},
 		text: {
-			color: colors.accentColor,
-			fontSize: 16,
-			fontFamily: 'Rubik_400Regular',
+			...fonts.accent,
 		},
 		separator: {
 			width: '100%',

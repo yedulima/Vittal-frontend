@@ -1,3 +1,4 @@
+import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { medicinesListStyles } from '@/styles/components/MedicinesListStyles';
 import { MedicinesInterface } from '@/utils/data';
@@ -12,7 +13,8 @@ interface MedicinesListProps {
 
 export default function MedicinesList({ data }: MedicinesListProps) {
 	const { colors } = useThemeContext();
-	const styles = medicinesListStyles(colors);
+	const { fontSize } = useFontTextContext();
+	const styles = medicinesListStyles(colors, fontSize);
 
 	const pedingMedicines = data.filter((item) => item.done === false);
 

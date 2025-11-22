@@ -1,17 +1,16 @@
 import { ContactInterface, TecnicalSheet } from '@/api/interfaces';
 import { listenIdosoChanges } from '@/api/services/idoso.service';
+import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
+import { idosoProfileModalStyles } from '@/styles/components/modals/IdosoProfileModalStyles';
 import { calculateAge } from '@/utils/calculateAge';
 import { Image } from 'expo-image';
 import { useEffect, useState } from 'react';
 import { Modal, ScrollView, Text, View } from 'react-native';
 
-import { idosoProfileModalStyles } from '@/styles/components/modals/IdosoProfileModalStyles';
-
 import BackArrow from '@/components/BackArrow';
 import Button from '@/components/Button';
 import ProfileSection from '@/components/ProfileSection';
-import MedicinesInUseModal from '@/components/modals/MedicinesInUseModal';
 
 interface IdosoProfileModalProps {
 	data: ContactInterface;
@@ -21,9 +20,8 @@ interface IdosoProfileModalProps {
 
 export default function IdosoProfileModal({ data, isVisible, onClose }: IdosoProfileModalProps) {
 	const { colors } = useThemeContext();
-	const styles = idosoProfileModalStyles(colors);
-
-	const [isMedicinesVisible, setIsMedicinesVisible] = useState<boolean>(false);
+	const { fontSize } = useFontTextContext();
+	const styles = idosoProfileModalStyles(colors, fontSize);
 
 	const [liveData, setLiveData] = useState<ContactInterface>(data);
 	const age = calculateAge(data.birthday);
@@ -88,36 +86,11 @@ export default function IdosoProfileModal({ data, isVisible, onClose }: IdosoPro
 									},
 								]}
 							/>
-							{/* <View style={styles.medicinesHeader}>
-							<Text style={styles.medicinesTitle}>Medicamentos em uso</Text>
-							<TouchableOpacity activeOpacity={0.9}>
-								<Feather name="plus" size={18} style={styles.plusIcon} />
-							</TouchableOpacity>
-						</View>
-						<View style={styles.medicinesContent}>
-							<FlatList
-								data={medicines}
-								keyExtractor={(item) => item.name}
-								renderItem={({ item }) => <MedicineOnProfile data={item} />}
-								showsVerticalScrollIndicator={false}
-								scrollEnabled={false}
-								ListEmptyComponent={() => (
-									<View>
-										<Text style={styles.text}>Nenhum medicamento cadastrado ainda</Text>
-									</View>
-								)}
-							/>
-						</View> */}
-							<Button text="Medicamentos em uso" onPress={() => setIsMedicinesVisible(true)} />
+							<Button text="Medicamentos em uso" onPress={() => {}} />
 						</ScrollView>
 					</View>
 				</Modal>
 			</View>
-			<MedicinesInUseModal
-				data={medicines}
-				isVisible={isMedicinesVisible}
-				onClose={() => setIsMedicinesVisible(false)}
-			/>
 		</>
 	);
 }

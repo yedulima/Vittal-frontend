@@ -1,9 +1,12 @@
 import { Colors } from '@/constants/Colors';
+import { FontSize, FontText } from '@/constants/FontText';
 import { Measures } from '@/constants/SafeAreaMeasures';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
-export const medicineModalStyles = (colors: ThemeColors) => {
+export const medicineModalStyles = (colors: ThemeColors, size: FontSize) => {
+	const fonts = FontText(colors, size);
+
 	return StyleSheet.create({
 		container: {
 			flex: 1,
@@ -35,9 +38,7 @@ export const medicineModalStyles = (colors: ThemeColors) => {
 			gap: 2,
 		},
 		title: {
-			fontSize: 28,
-			color: colors.textColor,
-			fontFamily: 'Rubik_600SemiBold',
+			...fonts.h1,
 		},
 		descriptionContainer: {
 			gap: 6,
@@ -51,22 +52,20 @@ export const medicineModalStyles = (colors: ThemeColors) => {
 			marginBottom: 15,
 		},
 		topicText: {
-			fontSize: 17,
+			...fonts.accent,
+			...fonts.semibold,
 			color: colors.textColor,
-			fontFamily: 'Rubik_600SemiBold',
 		},
 		text: {
-			fontSize: 16,
-			color: colors.accentColor,
-			fontFamily: 'Rubik_400Regular',
+			...fonts.accent,
 		},
 		button: {
 			backgroundColor: Colors.green[600],
 		},
 		buttonText: {
-			fontSize: 16,
+			...fonts.accent,
+			...fonts.semibold,
 			color: Colors.white[800],
-			fontFamily: 'Rubik_600SemiBold',
 		},
 		icon: {
 			color: colors.iconColor,

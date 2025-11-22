@@ -1,8 +1,11 @@
+import { FontSize, FontText } from '@/constants/FontText';
 import { Measures } from '@/constants/SafeAreaMeasures';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
-export const defaultConfigsModalStyles = (colors: ThemeColors) => {
+export const defaultConfigsModalStyles = (colors: ThemeColors, size: FontSize) => {
+	const fonts = FontText(colors, size);
+
 	return StyleSheet.create({
 		container: {
 			flex: 1,
@@ -12,11 +15,11 @@ export const defaultConfigsModalStyles = (colors: ThemeColors) => {
 		},
 		content: {
 			width: '90%',
-			height: '40%',
 			paddingHorizontal: Measures.horizontal,
 			paddingVertical: Measures.vertical + 5,
 			borderRadius: 12,
 			paddingTop: 10,
+			paddingBottom: 80,
 			backgroundColor: colors.cardColor,
 			gap: 10,
 		},
@@ -27,6 +30,7 @@ export const defaultConfigsModalStyles = (colors: ThemeColors) => {
 			justifyContent: 'space-between',
 			marginTop: 15,
 			marginBottom: 15,
+			gap: 5,
 		},
 		titleContainer: {
 			flex: 1,
@@ -34,14 +38,10 @@ export const defaultConfigsModalStyles = (colors: ThemeColors) => {
 			gap: 2,
 		},
 		title: {
-			fontSize: 28,
-			color: colors.textColor,
-			fontFamily: 'Rubik_600SemiBold',
+			...fonts.h1,
 		},
 		subTitle: {
-			fontSize: 15,
-			color: colors.accentColor,
-			fontFamily: 'Rubik_400Regular',
+			...fonts.accent,
 		},
 		icon: {
 			color: colors.iconColor,

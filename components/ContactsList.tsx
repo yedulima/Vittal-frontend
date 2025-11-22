@@ -1,4 +1,5 @@
 import { ContactInterface } from '@/api/interfaces';
+import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { contactsListStyles } from '@/styles/components/ContactsListStyles';
 import { FlatList, Text, View } from 'react-native';
@@ -11,7 +12,8 @@ interface ContactListProp {
 
 export default function ContactsList({ data }: ContactListProp) {
 	const { colors } = useThemeContext();
-	const styles = contactsListStyles(colors);
+	const { fontSize } = useFontTextContext();
+	const styles = contactsListStyles(colors, fontSize);
 
 	return (
 		<View style={styles.container}>

@@ -1,9 +1,9 @@
+import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
+import { defaultConfigsModalStyles } from '@/styles/components/modals/DefaultConfigsModalStyles';
 import { Feather } from '@expo/vector-icons';
 import { ReactNode } from 'react';
 import { Modal, Text, TouchableOpacity, View } from 'react-native';
-
-import { defaultConfigsModalStyles } from '@/styles/components/modals/DefaultConfigsModalStyles';
 
 interface DefaultConfigsModalProps {
 	title: string;
@@ -21,7 +21,8 @@ export default function DefaultConfigsModal({
 	children,
 }: DefaultConfigsModalProps) {
 	const { colors } = useThemeContext();
-	const styles = defaultConfigsModalStyles(colors);
+	const { fontSize } = useFontTextContext();
+	const styles = defaultConfigsModalStyles(colors, fontSize);
 
 	return (
 		<View>
@@ -34,7 +35,7 @@ export default function DefaultConfigsModal({
 								<Text style={styles.subTitle}>{subTitle}</Text>
 							</View>
 							<TouchableOpacity onPress={onClose} activeOpacity={0.9}>
-								<Feather name="x" size={23} style={styles.icon} />
+								<Feather name="x" size={fontSize.iconSize} style={styles.icon} />
 							</TouchableOpacity>
 						</View>
 						{children}

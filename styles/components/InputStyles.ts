@@ -1,8 +1,11 @@
 import { Colors } from '@/constants/Colors';
+import { FontSize, FontText } from '@/constants/FontText';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
-export const inputStyles = (colors: ThemeColors) => {
+export const inputStyles = (colors: ThemeColors, size: FontSize) => {
+	const fonts = FontText(colors, size);
+
 	return StyleSheet.create({
 		container: {
 			alignItems: 'center',

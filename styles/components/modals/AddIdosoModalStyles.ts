@@ -1,9 +1,12 @@
 import { Colors } from '@/constants/Colors';
+import { FontSize, FontText } from '@/constants/FontText';
 import { Measures } from '@/constants/SafeAreaMeasures';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
-export const addIdosoModalStyles = (colors: ThemeColors) => {
+export const addIdosoModalStyles = (colors: ThemeColors, size: FontSize) => {
+	const fonts = FontText(colors, size);
+
 	return StyleSheet.create({
 		container: {
 			flex: 1,
@@ -35,14 +38,10 @@ export const addIdosoModalStyles = (colors: ThemeColors) => {
 			gap: 2,
 		},
 		title: {
-			fontSize: 24,
-			color: colors.textColor,
-			fontFamily: 'Rubik_600SemiBold',
+			...fonts.h2,
 		},
 		text: {
-			fontSize: 16,
-			color: colors.accentColor,
-			fontFamily: 'Rubik_400Regular',
+			...fonts.accent,
 		},
 		addContainer: {
 			flex: 1,
@@ -52,7 +51,7 @@ export const addIdosoModalStyles = (colors: ThemeColors) => {
 			backgroundColor: Colors.green[500],
 		},
 		addButtonText: {
-			fontSize: 16,
+			...fonts.accent,
 			fontFamily: 'Rubik_500Medium',
 			color: colors.buttonTextColor,
 		},

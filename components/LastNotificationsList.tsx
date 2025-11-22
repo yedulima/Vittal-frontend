@@ -1,3 +1,4 @@
+import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { lastNotificationsListStyles } from '@/styles/components/LastNotificationsListStyles';
 import { Feather } from '@expo/vector-icons';
@@ -19,7 +20,8 @@ interface NotificationListProps {
 
 export default function LastNotificationsList({ data }: NotificationListProps) {
 	const { colors } = useThemeContext();
-	const styles = lastNotificationsListStyles(colors);
+	const { fontSize } = useFontTextContext();
+	const styles = lastNotificationsListStyles(colors, fontSize);
 
 	const slicedData = data.slice(0, 2);
 

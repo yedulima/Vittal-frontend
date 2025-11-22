@@ -1,7 +1,10 @@
+import { FontSize, FontText } from '@/constants/FontText';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
-export const lastNotificationsListStyles = (colors: ThemeColors) => {
+export const lastNotificationsListStyles = (colors: ThemeColors, size: FontSize) => {
+	const fonts = FontText(colors, size);
+
 	return StyleSheet.create({
 		container: {
 			width: '100%',
@@ -14,9 +17,9 @@ export const lastNotificationsListStyles = (colors: ThemeColors) => {
 			marginBottom: 15,
 		},
 		title: {
-			fontSize: 17,
+			...fonts.accent,
+			...fonts.semibold,
 			color: colors.textColor,
-			fontFamily: 'Rubik_600SemiBold',
 		},
 		moreContainer: {
 			flexDirection: 'row',
@@ -24,10 +27,8 @@ export const lastNotificationsListStyles = (colors: ThemeColors) => {
 			justifyContent: 'center',
 		},
 		moreText: {
-			fontSize: 16,
-			color: colors.accentColor,
+			...fonts.accent,
 			marginRight: 5,
-			fontFamily: 'Rubik_400Regular',
 		},
 		separator: {
 			width: '100%',

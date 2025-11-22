@@ -1,9 +1,12 @@
 import { Colors } from '@/constants/Colors';
+import { FontSize, FontText } from '@/constants/FontText';
 import { Measures } from '@/constants/SafeAreaMeasures';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
-export const configurationsStyles = (colors: ThemeColors) => {
+export const configurationsStyles = (colors: ThemeColors, size: FontSize) => {
+	const fonts = FontText(colors, size);
+
 	return StyleSheet.create({
 		container: {
 			flex: 1,
@@ -11,18 +14,18 @@ export const configurationsStyles = (colors: ThemeColors) => {
 			paddingHorizontal: Measures.horizontal,
 		},
 		title: {
-			alignSelf: 'flex-start',
-			fontSize: 30,
-			color: colors.textColor,
+			...fonts.h1,
 			marginBottom: 20,
-			fontFamily: 'Rubik_700Bold',
+		},
+		text: {
+			...fonts.accent,
+			color: colors.textColor,
 		},
 		button: {
 			backgroundColor: colors.cardColor,
 		},
 		buttonText: {
-			fontSize: 16,
-			fontFamily: 'Rubik_400Regular',
+			...fonts.accent,
 			color: colors.textColor,
 		},
 		logoutButton: {
@@ -30,9 +33,8 @@ export const configurationsStyles = (colors: ThemeColors) => {
 			backgroundColor: Colors.red[400],
 		},
 		logoutText: {
-			fontSize: 16,
+			...fonts.accent,
 			color: Colors.white[800],
-			fontFamily: 'Rubik_400Regular',
 		},
 		scrollViewContainer: {
 			paddingBottom: 24,

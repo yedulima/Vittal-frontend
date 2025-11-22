@@ -1,4 +1,5 @@
 import { useAuthContext } from '@/contexts/AuthContext';
+import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { headerStyles } from '@/styles/components/HeaderStyles';
 import { NOTIFICATIONS_LENGTH } from '@/utils/data';
@@ -11,7 +12,8 @@ const PlaceHolderImage = require('@/assets/images/placeholder-image.jpg');
 export default function Header() {
 	const { user } = useAuthContext();
 	const { colors } = useThemeContext();
-	const styles = headerStyles(colors);
+	const { fontSize } = useFontTextContext();
+	const styles = headerStyles(colors, fontSize);
 
 	const [name] = useState<string>(() => {
 		let name = user?.displayName?.split(' ');

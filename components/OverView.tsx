@@ -1,3 +1,4 @@
+import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { overViewStyles } from '@/styles/components/OverViewStyles';
 import { Feather } from '@expo/vector-icons';
@@ -14,7 +15,8 @@ interface OverViewProps {
 
 export default function OverView({ data }: OverViewProps) {
 	const { colors } = useThemeContext();
-	const styles = overViewStyles(colors);
+	const { fontSize } = useFontTextContext();
+	const styles = overViewStyles(colors, fontSize);
 
 	return (
 		<View style={styles.container}>

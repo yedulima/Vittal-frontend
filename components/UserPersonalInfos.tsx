@@ -1,4 +1,5 @@
 import { useAuthContext } from '@/contexts/AuthContext';
+import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { userPersonalInfosStyles } from '@/styles/components/UserPersonalInfosStyles';
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -6,7 +7,8 @@ import { Text, TouchableOpacity, View } from 'react-native';
 
 export default function UserPersonalInfos() {
 	const { colors } = useThemeContext();
-	const styles = userPersonalInfosStyles(colors);
+	const { fontSize } = useFontTextContext();
+	const styles = userPersonalInfosStyles(colors, fontSize);
 
 	const { user, userData } = useAuthContext();
 
@@ -15,7 +17,7 @@ export default function UserPersonalInfos() {
 			<View style={styles.header}>
 				<Text style={styles.title}>Informações pessoais</Text>
 				<TouchableOpacity activeOpacity={0.8}>
-					<FontAwesome5 name="edit" size={16} style={styles.icon} />
+					<FontAwesome5 name="edit" size={fontSize.iconSize} style={styles.icon} />
 				</TouchableOpacity>
 			</View>
 			<View>

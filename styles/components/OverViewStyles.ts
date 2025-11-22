@@ -1,7 +1,10 @@
+import { FontSize, FontText } from '@/constants/FontText';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
-export const overViewStyles = (colors: ThemeColors) => {
+export const overViewStyles = (colors: ThemeColors, size: FontSize) => {
+	const fonts = FontText(colors, size);
+
 	return StyleSheet.create({
 		container: {
 			flex: 1,
@@ -20,14 +23,12 @@ export const overViewStyles = (colors: ThemeColors) => {
 			flex: 1,
 		},
 		count: {
-			fontSize: 20,
-			color: colors.textColor,
-			fontFamily: 'Rubik_700Bold',
+			...fonts.h3,
 		},
 		name: {
-			fontSize: 14,
+			...fonts.caption,
+			...fonts.medium,
 			color: colors.textColor,
-			fontFamily: 'Rubik_500Medium',
 		},
 		icon: {
 			color: colors.iconColor,

@@ -1,4 +1,5 @@
 import { ThemeColors } from '@/constants/Themes';
+import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { inputStyles } from '@/styles/components/InputStyles';
 import { Feather } from '@expo/vector-icons';
@@ -10,6 +11,7 @@ interface InputProps extends Omit<TextInputProps, 'onChangeText'> {
 	placeHolder: string;
 	value: string;
 	onChangeText: (t: string) => void;
+	fontSizeEnabled: boolean;
 	rightIcon?: React.ComponentProps<typeof Feather>['name'];
 	rightIconPress?: () => void;
 	errorMessage?: string;
@@ -23,6 +25,7 @@ export default function Input({
 	placeHolder,
 	value,
 	onChangeText,
+	fontSizeEnabled = false,
 	rightIcon,
 	rightIconPress,
 	errorMessage,
@@ -32,7 +35,8 @@ export default function Input({
 	...others
 }: InputProps) {
 	const { colors } = useThemeContext();
-	const styles = inputStyles(styleColors ? styleColors : colors);
+	const { fontSize } = useFontTextContext();
+	const styles = inputStyles(styleColors ? styleColors : colors, fontSize);
 
 	const [show, setShow] = useState<boolean>(false);
 

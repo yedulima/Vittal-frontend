@@ -1,16 +1,19 @@
+import { FontSize, FontText } from '@/constants/FontText';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
-export const userPersonalInfosStyles = (colors: ThemeColors) => {
+export const userPersonalInfosStyles = (colors: ThemeColors, size: FontSize) => {
+	const fonts = FontText(colors, size);
+
 	return StyleSheet.create({
 		container: {
 			flex: 1,
-			paddingVertical: 15,
-			paddingHorizontal: 15,
+			padding: 15,
 			width: '100%',
-			margin: 2,
-			borderRadius: 5,
+			borderRadius: 15,
 			backgroundColor: colors.cardColor,
+			borderWidth: 1,
+			borderColor: colors.cardBorderColor,
 			gap: 20,
 		},
 		header: {
@@ -24,9 +27,7 @@ export const userPersonalInfosStyles = (colors: ThemeColors) => {
 			marginBottom: 15,
 		},
 		title: {
-			color: colors.textColor,
-			fontSize: 20,
-			fontFamily: 'Rubik_600SemiBold',
+			...fonts.h3,
 		},
 		nameContainer: {
 			flexDirection: 'row',
@@ -35,24 +36,18 @@ export const userPersonalInfosStyles = (colors: ThemeColors) => {
 			gap: 8,
 		},
 		name: {
-			fontSize: 17,
-			color: colors.accentColor,
-			fontFamily: 'Rubik_500Medium',
+			...fonts.accent,
+			...fonts.medium,
 		},
 		content: {
-			fontSize: 16,
+			...fonts.accent,
 			color: colors.textColor,
-			fontFamily: 'Rubik_400Regular',
 		},
 		noContent: {
-			fontSize: 16,
-			color: colors.accentColor,
-			fontFamily: 'Rubik_400Regular',
+			...fonts.accent,
 		},
 		verifiedText: {
-			fontSize: 14,
-			color: colors.accentColor,
-			fontFamily: 'Rubik_400Regular',
+			...fonts.caption,
 		},
 		icon: {
 			color: colors.iconColor,

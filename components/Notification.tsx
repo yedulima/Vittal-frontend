@@ -1,3 +1,4 @@
+import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { notificationStyles } from '@/styles/components/NotificationStyles';
 import { Feather } from '@expo/vector-icons';
@@ -15,7 +16,8 @@ interface NotificationProp {
 
 export default function Notification({ data }: NotificationProp) {
 	const { colors } = useThemeContext();
-	const styles = notificationStyles(colors);
+	const { fontSize } = useFontTextContext();
+	const styles = notificationStyles(colors, fontSize);
 
 	return (
 		<TouchableOpacity style={styles.container} activeOpacity={0.8}>

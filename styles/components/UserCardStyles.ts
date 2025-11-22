@@ -1,7 +1,10 @@
+import { FontSize, FontText } from '@/constants/FontText';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
-export const userCardStyles = (colors: ThemeColors) => {
+export const userCardStyles = (colors: ThemeColors, size: FontSize) => {
+	const fonts = FontText(colors, size);
+
 	return StyleSheet.create({
 		container: {
 			paddingHorizontal: 17,
@@ -16,12 +19,11 @@ export const userCardStyles = (colors: ThemeColors) => {
 			gap: 4,
 		},
 		title: {
-			fontSize: 18,
-			fontWeight: 600,
-			color: colors.textColor,
+			...fonts.body,
+			...fonts.medium,
 		},
 		description: {
-			fontSize: 14,
+			...fonts.caption,
 			color: colors.textColor,
 		},
 	});

@@ -1,3 +1,4 @@
+import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { backArrowStyles } from '@/styles/components/BackArrow';
 import { Feather } from '@expo/vector-icons';
@@ -10,7 +11,8 @@ interface BackArrorProps {
 
 export default function BackArrow({ onPress }: BackArrorProps) {
 	const { colors } = useThemeContext();
-	const styles = backArrowStyles(colors);
+	const { fontSize } = useFontTextContext();
+	const styles = backArrowStyles(colors, fontSize);
 
 	const router = useRouter();
 	const action = () => (onPress ? onPress() : router.back());

@@ -1,8 +1,11 @@
+import { FontSize, FontText } from '@/constants/FontText';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
-export const userProfileInfosStyles = (colors: ThemeColors) => {
+export const userProfileInfosStyles = (colors: ThemeColors, size: FontSize) => {
 	const photoSize = 145;
+
+	const fonts = FontText(colors, size);
 
 	return StyleSheet.create({
 		container: {
@@ -14,11 +17,12 @@ export const userProfileInfosStyles = (colors: ThemeColors) => {
 			justifyContent: 'center',
 			marginTop: 15,
 			marginBottom: 30,
+			gap: 5,
 		},
 		name: {
-			fontSize: 18,
-			color: colors.textColor,
-			fontFamily: 'Rubik_600SemiBold',
+			...fonts.body,
+			...fonts.semibold,
+			textAlign: 'center',
 		},
 		emailContainer: {
 			flexDirection: 'row',
@@ -27,9 +31,8 @@ export const userProfileInfosStyles = (colors: ThemeColors) => {
 			gap: 5,
 		},
 		email: {
-			fontSize: 15,
-			color: colors.accentColor,
-			fontFamily: 'Rubik_400Regular',
+			...fonts.accent,
+			textAlign: 'center',
 		},
 		verifiedBadge: {
 			color: colors.iconColor,

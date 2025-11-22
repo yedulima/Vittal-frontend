@@ -1,4 +1,5 @@
 import { ContactInterface } from '@/api/interfaces';
+import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { contactStyles } from '@/styles/components/ContactStyles';
 import { Feather } from '@expo/vector-icons';
@@ -16,7 +17,8 @@ interface ContactProp {
 
 export default function Contact({ data }: ContactProp) {
 	const { colors } = useThemeContext();
-	const styles = contactStyles(colors);
+	const { fontSize } = useFontTextContext();
+	const styles = contactStyles(colors, fontSize);
 
 	const [isVisible, setIsVisible] = useState<boolean>(false);
 
@@ -28,7 +30,9 @@ export default function Contact({ data }: ContactProp) {
 				<View style={styles.info}>
 					<Image source={imageSource} style={styles.photo} />
 					<View style={styles.userCredentials}>
-						<Text style={styles.name}>{data.name}</Text>
+						<Text style={styles.name} numberOfLines={1} ellipsizeMode="tail">
+							{data.name}
+						</Text>
 						<Text style={styles.status}>{data.status}</Text>
 					</View>
 				</View>

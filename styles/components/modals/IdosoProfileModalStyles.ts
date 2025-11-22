@@ -1,9 +1,12 @@
+import { FontSize, FontText } from '@/constants/FontText';
 import { Measures } from '@/constants/SafeAreaMeasures';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
-export const idosoProfileModalStyles = (colors: ThemeColors) => {
+export const idosoProfileModalStyles = (colors: ThemeColors, size: FontSize) => {
 	const photoSize = 110;
+
+	const fonts = FontText(colors, size);
 
 	return StyleSheet.create({
 		content: {
@@ -25,16 +28,6 @@ export const idosoProfileModalStyles = (colors: ThemeColors) => {
 			marginTop: 15,
 			marginBottom: 15,
 		},
-		title: {
-			fontSize: 24,
-			color: colors.textColor,
-			fontFamily: 'Rubik_600SemiBold',
-		},
-		text: {
-			fontSize: 16,
-			color: colors.accentColor,
-			fontFamily: 'Rubik_400Regular',
-		},
 		profileHeader: {
 			width: '100%',
 			justifyContent: 'center',
@@ -49,14 +42,14 @@ export const idosoProfileModalStyles = (colors: ThemeColors) => {
 			gap: 4,
 		},
 		name: {
-			fontSize: 18,
+			...fonts.body,
+			...fonts.semibold,
 			color: colors.textColor,
-			fontFamily: 'Rubik_600SemiBold',
+			textAlign: 'center',
 		},
 		age: {
-			fontSize: 16,
-			color: colors.accentColor,
-			fontFamily: 'Rubik_400Regular',
+			...fonts.accent,
+			textAlign: 'center',
 		},
 		profilePhoto: {
 			width: photoSize,
@@ -66,29 +59,6 @@ export const idosoProfileModalStyles = (colors: ThemeColors) => {
 			marginBottom: 15,
 			borderColor: colors.accentColor,
 			backgroundColor: colors.imageBackgroundColor,
-		},
-		medicinesHeader: {
-			flexDirection: 'row',
-			alignItems: 'center',
-			justifyContent: 'space-between',
-			marginBottom: 9,
-		},
-		medicinesTitle: {
-			fontSize: 20,
-			color: colors.textColor,
-			fontFamily: 'Rubik_600SemiBold',
-		},
-		medicinesContent: {
-			backgroundColor: colors.backgroundColor,
-			borderRadius: 12,
-			padding: 15,
-			gap: 20,
-		},
-		plusIcon: {
-			color: colors.textColor,
-		},
-		closeIcon: {
-			color: colors.textColor,
 		},
 		icon: {
 			color: colors.iconColor,

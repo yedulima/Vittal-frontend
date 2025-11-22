@@ -1,6 +1,7 @@
 import { LightTheme } from '@/constants/Themes';
 import { userCardStyles } from '@/styles/components/UserCardStyles';
 import { StyleProp, Text, TouchableOpacity, ViewStyle } from 'react-native';
+import { Normal } from '@/constants/FontText';
 
 interface UserCardProps {
 	title: string;
@@ -10,7 +11,7 @@ interface UserCardProps {
 }
 
 export default function UserCard({ title, description, onPress, style }: UserCardProps) {
-	const styles = userCardStyles(LightTheme);
+	const styles = userCardStyles(LightTheme, Normal);
 
 	return (
 		<TouchableOpacity style={[styles.container, style]} activeOpacity={0.9} onPress={onPress}>

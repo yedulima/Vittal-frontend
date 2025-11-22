@@ -51,12 +51,7 @@ export default function LoginScreen() {
 				<View style={styles.separationLine} />
 			</View>
 
-			<GoogleButton
-				text="Entrar com Google"
-				onPress={() => {}}
-				styleColors={LightTheme}
-				style={styles.googleButton}
-			/>
+			<GoogleButton text="Entrar com Google" onPress={() => {}} style={styles.googleButton} />
 
 			<Link href={'/register'} style={styles.noAccountText}>
 				Não tem uma conta? Faça já seu <Text style={styles.registerDecoration}>cadastro!</Text>
