@@ -1,10 +1,11 @@
+import { NotificationInterface } from '@/api/interfaces';
+import { listenForNotifications } from '@/api/services/notification.service';
 import { useAuthContext } from '@/contexts/AuthContext';
 import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { headerStyles } from '@/styles/components/HeaderStyles';
-import { NOTIFICATIONS_LENGTH } from '@/utils/data';
 import { Image } from 'expo-image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ImageSourcePropType, Text, View } from 'react-native';
 
 const PlaceHolderImage = require('@/assets/images/placeholder-image.jpg');
@@ -14,6 +15,21 @@ export default function Header() {
 	const { colors } = useThemeContext();
 	const { fontSize } = useFontTextContext();
 	const styles = headerStyles(colors, fontSize);
+
+	const [notificationsLenght, setNotificationsLenght] = useState<number>();
+
+	useEffect(() => {
+		const unsubscribe = listenForNotifications(user?.uid as string, (newNotifications: NotificationInterface[]) => {
+			const filteredNotifications = newNotifications.filter((noti) => !noti.read);
+			setNotificationsLenght(filteredNotifications.length);
+		});
+
+		return () => {
+			if (unsubscribe) {
+				unsubscribe();
+			}
+		};
+	}, []);
 
 	const [name] = useState<string>(() => {
 		let name = user?.displayName?.split(' ');
@@ -35,8 +51,8 @@ export default function Header() {
 				</View>
 				<Image source={profilePhotoImage} style={styles.photo} />
 			</View>
-			{NOTIFICATIONS_LENGTH > 0 && (
-				<Text style={styles.adversimentMessage}>Você possui {NOTIFICATIONS_LENGTH} novas notificações</Text>
+			{!!notificationsLenght && (
+				<Text style={styles.adversimentMessage}>Você possui {notificationsLenght} novas notificações</Text>
 			)}
 		</View>
 	);

@@ -5,7 +5,7 @@ import { useThemeContext } from '@/contexts/ThemeContext';
 import { contactsStyles } from '@/styles/screens/ContactsStyles';
 import { Feather } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
-import { ScrollView, Text, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, ScrollView, Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import ContactsList from '@/components/ContactsList';
@@ -19,6 +19,7 @@ export default function ContactsScreen() {
 
 	const [data, setData] = useState<ContactInterface[]>([]);
 	const [originalData, setOriginalData] = useState<ContactInterface[]>([]);
+	const [loading, setLoading] = useState<boolean>(true);
 
 	const [isVisible, setIsVisible] = useState<boolean>(false);
 
@@ -27,6 +28,7 @@ export default function ContactsScreen() {
 		const data = result?.data?.data || [];
 		setOriginalData(data);
 		setData(data);
+		setLoading(false);
 	};
 
 	useEffect(() => {
@@ -46,9 +48,13 @@ export default function ContactsScreen() {
 				dataToSearch={originalData}
 				onChange={(filteredData: ContactInterface[]) => onChangeQuery(filteredData)}
 			/>
-			<ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollViewContainer}>
-				<ContactsList data={data} />
-			</ScrollView>
+			{loading ? (
+				<ActivityIndicator size={'large'} color={colors.textColor} />
+			) : (
+				<ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollViewContainer}>
+					<ContactsList data={data} />
+				</ScrollView>
+			)}
 
 			<TouchableOpacity onPress={() => setIsVisible(true)} activeOpacity={0.8} style={styles.addContainer}>
 				<Feather name="plus" size={30} style={styles.icon} />

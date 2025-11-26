@@ -1,10 +1,14 @@
 import { Colors } from '@/constants/Colors';
 import { FontSize, FontText } from '@/constants/FontText';
 import { ThemeColors } from '@/constants/Themes';
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 export const inputStyles = (colors: ThemeColors, size: FontSize) => {
 	const fonts = FontText(colors, size);
+
+	const platform = Platform.OS === 'android';
+	const inputPadding = platform ? 3 : 10;
+	const inputPaddingSide = platform ? inputPadding + 10 : inputPadding;
 
 	return StyleSheet.create({
 		container: {
@@ -12,36 +16,35 @@ export const inputStyles = (colors: ThemeColors, size: FontSize) => {
 			justifyContent: 'center',
 		},
 		title: {
+			...fonts.accent,
 			alignSelf: 'flex-start',
-			fontSize: 16,
 			color: colors.textColor,
 			marginBottom: 4,
-			fontFamily: 'Rubik_500Medium',
 		},
 		inputContainer: {
 			width: '100%',
 			flexDirection: 'row',
-			justifyContent: 'center',
+			alignItems: 'center',
 			gap: 5,
 			backgroundColor: colors.cardColor,
 			borderColor: colors.cardBorderColor,
 			borderWidth: 1,
-			padding: 11,
+			padding: inputPadding,
+			paddingHorizontal: inputPaddingSide,
 			borderRadius: 10,
 		},
 		textInput: {
+			...fonts.accent,
 			flex: 1,
 			color: colors.textColor,
 			outlineWidth: 0,
-			fontFamily: 'Rubik_400Regular',
 		},
 		errorMessage: {
+			...fonts.accent,
 			alignSelf: 'flex-start',
 			marginTop: 5,
 			paddingLeft: 3,
-			fontSize: 14,
 			color: Colors.red[400],
-			fontFamily: 'Rubik_500Medium',
 		},
 		pressOpacity: {
 			outlineWidth: 0,

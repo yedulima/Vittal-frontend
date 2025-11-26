@@ -24,6 +24,15 @@ export const loginFormStyles = (colors: ThemeColors) => {
 			color: Colors.white[800],
 			fontFamily: 'Rubik_500Medium',
 		},
+		buttonContainer: {
+			padding: 13,
+			margin: 2,
+			borderRadius: 15,
+			backgroundColor: colors.buttonColor,
+			alignItems: 'center',
+			justifyContent: 'center',
+			gap: 7,
+		},
 		forgotPassword: {
 			fontSize: 15,
 			color: colors.textColor,

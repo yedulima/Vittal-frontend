@@ -2,10 +2,10 @@ import { LightTheme } from '@/constants/Themes';
 import { useAuthContext } from '@/contexts/AuthContext';
 import { loginStyles } from '@/styles/screens/LoginStyles';
 import { AUTH_ERROR_MESSAGES, getFormErrorFromFirebaseError } from '@/utils/firebaseErrorMapper';
-import { Link } from 'expo-router';
 import { UseFormReturn } from 'react-hook-form';
 import { Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Link } from 'expo-router';
 
 import BackArrow from '@/components/BackArrow';
 import GoogleButton from '@/components/GoogleButton';
@@ -45,13 +45,13 @@ export default function LoginScreen() {
 
 			<LoginForm onSubmit={handleLogin} />
 
-			<View style={styles.orContainer}>
+			{/* <View style={styles.orContainer}>
 				<View style={styles.separationLine} />
 				<Text style={styles.orText}>Ou</Text>
 				<View style={styles.separationLine} />
 			</View>
 
-			<GoogleButton text="Entrar com Google" onPress={() => {}} style={styles.googleButton} />
+			<GoogleButton text="Entrar com Google" onPress={() => {}} style={styles.googleButton} /> */}
 
 			<Link href={'/register'} style={styles.noAccountText}>
 				Não tem uma conta? Faça já seu <Text style={styles.registerDecoration}>cadastro!</Text>

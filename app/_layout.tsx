@@ -48,7 +48,7 @@ const InitialLayout = () => {
 					<Stack.Screen name="register" />
 				</Stack.Protected>
 			</Stack>
-			<StatusBar style={isDarkMode ? 'dark' : 'light'} />
+			<StatusBar style={isDarkMode ? 'light' : 'dark'} />
 		</>
 	);
 };

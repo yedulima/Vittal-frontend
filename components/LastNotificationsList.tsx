@@ -4,26 +4,14 @@ import { lastNotificationsListStyles } from '@/styles/components/LastNotificatio
 import { Feather } from '@expo/vector-icons';
 import { Link } from 'expo-router';
 import React from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 
-import Notification from '@/components/Notification';
+import NotificationsList from '@/components/NotificationsList';
 
-interface NotificationListProps {
-	data: {
-		id: string;
-		title: string;
-		description: string;
-		date: string;
-		iconName: React.ComponentProps<typeof Feather>['name'];
-	}[];
-}
-
-export default function LastNotificationsList({ data }: NotificationListProps) {
+export default function LastNotificationsList() {
 	const { colors } = useThemeContext();
 	const { fontSize } = useFontTextContext();
 	const styles = lastNotificationsListStyles(colors, fontSize);
-
-	const slicedData = data.slice(0, 2);
 
 	return (
 		<View style={styles.container}>
@@ -36,13 +24,7 @@ export default function LastNotificationsList({ data }: NotificationListProps) {
 					</Link>
 				</View>
 			</View>
-			<FlatList
-				data={slicedData}
-				keyExtractor={(item) => item.id}
-				renderItem={({ item }) => <Notification data={item} />}
-				showsVerticalScrollIndicator={false}
-				ItemSeparatorComponent={() => <View style={styles.separator} />}
-			/>
+			<NotificationsList slice={3} reversed />
 		</View>
 	);
 }

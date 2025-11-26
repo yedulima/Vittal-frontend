@@ -1,11 +1,14 @@
 import { FontSize, FontText } from '@/constants/FontText';
 import { ThemeColors } from '@/constants/Themes';
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 export const headerStyles = (colors: ThemeColors, size: FontSize) => {
-	const photoSize = 65;
+	const photoSize = 75;
 
 	const fonts = FontText(colors, size);
+
+	const platform = Platform.OS;
+	const accentTextStyle = platform === 'android' ? fonts.body : fonts.accent;
 
 	return StyleSheet.create({
 		container: {
@@ -22,12 +25,13 @@ export const headerStyles = (colors: ThemeColors, size: FontSize) => {
 			flex: 1,
 		},
 		hourWelcomeText: {
-			fontSize: 16,
+			...fonts.body,
+			...fonts.regular,
 			color: colors.textColor,
-			fontFamily: 'Rubik_400Regular',
 		},
 		name: {
 			...fonts.h1,
+			lineHeight: 35,
 			width: '100%',
 		},
 		photo: {

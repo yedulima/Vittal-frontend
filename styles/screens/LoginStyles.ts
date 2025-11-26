@@ -53,9 +53,8 @@ export const loginStyles = (colors: ThemeColors) => {
 		},
 		noAccountText: {
 			alignSelf: 'center',
-			position: 'fixed',
 			fontSize: 15,
-			bottom: Measures.vertical,
+			marginTop: 10,
 			color: colors.accentColor,
 			fontFamily: 'Rubik_400Regular',
 		},

@@ -52,7 +52,7 @@ export const addIdosoModalStyles = (colors: ThemeColors, size: FontSize) => {
 		},
 		addButtonText: {
 			...fonts.accent,
-			fontFamily: 'Rubik_500Medium',
+			...fonts.medium,
 			color: colors.buttonTextColor,
 		},
 		icon: {

@@ -12,7 +12,10 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 
 const addIdosoSchema = z.object({
-	id: z.string({ required_error: 'Insira um id para continuar' }).nonempty('Insira um id para continuar'),
+	email: z
+		.string({ required_error: 'Insira um email para continuar' })
+		.nonempty('Insira um email para continuar')
+		.email(),
 });
 
 type AddIdosoSchema = z.infer<typeof addIdosoSchema>;
@@ -26,7 +29,7 @@ interface AddIdosoModalProps {
 export default function AddIdosoModal({ isVisible, onClose, onIdosoAdded }: AddIdosoModalProps) {
 	const { control, handleSubmit, setError, setValue } = useForm<AddIdosoSchema>({
 		resolver: zodResolver(addIdosoSchema),
-		defaultValues: { id: '' },
+		defaultValues: { email: '' },
 	});
 
 	const { colors } = useThemeContext();
@@ -35,12 +38,13 @@ export default function AddIdosoModal({ isVisible, onClose, onIdosoAdded }: AddI
 
 	const submitHandler = async (data: AddIdosoSchema) => {
 		try {
-			await addIdoso(data.id);
-			setValue('id', '');
+			await addIdoso(data.email);
+			setValue('email', '');
 			onIdosoAdded();
 			onClose();
 		} catch (error: any) {
-			setError('id', { message: 'Id fornecido inválido' });
+			console.log(error);
+			setError('email', { message: 'Email fornecido inválido' });
 		}
 	};
 
@@ -52,7 +56,7 @@ export default function AddIdosoModal({ isVisible, onClose, onIdosoAdded }: AddI
 						<View style={styles.header}>
 							<View style={styles.titleContainer}>
 								<Text style={styles.title}>Adicionar novo idoso</Text>
-								<Text style={styles.text}>Insira o id do idoso para adicionar</Text>
+								<Text style={styles.text}>Insira o email do idoso para adicionar</Text>
 							</View>
 							<TouchableOpacity onPress={onClose} activeOpacity={0.9}>
 								<Feather name="x" size={23} style={styles.icon} />
@@ -60,12 +64,12 @@ export default function AddIdosoModal({ isVisible, onClose, onIdosoAdded }: AddI
 						</View>
 						<View style={styles.addContainer}>
 							<Controller
-								name="id"
+								name="email"
 								control={control}
 								render={({ field, fieldState }) => (
 									<Input
-										title="Id do idoso"
-										placeHolder="Insira o id aqui"
+										title="Email do idoso"
+										placeHolder="vittal@examplo.com"
 										value={field.value}
 										onChangeText={field.onChange}
 										errorMessage={fieldState.error?.message}

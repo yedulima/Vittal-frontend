@@ -8,10 +8,11 @@ export interface UserInterface {
 }
 
 export interface UserData extends UserInterface {
-	createdAt: Date,
+	createdAt: Date;
 }
 
 export interface Medicine {
+	id: string;
 	name: string;
 	datePeriod: {
 		start: string;
@@ -39,16 +40,82 @@ export interface IdosoInterface {
 	status?: string;
 }
 
+export interface UpdateIdosoPayload {
+	emergency_numbers?: string[];
+	address?: string;
+	technical_sheet?: TecnicalSheet;
+}
+
 export interface CuidadorInterface {
 	user_ref: string;
 	idosos?: string[];
 }
 
-export interface CloudFunctionDataResponse {
+export interface CloudFunctionDataResponse<T = any> {
 	message: string;
-	data: any;
+	data: T;
 }
 
-export interface ContactInterface extends UserInterface, IdosoInterface {
+export interface ContactInterface {
 	id: string;
+	name: string;
+	photoURL: string;
+	status: string;
+}
+
+export interface ContactCompactInterface {
+	id: string;
+	name: string;
+	photoURL: string;
+}
+
+export interface NotificationInterface {
+	id: string;
+	title: string;
+	body: string;
+	read: boolean;
+	time: string;
+}
+
+export interface SendMessagePayload {
+	dest_user: string;
+	title: string;
+	body: string;
+	sender: string;
+}
+
+export interface ChangeReadStatePayload {
+	notification_id: string;
+}
+
+export interface SendMessagePayload {
+	dest_user: string;
+	title: string;
+	body: string;
+}
+
+export interface FullContactInterface extends IdosoInterface, UserInterface {
+	id: string;
+}
+
+export interface AddMedicinePayload {
+	userId: string;
+	name: string;
+	datePeriod: {
+		start: string;
+		end: string;
+	};
+	dosage: string;
+	description: string;
+	schedules: string[];
+	instructions: string;
+}
+
+export interface UpdateMedicinePayload extends AddMedicinePayload {
+	medicationId: string;
+}
+
+export interface DeleteMedicinePayload {
+	userId: string;
+	medicationId: string;
 }

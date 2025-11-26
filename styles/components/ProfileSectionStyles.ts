@@ -1,6 +1,7 @@
 import { FontSize, FontText } from '@/constants/FontText';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
+import { Colors } from '@/constants/Colors';
 
 export const profileSectionStyles = (colors: ThemeColors, size: FontSize) => {
 	const fonts = FontText(colors, size);
@@ -52,13 +53,14 @@ export const profileSectionStyles = (colors: ThemeColors, size: FontSize) => {
 			gap: 8,
 		},
 		multiplesItemsItem: {
-			backgroundColor: colors.cardColor,
-			borderRadius: 10,
-			padding: 8,
+			backgroundColor: Colors.green[500],
+			borderRadius: 15,
+			paddingHorizontal: 10,
+			paddingVertical: 6,
 		},
 		multiplesItemsText: {
 			...fonts.accent,
-			color: colors.textColor,
+			color: Colors.white[800],
 		},
 		icon: {
 			color: colors.iconColor,

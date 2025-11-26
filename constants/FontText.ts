@@ -14,7 +14,7 @@ export interface FontSize {
 }
 
 export const Large: FontSize = {
-	h1: 33,
+	h1: 35,
 	h2: 27,
 	h3: 23,
 	body: 23,
@@ -26,7 +26,7 @@ export const Large: FontSize = {
 };
 
 export const Normal: FontSize = {
-	h1: 30,
+	h1: 32,
 	h2: 26,
 	h3: 20,
 	body: 20,
@@ -46,7 +46,7 @@ export const Small: FontSize = {
 	caption: 12,
 	small: 11,
 
-	iconSize: 15,
+	iconSize: 16,
 };
 
 export const FontFamilies = {
@@ -76,6 +76,7 @@ export const FontText = (colors: ThemeColors, size: FontSize) => {
 			fontSize: size.h3,
 			color: colors.textColor,
 			fontFamily: FontFamilies.semibold,
+			lineHeight: 24,
 		},
 
 		body: {

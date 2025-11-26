@@ -22,11 +22,11 @@ export default function OverViewList({ data }: OverViewListProps) {
 	return (
 		<View style={styles.container}>
 			<FlatList
-				contentContainerStyle={{ margin: 2 }}
 				data={data}
 				keyExtractor={(item) => item.id}
+				showsVerticalScrollIndicator={false}
+				scrollEnabled={false}
 				renderItem={({ item }) => <OverView data={item} />}
-				numColumns={2}
 			/>
 		</View>
 	);

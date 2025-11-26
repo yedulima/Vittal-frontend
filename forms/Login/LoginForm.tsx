@@ -1,11 +1,11 @@
+import { Normal } from '@/constants/FontText';
 import { LightTheme } from '@/constants/Themes';
 import { LoginSchema, loginSchema } from '@/forms/Login/LoginSchema';
 import { loginFormStyles } from '@/styles/forms/LoginFormStyles';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm, UseFormReturn } from 'react-hook-form';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 
-import Button from '@/components/Button';
 import Input from '@/components/Input';
 
 interface LoginFormProps {
@@ -38,6 +38,7 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
 							onChangeText={field.onChange}
 							errorMessage={fieldState.error?.message}
 							styleColors={LightTheme}
+							customFontSize={Normal}
 						/>
 					)}
 				/>
@@ -53,6 +54,7 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
 							errorMessage={fieldState.error?.message}
 							styleColors={LightTheme}
 							isPassword
+							customFontSize={Normal}
 						/>
 					)}
 				/>
@@ -60,12 +62,13 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
 
 			<Text style={styles.forgotPassword}>Esqueceu sua senha?</Text>
 
-			<Button
-				text="Entrar"
+			<TouchableOpacity
+				activeOpacity={0.9}
 				onPress={handleSubmit(submitHandler)}
-				style={styles.button}
-				textStyle={styles.buttonText}
-			/>
+				style={[styles.buttonContainer, styles.button]}
+			>
+				<Text style={styles.buttonText}>Entrar</Text>
+			</TouchableOpacity>
 		</View>
 	);
 }

@@ -3,9 +3,8 @@ import { RegisterSchema } from '@/forms/Register/RegisterSchema';
 import { registerFormStyles } from '@/styles/forms/RegisterFormStyles';
 import { useRouter } from 'expo-router';
 import { Controller, useFormContext } from 'react-hook-form';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 
-import Button from '@/components/Button';
 import ProgressBar from '@/components/ProgressBar';
 import UserCard from '@/components/UserCard';
 
@@ -51,24 +50,27 @@ export default function ChooseUserForm({ onNext }: ChooseUserFormProps) {
 					</View>
 				)}
 			/>
-
-			<>
-				<Button
-					text="Selecionar"
+			
+			<View style={styles.buttonSelectionContainer}>
+				<TouchableOpacity
+					activeOpacity={0.9}
 					onPress={handleNext}
-					style={styles.chooseButton}
-					textStyle={styles.chooseText}
-				/>
-				<Button
-					text="Voltar"
+					style={[styles.buttonContainer, styles.nextButton]}
+				>
+					<Text style={styles.chooseText}>Selecionar</Text>
+				</TouchableOpacity>
+
+				<TouchableOpacity
+					activeOpacity={0.9}
 					onPress={() => {
 						setValue('role', '');
 						router.back();
 					}}
-					style={styles.backButton}
-					textStyle={styles.backText}
-				/>
-			</>
+					style={[styles.buttonContainer, styles.backButton]}
+				>
+					<Text style={styles.backText}>Voltar</Text>
+				</TouchableOpacity>
+			</View>
 		</View>
 	);
 }

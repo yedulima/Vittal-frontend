@@ -9,8 +9,10 @@ interface ButtonProps extends TouchableOpacityProps {
 	text: string;
 	onPress: () => void;
 	subText?: string;
+	caption?: string;
 	style?: StyleProp<ViewStyle>;
 	textStyle?: StyleProp<TextStyle>;
+	captionStyle?: StyleProp<TextStyle>;
 	leftIconName?: React.ComponentProps<typeof Feather>['name'];
 	rightIconName?: React.ComponentProps<typeof Feather>['name'];
 	iconColor?: string;
@@ -20,8 +22,10 @@ export default function Button({
 	text,
 	onPress,
 	subText,
+	caption,
 	style,
 	textStyle,
+	captionStyle,
 	leftIconName,
 	rightIconName,
 	iconColor,
@@ -42,8 +46,14 @@ export default function Button({
 			{...others}
 		>
 			{leftIconName && <Feather name={leftIconName} size={fontSize.iconSize} color={iconFinalColor} />}
-			<View style={styles.textContainer}>
+			<View
+				style={[
+					styles.textContainer,
+					{ flexDirection: caption ? 'column' : 'row', justifyContent: caption ? 'center' : 'flex-start' },
+				]}
+			>
 				<Text style={[styles.text, textStyle]}>{text}</Text>
+				{caption && <Text style={[styles.caption, captionStyle]}>{caption}</Text>}
 				{subText && <Text style={styles.caption}>{subText}</Text>}
 			</View>
 			{rightIconName && <Feather name={rightIconName} size={fontSize.iconSize} color={iconFinalColor} />}

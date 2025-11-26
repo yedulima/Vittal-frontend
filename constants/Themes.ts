@@ -16,6 +16,9 @@ export interface ThemeColors {
 	tabBarActiveTintColor: string;
 	tabBarInactiveTintColor: string;
 
+	notificationBadgeBackground: string;
+	notificationBadgeTextColor: string;
+
 	backDropColor: string;
 
 	// Switch button colors
@@ -39,6 +42,9 @@ export const LightTheme: ThemeColors = {
 	tabBarActiveTintColor: Colors.green[500],
 	tabBarInactiveTintColor: Colors.gray[300],
 
+	notificationBadgeBackground: Colors.green[500],
+	notificationBadgeTextColor: Colors.white[800],
+
 	backDropColor: 'rgba(0, 0, 0, 0.5)',
 
 	trackActiveColor: Colors.green[500],
@@ -60,6 +66,9 @@ export const DarkTheme: ThemeColors = {
 	tabBarColor: Colors.navy[800],
 	tabBarActiveTintColor: Colors.green[500],
 	tabBarInactiveTintColor: Colors.navy[700],
+
+	notificationBadgeBackground: Colors.green[600],
+	notificationBadgeTextColor: Colors.white[800],
 
 	backDropColor: 'rgba(0, 0, 0, 0.5)',
 

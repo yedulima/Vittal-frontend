@@ -21,7 +21,7 @@ export const createCuidador = async (data: CuidadorInterface) => {
 
 export const addIdoso = async (userId: string) => {
 	try {
-		const result = (await addIdosoCallback({ user_ref: userId })) as CloudFunctionDataResponse;
+		const result = (await addIdosoCallback({ user_email: userId })) as CloudFunctionDataResponse;
 		return result;
 	} catch (error: unknown) {
 		if (error instanceof Error) {
@@ -54,3 +54,5 @@ export const deleteCuidador = async () => {
 		throw error;
 	}
 };
+
+

@@ -9,7 +9,6 @@ export const notificationStyles = (colors: ThemeColors, size: FontSize) => {
 		container: {
 			flexDirection: 'row',
 			alignItems: 'center',
-			backgroundColor: colors.cardColor,
 			borderRadius: 15,
 			padding: 15,
 			borderWidth: 1,

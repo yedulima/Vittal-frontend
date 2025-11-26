@@ -1,9 +1,12 @@
 import { Colors } from '@/constants/Colors';
 import { ThemeColors } from '@/constants/Themes';
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 export const registerFormStyles = (colors: ThemeColors) => {
 	const photoSize = 145;
+
+	const platform = Platform.OS === 'android';
+	const textSize = platform ? 18 : 16;
 
 	return StyleSheet.create({
 		container: {
@@ -49,17 +52,41 @@ export const registerFormStyles = (colors: ThemeColors) => {
 			borderRadius: 17,
 		},
 		chooseText: {
-			fontSize: 16,
+			fontSize: textSize,
 			color: Colors.white[800],
 			fontFamily: 'Rubik_600SemiBold',
 		},
 		backButton: {
-			backgroundColor: 'transparent',
+			backgroundColor: colors.cardColor,
+			shadowColor: '#000',
+			shadowOffset: {
+				width: 0,
+				height: 2,
+			},
+			shadowOpacity: 0.23,
+			shadowRadius: 2.62,
+
+			elevation: 4,
 		},
 		backText: {
-			fontSize: 16,
+			fontSize: textSize,
 			color: colors.textColor,
 			fontFamily: 'Rubik_600SemiBold',
+		},
+		buttonSelectionContainer: {
+			gap: 5,
+		},
+		buttonContainer: {
+			padding: 13,
+			margin: 2,
+			borderRadius: 15,
+			backgroundColor: colors.buttonColor,
+			alignItems: 'center',
+			justifyContent: 'center',
+			gap: 7,
+		},
+		nextButton: {
+			backgroundColor: Colors.green[500],
 		},
 	});
 };

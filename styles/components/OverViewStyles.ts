@@ -15,20 +15,27 @@ export const overViewStyles = (colors: ThemeColors, size: FontSize) => {
 			borderWidth: 1,
 			borderColor: colors.cardBorderColor,
 			borderRadius: 10,
-			padding: 18,
+			paddingHorizontal: 16,
+			paddingVertical: 12,
 			margin: 3,
-			gap: 9,
+			gap: 15,
 		},
 		infos: {
 			flex: 1,
+			gap: 3,
 		},
 		count: {
-			...fonts.h3,
+			...fonts.h2,
+			...fonts.bold,
 		},
 		name: {
-			...fonts.caption,
+			...fonts.accent,
 			...fonts.medium,
-			color: colors.textColor,
+		},
+		IconContainer: {
+			flexDirection: 'row',
+			alignItems: 'center',
+			gap: 10,
 		},
 		icon: {
 			color: colors.iconColor,

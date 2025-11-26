@@ -1,3 +1,4 @@
+import { Colors } from '@/constants/Colors';
 import { FontSize, FontText } from '@/constants/FontText';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
@@ -33,6 +34,7 @@ export const medicineStyles = (colors: ThemeColors, size: FontSize) => {
 		medicineInfos: {
 			justifyContent: 'center',
 			flex: 1,
+			gap: 6,
 		},
 		title: {
 			...fonts.accent,
@@ -44,8 +46,28 @@ export const medicineStyles = (colors: ThemeColors, size: FontSize) => {
 			...fonts.light,
 			width: '95%',
 		},
+		perDayHoursContainer: {
+			flexDirection: 'row',
+			alignItems: 'center',
+			gap: 10,
+		},
+		hoursContainer: {
+			flex: 1,
+			flexDirection: 'row',
+			alignItems: 'center',
+			gap: 5,
+		},
+		perDayText: {
+			...fonts.caption,
+			backgroundColor: Colors.green[500],
+			color: Colors.white[800],
+			textAlign: 'center',
+			paddingHorizontal: 5,
+			paddingVertical: 3,
+			borderRadius: 15,
+		},
 		time: {
-			...fonts.small,
+			...fonts.caption,
 			...fonts.light,
 		},
 		infosHeader: {

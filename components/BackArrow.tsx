@@ -19,7 +19,7 @@ export default function BackArrow({ onPress }: BackArrorProps) {
 
 	return (
 		<TouchableOpacity activeOpacity={0.9} onPress={action} style={styles.container}>
-			<Feather name="arrow-left" size={20} style={styles.icon} />
+			<Feather name="arrow-left" size={fontSize.iconSize + 3} style={styles.icon} />
 			<Text style={styles.text}>Voltar</Text>
 		</TouchableOpacity>
 	);

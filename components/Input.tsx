@@ -1,17 +1,29 @@
+import { FontSize } from '@/constants/FontText';
 import { ThemeColors } from '@/constants/Themes';
 import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { inputStyles } from '@/styles/components/InputStyles';
 import { Feather } from '@expo/vector-icons';
 import React, { useState } from 'react';
-import { KeyboardType, Text, TextInput, TextInputProps, TouchableOpacity, View } from 'react-native';
+import {
+	KeyboardType,
+	StyleProp,
+	Text,
+	TextInput,
+	TextInputProps,
+	TouchableOpacity,
+	View,
+	ViewStyle,
+} from 'react-native';
 
 interface InputProps extends Omit<TextInputProps, 'onChangeText'> {
-	title: string;
 	placeHolder: string;
 	value: string;
+	title?: string;
+	containerStyle?: StyleProp<ViewStyle>;
+	inputContainerStyle?: StyleProp<ViewStyle>;
 	onChangeText: (t: string) => void;
-	fontSizeEnabled: boolean;
+	customFontSize?: FontSize;
 	rightIcon?: React.ComponentProps<typeof Feather>['name'];
 	rightIconPress?: () => void;
 	errorMessage?: string;
@@ -21,11 +33,13 @@ interface InputProps extends Omit<TextInputProps, 'onChangeText'> {
 }
 
 export default function Input({
-	title,
 	placeHolder,
 	value,
+	title,
+	containerStyle,
+	inputContainerStyle,
 	onChangeText,
-	fontSizeEnabled = false,
+	customFontSize,
 	rightIcon,
 	rightIconPress,
 	errorMessage,
@@ -36,14 +50,14 @@ export default function Input({
 }: InputProps) {
 	const { colors } = useThemeContext();
 	const { fontSize } = useFontTextContext();
-	const styles = inputStyles(styleColors ? styleColors : colors, fontSize);
+	const styles = inputStyles(styleColors ? styleColors : colors, customFontSize ? customFontSize : fontSize);
 
 	const [show, setShow] = useState<boolean>(false);
 
 	return (
-		<View style={styles.container}>
+		<View style={[styles.container, containerStyle]}>
 			{title && <Text style={styles.title}>{title}</Text>}
-			<View style={styles.inputContainer}>
+			<View style={[styles.inputContainer, inputContainerStyle]}>
 				<TextInput
 					value={value}
 					onChangeText={onChangeText}

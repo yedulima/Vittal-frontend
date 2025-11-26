@@ -1,3 +1,4 @@
+import { Colors } from '@/constants/Colors';
 import { FontSize, FontText } from '@/constants/FontText';
 import { Measures } from '@/constants/SafeAreaMeasures';
 import { ThemeColors } from '@/constants/Themes';
@@ -46,12 +47,12 @@ export const calendarModalStyles = (colors: ThemeColors, size: FontSize) => {
 			...fonts.regular,
 		},
 		selectButton: {
-			backgroundColor: colors.buttonColor,
+			backgroundColor: Colors.green[500],
 		},
 		selectButtonText: {
 			...fonts.regular,
 			fontSize: 16,
-			color: colors.buttonTextColor,
+			color: Colors.white[800],
 		},
 		icon: {
 			color: colors.iconColor,

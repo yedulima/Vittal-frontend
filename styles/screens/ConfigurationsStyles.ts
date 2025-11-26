@@ -2,19 +2,24 @@ import { Colors } from '@/constants/Colors';
 import { FontSize, FontText } from '@/constants/FontText';
 import { Measures } from '@/constants/SafeAreaMeasures';
 import { ThemeColors } from '@/constants/Themes';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 export const configurationsStyles = (colors: ThemeColors, size: FontSize) => {
 	const fonts = FontText(colors, size);
 
+	const platform = Platform.OS === 'android'
+	const bottomPaddingContainer = platform ? 0 : 2;
+
 	return StyleSheet.create({
 		container: {
 			flex: 1,
-			paddingVertical: Measures.vertical,
 			paddingHorizontal: Measures.horizontal,
+			paddingBottom: bottomPaddingContainer,
 		},
 		title: {
 			...fonts.h1,
+			paddingTop: Measures.vertical,
+			lineHeight: 35,
 			marginBottom: 20,
 		},
 		text: {
@@ -37,7 +42,7 @@ export const configurationsStyles = (colors: ThemeColors, size: FontSize) => {
 			color: Colors.white[800],
 		},
 		scrollViewContainer: {
-			paddingBottom: 24,
+			paddingBottom: Measures.vertical * 2,
 		},
 	});
 };

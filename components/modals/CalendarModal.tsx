@@ -84,7 +84,7 @@ export default function CalendarModal({
 								textMonthFontFamily: 'Rubik_500Medium',
 								textDayStyle: styles.textDay,
 								textDayHeaderFontSize: 15,
-								monthTextColor: Colors.black,
+								monthTextColor: colors.textColor,
 								todayTextColor: Colors.green[700],
 								selectedDayBackgroundColor: Colors.green[500],
 								selectedDayTextColor: Colors.white[800],

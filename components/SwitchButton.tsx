@@ -21,7 +21,9 @@ export default function SwitchButton({ text, onPress, value, style }: SwitchButt
 			<Switch
 				value={value}
 				trackColor={{ true: colors.trackActiveColor, false: colors.trackInactiveColor }}
-				activeThumbColor="#fff"
+				thumbColor="#fff"
+				style={styles.switch}
+				disabled
 			/>
 		</TouchableOpacity>
 	);

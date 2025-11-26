@@ -1,4 +1,4 @@
 export const Measures = {
-	horizontal: 26,
+	horizontal: 20,
 	vertical: 26,
 };

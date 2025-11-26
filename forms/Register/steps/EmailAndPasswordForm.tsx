@@ -1,10 +1,10 @@
+import { Normal } from '@/constants/FontText';
 import { LightTheme } from '@/constants/Themes';
 import { RegisterSchema } from '@/forms/Register/RegisterSchema';
 import { registerFormStyles } from '@/styles/forms/RegisterFormStyles';
 import { Controller, useFormContext, UseFormReturn } from 'react-hook-form';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 
-import Button from '@/components/Button';
 import Input from '@/components/Input';
 import ProgressBar from '@/components/ProgressBar';
 
@@ -39,6 +39,7 @@ export default function EmailAndPasswordForm({ onBack, onSubmit }: EmailAndPassw
 							onChangeText={field.onChange}
 							errorMessage={fieldState.error?.message}
 							styleColors={LightTheme}
+							customFontSize={Normal}
 						/>
 					)}
 				/>
@@ -54,6 +55,7 @@ export default function EmailAndPasswordForm({ onBack, onSubmit }: EmailAndPassw
 							errorMessage={fieldState.error?.message}
 							styleColors={LightTheme}
 							isPassword
+							customFontSize={Normal}
 						/>
 					)}
 				/>
@@ -69,20 +71,29 @@ export default function EmailAndPasswordForm({ onBack, onSubmit }: EmailAndPassw
 							errorMessage={fieldState.error?.message}
 							styleColors={LightTheme}
 							isPassword
+							customFontSize={Normal}
 						/>
 					)}
 				/>
 			</View>
 
-			<>
-				<Button
-					text="Criar"
+			<View style={styles.buttonSelectionContainer}>
+				<TouchableOpacity
+					activeOpacity={0.9}
 					onPress={handleSubmit(handleSubmitForm)}
-					style={styles.button}
-					textStyle={styles.buttonText}
-				/>
-				<Button text="Voltar" onPress={onBack} style={styles.backButton} textStyle={styles.backText} />
-			</>
+					style={[styles.buttonContainer, styles.nextButton]}
+				>
+					<Text style={styles.chooseText}>Cadastrar-se</Text>
+				</TouchableOpacity>
+
+				<TouchableOpacity
+					activeOpacity={0.9}
+					onPress={onBack}
+					style={[styles.buttonContainer, styles.backButton]}
+				>
+					<Text style={styles.backText}>Voltar</Text>
+				</TouchableOpacity>
+			</View>
 		</View>
 	);
 }

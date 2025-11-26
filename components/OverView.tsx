@@ -20,7 +20,9 @@ export default function OverView({ data }: OverViewProps) {
 
 	return (
 		<View style={styles.container}>
-			<Feather name={data.iconName} size={35} style={styles.icon} />
+			<View style={styles.IconContainer}>
+				<Feather name={data.iconName} size={fontSize.iconSize + 15} style={styles.icon} />
+			</View>
 			<View style={styles.infos}>
 				<Text style={styles.name}>{data.name}</Text>
 				<Text style={styles.count}>{data.count}</Text>

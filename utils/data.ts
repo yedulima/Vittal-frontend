@@ -83,21 +83,9 @@ export const OVERVIEW: OverViewInterface[] = [
 	},
 	{
 		id: '2',
-		name: 'Alertas',
-		count: ALERTS_NUM.toString(),
-		iconName: 'alert-triangle',
-	},
-	{
-		id: '3',
 		name: 'Pendentes',
 		count: NOTIFICATIONS_LENGTH.toString(),
 		iconName: 'clock',
-	},
-	{
-		id: '4',
-		name: 'Idosos',
-		count: USERS_LENGTH.toString(),
-		iconName: 'users',
 	},
 ];
 

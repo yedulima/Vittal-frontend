@@ -9,6 +9,7 @@ export const switchButtonStyles = (colors: ThemeColors, size: FontSize) => {
 		container: {
 			flex: 1,
 			flexDirection: 'row',
+			alignItems: 'center',
 			padding: 15,
 			margin: 2,
 			borderRadius: 5,
@@ -18,6 +19,10 @@ export const switchButtonStyles = (colors: ThemeColors, size: FontSize) => {
 			...fonts.accent,
 			flex: 1,
 			color: colors.textColor,
+		},
+		switch: {
+			transform: [{ scaleX: 1.1 }, { scaleY: 1.1 }],
+			marginRight: 5,
 		},
 	});
 };

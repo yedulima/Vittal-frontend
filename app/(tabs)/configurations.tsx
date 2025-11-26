@@ -3,7 +3,7 @@ import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { configurationsStyles } from '@/styles/screens/ConfigurationsStyles';
 import { useState } from 'react';
-import { ScrollView, Text } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Button from '@/components/Button';
@@ -29,7 +29,6 @@ export default function ConfigurationsScreen() {
 	return (
 		<SafeAreaView style={styles.container}>
 			<Text style={styles.title}>Configurações</Text>
-
 			<ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollViewContainer}>
 				<UserProfileInfos />
 				<UserPersonalInfos />

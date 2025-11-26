@@ -1,12 +1,16 @@
 import { Colors } from '@/constants/Colors';
 import { ThemeColors } from '@/constants/Themes';
-import { Dimensions, StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet, Platform } from 'react-native';
 
 const { height: screenHeight } = Dimensions.get('window');
 
 export const welcomeStyles = (colors: ThemeColors) => {
 	const imageHeight = screenHeight * 0.7;
 	const gradientHeight = 525;
+
+	const platform = Platform.OS === 'android';
+	const welcomeTextSize = platform ? 18 : 15;
+	const sloganTextSize = platform ? 30 : 27;
 
 	return StyleSheet.create({
 		container: {
@@ -38,19 +42,21 @@ export const welcomeStyles = (colors: ThemeColors) => {
 			gap: 15,
 		},
 		title: {
-			fontSize: 15,
+			fontSize: welcomeTextSize,
 			color: colors.accentColor,
 			textTransform: 'uppercase',
 			letterSpacing: 1.5,
 			fontFamily: 'Rubik_400Regular',
+			lineHeight: 15,
 		},
 		subTitle: {
-			fontSize: 27,
+			fontSize: sloganTextSize,
 			color: colors.textColor,
 			textTransform: 'capitalize',
 			textAlign: 'center',
 			fontFamily: 'Rubik_700Bold',
 			letterSpacing: 1,
+			lineHeight: 35,
 		},
 		greenSubTitle: {
 			color: Colors.green[500],

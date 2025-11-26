@@ -1,12 +1,12 @@
+import { Normal } from '@/constants/FontText';
 import { LightTheme } from '@/constants/Themes';
 import { RegisterSchema } from '@/forms/Register/RegisterSchema';
 import { registerFormStyles } from '@/styles/forms/RegisterFormStyles';
 import { formatDate } from '@/utils/formatDate';
 import { useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 
-import Button from '@/components/Button';
 import Input from '@/components/Input';
 import ProgressBar from '@/components/ProgressBar';
 import CalendarModal from '@/components/modals/CalendarModal';
@@ -50,6 +50,7 @@ export default function DateOfBirthForm({ onBack, onNext }: DateOfBirthFormProps
 								styleColors={LightTheme}
 								rightIcon="calendar"
 								rightIconPress={() => setIsModalVisible(true)}
+								customFontSize={Normal}
 							/>
 							<CalendarModal
 								isVisible={isModalVisible}
@@ -64,10 +65,23 @@ export default function DateOfBirthForm({ onBack, onNext }: DateOfBirthFormProps
 				/>
 			</View>
 
-			<>
-				<Button text="Próximo" onPress={handleNext} style={styles.button} textStyle={styles.buttonText} />
-				<Button text="Voltar" onPress={onBack} style={styles.backButton} textStyle={styles.backText} />
-			</>
+			<View style={styles.buttonSelectionContainer}>
+				<TouchableOpacity
+					activeOpacity={0.9}
+					onPress={handleNext}
+					style={[styles.buttonContainer, styles.nextButton]}
+				>
+					<Text style={styles.chooseText}>Selecionar</Text>
+				</TouchableOpacity>
+
+				<TouchableOpacity
+					activeOpacity={0.9}
+					onPress={onBack}
+					style={[styles.buttonContainer, styles.backButton]}
+				>
+					<Text style={styles.backText}>Voltar</Text>
+				</TouchableOpacity>
+			</View>
 		</View>
 	);
 }

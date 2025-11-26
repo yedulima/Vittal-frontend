@@ -10,13 +10,16 @@ export const notificationsStyles = (colors: ThemeColors, size: FontSize) => {
 		container: {
 			flex: 1,
 			paddingHorizontal: Measures.horizontal,
-			paddingVertical: Measures.vertical,
 		},
 		title: {
 			...fonts.h1,
+			paddingTop: Measures.vertical,
+			lineHeight: 35,
 		},
 		text: {
-			...fonts.accent,
+			...fonts.h3,
+			...fonts.regular,
+			color: colors.accentColor,
 			marginBottom: 20,
 		},
 		scrollViewContainer: {

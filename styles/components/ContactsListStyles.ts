@@ -22,7 +22,7 @@ export const contactsListStyles = (colors: ThemeColors, size: FontSize) => {
 		},
 		separator: {
 			width: '100%',
-			margin: 4,
+			margin: 6,
 		},
 	});
 };

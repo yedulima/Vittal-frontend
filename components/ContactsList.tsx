@@ -22,6 +22,7 @@ export default function ContactsList({ data }: ContactListProp) {
 				keyExtractor={(item) => item.id}
 				renderItem={({ item }) => <Contact data={item} />}
 				showsVerticalScrollIndicator={false}
+				scrollEnabled={false}
 				ItemSeparatorComponent={() => <View style={styles.separator} />}
 				ListEmptyComponent={() => (
 					<View style={styles.noDataContainer}>

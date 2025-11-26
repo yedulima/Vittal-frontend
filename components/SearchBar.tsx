@@ -3,7 +3,7 @@ import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { useDebounce } from '@/hooks/useDebounce';
 import { searchBarStyles } from '@/styles/components/SearchBarStyles';
-import { useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TextInput, View } from 'react-native';
 
 import filter from 'lodash.filter';
@@ -26,7 +26,7 @@ export default function SearchBar({ placeholder, dataToSearch, onChange }: Searc
 		setQuery(query);
 	};
 
-	useMemo(() => {
+	useEffect(() => {
 		let result: ContactInterface[];
 
 		if (!debounceQuery) {

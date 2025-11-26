@@ -4,7 +4,7 @@ import { Measures } from '@/constants/SafeAreaMeasures';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
 
-export const medicineModalStyles = (colors: ThemeColors, size: FontSize) => {
+export const okModalStyles = (colors: ThemeColors, size: FontSize) => {
 	const fonts = FontText(colors, size);
 
 	return StyleSheet.create({
@@ -16,13 +16,13 @@ export const medicineModalStyles = (colors: ThemeColors, size: FontSize) => {
 		},
 		content: {
 			width: '90%',
-			minHeight: '45%',
 			paddingHorizontal: Measures.horizontal,
 			paddingVertical: Measures.vertical + 5,
 			borderRadius: 12,
-			justifyContent: 'space-between',
 			paddingTop: 10,
+			paddingBottom: 80,
 			backgroundColor: colors.cardColor,
+			gap: 10,
 		},
 		header: {
 			width: '100%',
@@ -31,6 +31,7 @@ export const medicineModalStyles = (colors: ThemeColors, size: FontSize) => {
 			justifyContent: 'space-between',
 			marginTop: 15,
 			marginBottom: 15,
+			gap: 5,
 		},
 		titleContainer: {
 			flex: 1,
@@ -40,32 +41,16 @@ export const medicineModalStyles = (colors: ThemeColors, size: FontSize) => {
 		title: {
 			...fonts.h1,
 		},
-		descriptionContainer: {
-			gap: 6,
-			marginBottom: 15,
-		},
-		topicContainer: {
-			flexDirection: 'row',
-			alignItems: 'center',
-			justifyContent: 'flex-start',
-			gap: 6,
-			marginBottom: 15,
-		},
-		topicText: {
-			...fonts.accent,
-			...fonts.semibold,
-			color: colors.textColor,
-		},
-		text: {
+		subTitle: {
 			...fonts.accent,
 		},
 		button: {
-			backgroundColor: Colors.green[600],
+			backgroundColor: Colors.green[500],
 		},
 		buttonText: {
 			...fonts.accent,
-			...fonts.semibold,
-			color: Colors.white[800],
+			...fonts.medium,
+			color: colors.buttonTextColor,
 		},
 		icon: {
 			color: colors.iconColor,

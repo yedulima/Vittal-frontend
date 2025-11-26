@@ -17,9 +17,29 @@ export const medicinesListStyles = (colors: ThemeColors, size: FontSize) => {
 		text: {
 			...fonts.accent,
 		},
+		medsContainer: {
+			padding: 20,
+			backgroundColor: colors.cardColor,
+			borderColor: colors.cardBorderColor,
+			borderWidth: 1,
+			borderRadius: 15,
+		},
+		noMedsContainer: {
+			alignItems: 'center',
+			justifyContent: 'center',
+			padding: 15,
+			gap: 10,
+		},
+		noMedsText: {
+			...fonts.accent,
+			textAlign: 'center',
+		},
+		icon: {
+			color: colors.iconColor,
+		},
 		separator: {
 			width: '100%',
-			margin: 4,
+			margin: 6,
 		},
 	});
 };

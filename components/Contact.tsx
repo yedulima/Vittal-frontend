@@ -4,10 +4,8 @@ import { useThemeContext } from '@/contexts/ThemeContext';
 import { contactStyles } from '@/styles/components/ContactStyles';
 import { Feather } from '@expo/vector-icons';
 import { Image } from 'expo-image';
-import { useState } from 'react';
+import { useRouter } from 'expo-router';
 import { Text, TouchableOpacity, View } from 'react-native';
-
-import IdosoProfileModal from './modals/IdosoProfileModal';
 
 const PlaceHolderImage = require('@/assets/images/placeholder-image.jpg');
 
@@ -20,13 +18,17 @@ export default function Contact({ data }: ContactProp) {
 	const { fontSize } = useFontTextContext();
 	const styles = contactStyles(colors, fontSize);
 
-	const [isVisible, setIsVisible] = useState<boolean>(false);
+	const router = useRouter();
 
 	const imageSource = data.photoURL ? { uri: data.photoURL } : PlaceHolderImage;
 
 	return (
 		<>
-			<TouchableOpacity style={styles.container} onPress={() => setIsVisible(true)} activeOpacity={0.8}>
+			<TouchableOpacity
+				style={styles.container}
+				onPress={() => router.navigate(`/contact/${data.id}`)}
+				activeOpacity={0.8}
+			>
 				<View style={styles.info}>
 					<Image source={imageSource} style={styles.photo} />
 					<View style={styles.userCredentials}>
@@ -38,7 +40,6 @@ export default function Contact({ data }: ContactProp) {
 				</View>
 				<Feather name="arrow-right" size={17} style={styles.icon} />
 			</TouchableOpacity>
-			<IdosoProfileModal data={data} isVisible={isVisible} onClose={() => setIsVisible(false)} />
 		</>
 	);
 }
