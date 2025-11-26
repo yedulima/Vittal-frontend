@@ -4,6 +4,7 @@ import { Colors } from '@/constants/Colors';
 import { useAuthContext } from '@/contexts/AuthContext';
 import { useFontTextContext } from '@/contexts/FontTextContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
+import { useSendMessage } from '@/hooks/useSendMessage';
 import { medicineStyles } from '@/styles/screens/MedicineStyles';
 import { calculateDateDifference } from '@/utils/calculateDateDifference';
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -20,7 +21,7 @@ import UpdateMedicineModal from '@/components/modals/UpdateMedicineModal';
 
 export default function Medicine() {
 	const { medicineId, contactId } = useLocalSearchParams();
-	const { role } = useAuthContext();
+	const { role, user } = useAuthContext();
 	const { colors } = useThemeContext();
 	const { fontSize } = useFontTextContext();
 	const styles = medicineStyles(colors, fontSize);
@@ -82,7 +83,14 @@ export default function Medicine() {
 			});
 
 			const data = response.data.data;
+
 			setActualStatus(data);
+			await useSendMessage(
+				contactId as string,
+				user?.uid as string,
+				`Status da medicação ${medicine.name} alterado`,
+				`Status da medicação alterado para ${actualStatus}`
+			);
 		} catch (error) {
 			console.error(error);
 		}
@@ -95,6 +103,12 @@ export default function Medicine() {
 				userId: contactId as string,
 				medicationId: medicineId as string,
 			});
+			await useSendMessage(
+				contactId as string,
+				user?.uid as string,
+				`Medicação excluída pelo cuidador`,
+				`${medicine.name} foi excluída pelo seu cuidador.`
+			);
 			setLoading(false);
 			router.back();
 		} catch (error) {

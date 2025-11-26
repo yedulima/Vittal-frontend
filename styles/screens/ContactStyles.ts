@@ -2,6 +2,7 @@ import { FontSize, FontText } from '@/constants/FontText';
 import { Measures } from '@/constants/SafeAreaMeasures';
 import { ThemeColors } from '@/constants/Themes';
 import { StyleSheet } from 'react-native';
+import { Colors } from '@/constants/Colors';
 
 export const contactStyles = (colors: ThemeColors, size: FontSize) => {
 	const photoSize = 110;
@@ -68,6 +69,9 @@ export const contactStyles = (colors: ThemeColors, size: FontSize) => {
 			...fonts.accent,
 			padding: 3,
 			color: colors.textColor,
+		},
+		excludeMedicineText: {
+			color: Colors.white[800],
 		},
 		scrollViewContainer: {
 			paddingBottom: 24,
