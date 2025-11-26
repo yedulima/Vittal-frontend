@@ -94,15 +94,15 @@ export default function IdosoProfile() {
 						{ name: 'Data de nascimento', content: data?.birthday! },
 						{ name: 'Telefone', content: data?.phoneNumber! as string, canCopy: true },
 						{ name: 'E-mail', content: data?.email!, canCopy: true },
-						{
-							name: 'Endereço',
-							onEdit: () => {},
-							content: liveData?.address as string,
-							canCopy: !!liveData?.address,
-						},
+						// {
+						// 	name: 'Endereço',
+						// 	onEdit: () => {},
+						// 	content: liveData?.address as string,
+						// 	canCopy: !!liveData?.address,
+						// },
 					]}
 				/>
-				<ProfileSection
+				{/* <ProfileSection
 					title="Informações Médicas"
 					items={[
 						{
@@ -116,7 +116,7 @@ export default function IdosoProfile() {
 							content: allergies,
 						},
 					]}
-				/>
+				/> */}
 				<Button
 					text="Medicamentos em uso"
 					onPress={() => router.navigate(`/contact/${contactId}/medications`)}
